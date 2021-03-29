@@ -1,0 +1,98 @@
+@mixin absolute-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+@mixin absolute-position($x, $y) {
+    position: absolute;
+    top: $y;
+    left: $x;
+    transform: translate(-$x, -$y);
+}
+
+@mixin absolute-above-center {
+    position: absolute;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%, -35%);
+}
+
+@mixin absolute-left-center {
+    position: absolute;
+    top: 50%;
+    left: 20%;
+    transform: translate(-20%, -50%);
+}
+
+@mixin lift {
+    transition: $transition-normal;
+
+    &:hover {
+        transform: translateY(-3px);
+        box-shadow: $shadow-normal;
+    }
+
+    &:active {
+        transform:translateY(-1px);
+        box-shadow: $shadow-small;
+    }
+}
+
+@mixin flex-column-stretch {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+@mixin no-hover-effects {
+    opacity: 1;
+    &:hover {
+        transform: scale(1);
+    }
+}
+
+@mixin flash-out {
+    position: relative;
+    transition: $transition-fast;
+
+    &::after {
+        content: "";
+
+        position: absolute;
+        top: 0;
+        left: 0;
+
+        display: inline-block;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+
+        border-radius: 1rem;
+        background-color: $color-alt-primary;
+        transition: $transition-normal;
+    }
+
+    &:hover {
+        &::after {
+            transform: scale(1.4, 1.6);
+            opacity: 0;
+        }
+    }
+}
+
+@mixin respond($breakpoint) {
+    @if $breakpoint == phone {
+        @media only screen and (max-width: 37.5em) { @content } // 600px
+    }
+    @if $breakpoint == tab-port {
+        @media only screen and (max-width: 56.25em) { @content } // 900px
+    }
+    @if $breakpoint == tab-land {
+        @media only screen and (max-width: 75em) { @content } // 1200px
+    }
+    @if $breakpoint == bdesk {
+        @media only screen and (min-width: 112.5em) { @content } // 1800px
+    }
+}
