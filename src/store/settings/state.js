@@ -1,3 +1,12 @@
 export default {
-  clickAnimationLength: 500
+  clickAnimationEnabled: true,
+  headerCanvasEnabled: true,
+  enabledTransitions: [
+    "slide-right",
+    "slide-left",
+    "fade",
+    "scale",
+    "mix-slide-left-fade"
+  ],
+  disabledTransitions: []
 };

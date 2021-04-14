@@ -1,6 +1,6 @@
 <template>
   <header class="header" :style="headerBackground" @mouseenter="beginWave">
-    <header-canvas></header-canvas>
+    <header-canvas v-if="headerCanvasEnabled"></header-canvas>
     <transition-group name="link-fall" tag="span" @afterEnter="afterEnter">
       <header-link
         v-for="link in liveLinks"
@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 
 import HeaderCanvasController from "@/utils/HeaderCanvasController";
 import { separateRGB, getRGBAStringFromHex } from "@/utils/hexAndDecimals";
@@ -40,6 +40,7 @@ export default {
       "getHeaderBackgroundColor",
       "getHeaderOpacity"
     ]),
+    ...mapGetters("settings", ["headerCanvasEnabled"]),
     headerBackground() {
       const rgbaString = getRGBAStringFromHex(
         this.getHeaderBackgroundColor,
@@ -59,7 +60,7 @@ export default {
       return separateRGB(this.endColor);
     }
   },
-  mounted: function() {
+  mounted() {
     // If we run this function right on mount, then the canvas won't be
     // properly mounted so the dimensions will be slightly off for the controller
     setTimeout(
@@ -69,10 +70,14 @@ export default {
     );
   },
   methods: {
+    ...mapActions("headerCanvas", ["setRandomStartAndEndColors"]),
     afterEnter(el) {
       el.classList.add("link-animation");
     },
     beginWave(e) {
+      if (!this.headerCanvasEnabled) {
+        return;
+      }
       const { x, y } = this.HeaderCanvasController.getNearestCornerPosition(
         e.clientX,
         e.clientY
@@ -83,7 +88,7 @@ export default {
         this.numberOfCircles
       );
       requestAnimationFrame(() => this.canvasWave(x, y, this.startRadius));
-      this.$store.dispatch("headerCanvas/setRandomStartAndEndColors");
+      this.setRandomStartAndEndColors();
     },
     canvasWave(x, y, r) {
       if (r < 400) {
@@ -114,7 +119,6 @@ export default {
 
   padding: 1rem;
   padding-right: 5rem;
-  transition: $transition-slow;
   transform: skewX(-25deg);
 }
 

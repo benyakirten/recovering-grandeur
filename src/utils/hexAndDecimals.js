@@ -10,6 +10,20 @@ export const separateRGB = hexString => {
     b: hexString.slice(5, 7)
   };
 };
+export const getCSSHexString = ({ r, g, b }) => {
+  // Given an object of the type given by separateRGB,
+  // make a CSS-friendly hex string from it
+  return `#${r}${g}${b}`;
+};
+export const getRGBAStringFromHex = (hexString, opacity) => {
+  // Create a CSS RGBA String i.e. rgba(0, 0, 0, opacity)
+  // from a hex string i.e. #000000 and an opacity number
+  let { r, g, b } = separateRGB(hexString);
+  r = parseInt(r, 16);
+  g = parseInt(g, 16);
+  b = parseInt(b, 16);
+  return `rgba(${r}, ${g}, ${b}, ${opacity})`;
+};
 export const getAverageOffset = (initialColor, endColor, iterations) => {
   // This function takes a CSS color hex STRING (i.e. '#000000')
   // separated into an OBJECT with r, g and b properties and returns an INTEGER
@@ -39,7 +53,6 @@ export const getHexForIteration = (i, offset, initialColor) => {
 };
 export const getHexDigits = (color, i, initialColor) => {
   // For an individual color, gets the hex code for the iteration
-
   const delta = (color * i).toString(16);
   let hex = subtractHexes(initialColor, delta);
   // If the hex is 0-9, we want it to be two digits long because
@@ -49,18 +62,31 @@ export const getHexDigits = (color, i, initialColor) => {
   }
   return hex;
 };
-export const subtractHexes = (original, delta) => {
+export const subtractHexes = (original, delta, multiplier = 1) => {
   // Convert hexes to integers, subtract them, then return them as hexes
   const i = parseInt(original, 16);
   const j = parseInt(delta, 16);
-  return (i - j).toString(16);
+  let difference = i - j * multiplier;
+  if (difference > 255) {
+    difference = 255;
+  } else if (difference < 0) {
+    difference = 0;
+  }
+  return difference.toString(16);
 };
-export const getRGBAStringFromHex = (hexString, opacity) => {
-  // Create a CSS RGBA String i.e. rgba(0, 0, 0, opacity)
-  // from a hex string i.e. #000000 and an opacity number
-  let { r, g, b } = separateRGB(hexString);
-  r = parseInt(r, 16);
-  g = parseInt(g, 16);
-  b = parseInt(b, 16);
-  return `rgba(${r}, ${g}, ${b}, ${opacity})`;
+export const getDecimalFromHex = hex => {
+  return parseInt(hex, 16);
+};
+export const getHexFromDecimal = decimal => {
+  return decimal.toString(16);
+};
+export const getColorAndVariation = (
+  separateColors,
+  colorVariation,
+  mult = 1
+) => {
+  const r = subtractHexes(separateColors.r, colorVariation, mult);
+  const g = subtractHexes(separateColors.g, colorVariation, mult);
+  const b = subtractHexes(separateColors.b, colorVariation, mult);
+  return getCSSHexString({ r, g, b });
 };

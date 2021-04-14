@@ -1,0 +1,102 @@
+// BASE SCENE TRANSITIONS
+
+// SLIDE RIGHT
+.scene-slide-right-enter-from {
+    position: absolute;
+    transform: translateX(150rem);
+  }
+  
+  .scene-slide-right-leave-to {
+    position: absolute;
+    transform: translateX(-150rem);
+  }
+  
+  .scene-slide-right-enter-active,
+  .scene-slide-right-leave-active {
+    transition: all 1.5s ease;
+  }
+  
+  .scene-slide-right-enter-to,
+  .scene-slide-right-leave-from {
+    position: absolute;
+    transform: translateX(0);
+  }
+  
+  // SLIDE LEFT
+  
+  .scene-slide-left-enter-from {
+    position: absolute;
+    transform: translateX(-150rem);
+  }
+  
+  .scene-slide-left-leave-to {
+    position: absolute;
+    transform: translateX(150rem);
+  }
+  
+  .scene-slide-left-enter-active,
+  .scene-slide-left-leave-active {
+    transition: all 1.5s ease;
+  }
+  
+  .scene-slide-left-enter-to,
+  .scene-slide-left-leave-from {
+    position: absolute;
+    transform: translateX(0);
+  }
+  
+  // FADE
+  .scene-fade-enter-from,
+  .scene-fade-leave-to {
+    opacity: 0;
+  }
+  
+  .scene-fade-enter-active,
+  .scene-fade-leave-active {
+    transition: all 1s ease;
+  }
+  
+  .scene-fade-enter-to,
+  .scene-fade-leave-from {
+    opacity: 1;
+  }
+  
+  // SCALE
+  .scene-scale-enter-from,
+  .scene-scale-leave-to {
+    transform: scale(0.2);
+    opacity: 0;
+  }
+  
+  .scene-scale-enter-active,
+  .scene-scale-leave-active {
+    transition: all 1s ease;
+  }
+  
+  .scene-scale-enter-to,
+  .scene-scale-leave-from {
+    position: absolute;
+    transform: scale(1) translateX(0);
+    opacity: 1;
+  }
+  
+  // HYBRID SCENE TRANSITIONS
+  
+  // SLIDE-LEFT AND FADE
+  .scene-mix-slide-left-fade-enter-active,
+  .scene-mix-slide-left-fade-leave-active {
+    position: absolute;
+    transition: all 0.85s ease;
+  }
+  .scene-mix-slide-left-fade-enter-from {
+    transform: translateX(-150rem);
+  }
+  .scene-mix-slide-left-fade-enter-to {
+    transform: translateX(0);
+  }
+  .scene-mix-slide-left-fade-leave-from {
+    transform: scale(1);
+  }
+  .scene-mix-slide-left-fade-leave-to {
+    transform: scale(0.8);
+  }

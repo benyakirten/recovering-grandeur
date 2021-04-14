@@ -18,6 +18,11 @@ export default {
   setHeaderOpacity(context, payload) {
     context.commit("setHeaderOpacity", payload);
   },
+  setHeaderQualities(context, payload) {
+    context.commit("setHeaderBackgroundColor", payload.headerBackgroundColor);
+    context.commit("setHeaderLinkColor", payload.headerLinkColor);
+    context.commit("setHeaderOpacity", payload.headerOpacity);
+  },
   setDefaultColors(context) {
     context.commit("setHeaderBackgroundColor", "#000000");
     context.commit("setHeaderLinkColor", "#ffffff");

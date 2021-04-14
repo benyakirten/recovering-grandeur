@@ -8,7 +8,7 @@ const linksModule = {
   state,
   mutations,
   getters,
-  actions,
+  actions
 };
 
 export default linksModule;

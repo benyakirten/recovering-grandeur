@@ -9,7 +9,7 @@
     <p class="text">
       <slot name="second-paragraph"></slot>
     </p>
-    <blockquote class="blockquote">
+    <blockquote class="blockquote" v-if="blockquote">
       <slot name="blockquote"></slot>
     </blockquote>
     <p class="text">
@@ -21,13 +21,38 @@
     <p class="text">
       <slot name="fifth-paragraph"></slot>
     </p>
-    <p class="disclaimer">
+    <p class="text" v-if="extraPara">
+      <slot name="sixth-paragraph"></slot>
+    </p>
+    <p class="disclaimer" v-if="disclaimer">
       For legal reasons, the story is a complete fabrication. Recovering
       Grandeur<sup class="small-text">&copy;</sup>
       is not responsible for any meaning derived from this story.
     </p>
   </div>
 </template>
+
+<script>
+export default {
+  props: {
+    disclaimer: {
+      type: Boolean,
+      required: false,
+      default: () => true
+    },
+    blockquote: {
+      type: Boolean,
+      required: false,
+      default: () => true
+    },
+    extraPara: {
+      type: Boolean,
+      required: false,
+      default: () => false
+    }
+  }
+};
+</script>
 
 <style lang="scss" scoped>
 .container {

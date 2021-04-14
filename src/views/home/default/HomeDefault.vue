@@ -13,8 +13,6 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
-
 import BaseLayout from "@/components/ui/BaseLayout";
 import HomeTop from "./top/HomeTop";
 import HomeCenter from "./center/HomeCenter";
@@ -25,14 +23,6 @@ export default {
     HomeTop,
     HomeCenter,
     HomeBottom
-  },
-  methods: {
-    ...mapActions("colorScheme", ["setDefaultColors"]),
-    ...mapActions("links", ["enlivenLinks"])
-  },
-  mounted() {
-    this.setDefaultColors();
-    setTimeout(() => this.enlivenLinks(), 1000);
   }
 };
 </script>

@@ -20,9 +20,8 @@
         </template>
         <template #second>
           <list-and-button-column v-bind="secondColumn">
-            Partial Coverage Through Work
-            <sup class="small-text">
-              &ast;&ast;
+            Partial Coverage Through Work<sup class="small-text"
+              >&ast;&ast;
             </sup>
           </list-and-button-column>
         </template>
@@ -48,7 +47,7 @@ import {
   popularPlan,
   luxuryPlan,
   vipPlan
-} from "@/data/pricing/CenterColumns";
+} from "@/data/pricing/centerColumns";
 
 import BaseCaption from "@/components/ui/BaseCaption";
 import BaseFourColumns from "@/components/ui/BaseFourColumns";

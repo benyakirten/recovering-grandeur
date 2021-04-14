@@ -1,0 +1,24 @@
+.click-circle {
+  position: absolute;
+  border-radius: 50%;
+  z-index: 100;
+
+  transform: translate(-50%, -50%) scale(0.2);
+}
+
+.small-text {
+  font-size: 0.8rem;
+}
+
+.background-sliding-gradient {
+  color: transparent;
+  background-image: linear-gradient(
+    to right,
+    $color-hero-2,
+    $color-hero-2-complementary-1
+  );
+  background-size: 200% 100%;
+  background-clip: text;
+
+  animation: sliding-background 4s infinite linear;
+}

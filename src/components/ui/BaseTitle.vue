@@ -10,8 +10,15 @@
 </template>
 
 <style lang="scss" scoped>
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 1rem 0;
+}
 .text {
   text-align: center;
+  min-height: 8rem;
 }
 .title {
   padding: 1rem 0.5rem;

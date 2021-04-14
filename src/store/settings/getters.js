@@ -1,5 +1,14 @@
 export default {
-  clickAnimationLength(state) {
-    return state.clickAnimationLength;
+  clickAnimationEnabled(state) {
+    return state.clickAnimationEnabled;
+  },
+  headerCanvasEnabled(state) {
+    return state.headerCanvasEnabled;
+  },
+  enabledTransitions(state) {
+    return state.enabledTransitions;
+  },
+  disabledTransitions(state) {
+    return state.disabledTransitions;
   }
 };

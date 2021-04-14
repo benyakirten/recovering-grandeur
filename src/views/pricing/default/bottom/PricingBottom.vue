@@ -5,7 +5,7 @@
 <script>
 import { mapGetters } from "vuex";
 
-import { pricingTable } from "@/data/pricing/CenterTable";
+import { pricingTable } from "@/data/pricing/centerTable";
 import TableDisplay from "@/components/table/TableDisplay";
 export default {
   components: {

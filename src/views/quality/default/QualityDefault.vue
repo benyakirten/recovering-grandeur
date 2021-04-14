@@ -13,7 +13,6 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
 import BaseLayout from "@/components/ui/BaseLayout";
 import QualityTop from "./top/QualityTop";
 import QualityCenter from "./center/QualityCenter";
@@ -24,22 +23,6 @@ export default {
     QualityTop,
     QualityCenter,
     QualityBottom
-  },
-  methods: {
-    ...mapActions("colorScheme", [
-      "setHeaderBackgroundColor",
-      "setHeaderLinkColor",
-      "setHeaderOpacity"
-    ]),
-    ...mapActions("links", ["enlivenLinks"])
-  },
-  mounted() {
-    this.setHeaderBackgroundColor("#2c2c2c");
-    this.setHeaderLinkColor("#2998ff");
-    this.setHeaderOpacity(0.6);
-    setTimeout(() => this.enlivenLinks(), 1000);
   }
 };
 </script>
-
-<style lang="scss" scoped></style>

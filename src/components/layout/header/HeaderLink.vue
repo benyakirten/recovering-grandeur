@@ -1,12 +1,8 @@
 <template>
-  <div class="link-container" @click="toggleLink(linkName)">
-    <router-link
-      class="link-container__link"
-      :style="headerLinkColor"
-      :to="linkRoute"
-    >
+  <div class="link-container" @click="linkClicked">
+    <p class="link-container__link" :style="headerLinkColor">
       {{ linkName }}
-    </router-link>
+    </p>
   </div>
 </template>
 
@@ -32,7 +28,13 @@ export default {
     }
   },
   methods: {
-    ...mapActions("links", ["toggleLink"])
+    ...mapActions("links", ["toggleLink"]),
+    linkClicked() {
+      if (this.$route.fullPath !== this.linkRoute) {
+        this.toggleLink(this.linkName);
+        this.$router.push(this.linkRoute);
+      }
+    }
   }
 };
 </script>
@@ -41,13 +43,16 @@ export default {
 .link-container {
   height: 100%;
   transform: skewX(25deg);
+  cursor: pointer;
 
   &:not(:first-child) {
     margin-top: 2rem;
   }
 
-  &__link:link,
-  &__link:visited {
+  &__link {
+    // The links are no longer router links
+    // so that the whole div can be clicked, and
+    // that made the router link redundant
     font-size: $font-size-xl;
     text-decoration: none;
 

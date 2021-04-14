@@ -24,12 +24,20 @@ export default {
       type: String,
       required: false,
       default: () => null
+    },
+    imgRotate: {
+      type: Number,
+      required: false,
+      default: () => null
     }
   },
   computed: {
     imgStyle() {
+      const _imgPath = this.image.match(/\.\w+$/)
+        ? this.image
+        : this.image + ".svg";
       let imgStyles = {
-        backgroundImage: `url(${require(`@/assets/${this.image}.svg`)})`,
+        backgroundImage: `url(${require(`@/assets/${_imgPath}`)})`,
         backgroundSize: "cover"
       };
       if (this.imgAnim) {
@@ -45,6 +53,12 @@ export default {
         imgStyles = {
           ...imgStyles,
           borderRadius: "2rem"
+        };
+      }
+      if (this.imgRotate) {
+        imgStyles = {
+          ...imgStyles,
+          transform: `rotate(${this.imgRotate}deg)`
         };
       }
       return imgStyles;

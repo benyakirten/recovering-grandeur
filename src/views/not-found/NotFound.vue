@@ -17,8 +17,6 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
-
 import BaseLayout from "@/components/ui/BaseLayout";
 import BaseBackground from "@/components/ui/BaseBackground";
 import HeroText from "@/components/general/HeroText";
@@ -27,16 +25,6 @@ export default {
     BaseLayout,
     BaseBackground,
     HeroText
-  },
-  methods: {
-    ...mapActions("links", ["enlivenLinks"]),
-    ...mapActions("colorScheme", ["setDefaultColors"])
-  },
-  mounted() {
-    this.setDefaultColors();
-    setTimeout(() => this.enlivenLinks(), 1000);
   }
 };
 </script>
-
-<style lang="scss" scoped></style>

@@ -9,25 +9,28 @@
           <p class="text">
             Over 70% of those who have survived their treatment at Recovering
             Grandeur<sup class="small-text">&copy;</sup> have given us at least
-            a 6 out of 11.7 satisfaction score on their post-op compulsory
+            a 9 out of 23.7 satisfaction score on their post-op compulsory
             evaluation.
           </p>
           <p class="text">
             We know you have a lot of choice out there. But not all of them
-            offer free bodily replacement<sup>1</sup>
-            if something goes wrong. It's a gaurantee you can count
-            on<sup>2</sup>, so our customers can have some peace (or a literal
-            piece) of mind.
+            offer free bodily replacement<sup class="small-text">1</sup> if
+            something goes wrong. It's a gaurantee you can count on<sup
+              class="small-text"
+              >2</sup
+            >, so our customers can have some peace (or a literal piece) of
+            mind.
           </p>
           <p class="text">
             UNHANDLED EXCEPTION: [Object object] between lines 355-49870:
             default_overwrite(undefined);
           </p>
           <p class="text">
-            We want to let you know that we take your health
-            seriously<sup>3</sup>. So seriously that our chief content
-            aggregator algorithm wants to share a story with you. Click on the
-            top-right arrow to see it.
+            We want to let you know that we take your health seriously<sup
+              class="small-text"
+              >3</sup
+            >. So seriously that our chief content aggregator algorithm wants to
+            share a story with you. Click on the top-right arrow to see it.
           </p>
           <p class="small-text">
             <sup>1</sup>&nbsp;Lorem ipsum dolor sit amet, consectetur adipiscing

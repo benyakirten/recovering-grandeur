@@ -41,8 +41,6 @@ export default {
   height: 100%;
   margin: 0 auto;
 
-  text-align: left;
-
   &__leading {
     font-size: $font-size-xl;
     font-family: $font-family-serif;

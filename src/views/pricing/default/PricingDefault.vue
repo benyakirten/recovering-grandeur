@@ -27,13 +27,7 @@ export default {
     PricingBottom
   },
   methods: {
-    ...mapActions("links", ["setAnchorId", "setButtonAction"]),
-    ...mapActions("colorScheme", [
-      "setHeaderBackgroundColor",
-      "setHeaderLinkColor",
-      "setHeaderOpacity"
-    ]),
-    ...mapActions("links", ["enlivenLinks"])
+    ...mapActions("links", ["setAnchorId", "setButtonAction"])
   },
   created() {
     this.setAnchorId("centerTableId");
@@ -41,12 +35,6 @@ export default {
       const table = document.getElementById("centerTableId");
       table.scrollIntoView({ behavior: "smooth" });
     });
-  },
-  mounted() {
-    this.setHeaderBackgroundColor("#2c2c2c");
-    this.setHeaderLinkColor("#7ed56f");
-    this.setHeaderOpacity(0.2);
-    setTimeout(() => this.enlivenLinks(), 1000);
   }
 };
 </script>

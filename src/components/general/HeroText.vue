@@ -49,7 +49,7 @@ export default {
   text-align: center;
 
   &__heading {
-    background-color: rgba($color-gray-dark-2, 0.2);
+    background-color: rgba($color-gray-dark-2, 0.3);
     font-family: $font-family-serif;
 
     &--primary {

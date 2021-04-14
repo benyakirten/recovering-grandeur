@@ -8,5 +8,5 @@ const app = createApp(App)
   .use(router);
 
 router.isReady().then(() => {
-  app.mount('#app');
-})
+  app.mount("#app");
+});

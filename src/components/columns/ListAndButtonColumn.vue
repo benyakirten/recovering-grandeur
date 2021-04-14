@@ -1,17 +1,23 @@
 <template>
   <div class="container">
-    <base-title class="one-quarter">
-      <template #title>
-        {{ title }}
-      </template>
-      <template #subtitle>
-        {{ subtitle }}
-      </template>
-    </base-title>
-    <cost-display class="one-quarter">
-      <slot></slot>
-    </cost-display>
-    <vertical-list :list="list" class="two-quarters"></vertical-list>
+    <div class="title">
+      <base-title>
+        <template #title>
+          {{ title }}
+        </template>
+        <template #subtitle>
+          {{ subtitle }}
+        </template>
+      </base-title>
+    </div>
+    <div class="cost-display">
+      <cost-display>
+        <slot></slot>
+      </cost-display>
+    </div>
+    <div class="list">
+      <vertical-list :list="list"></vertical-list>
+    </div>
     <base-button>
       {{ buttonCaption }}
     </base-button>
@@ -57,7 +63,13 @@ export default {
 .container {
   display: flex;
   flex-direction: column;
+  height: 100%;
   padding: 1rem 0;
-  min-height: 100%;
+}
+.title {
+  height: 20rem;
+}
+.cost-display {
+  height: 10rem;
 }
 </style>
