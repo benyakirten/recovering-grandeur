@@ -1,12 +1,7 @@
 export default {
+  breakpointEnabled: true,
   clickAnimationEnabled: true,
   headerCanvasEnabled: true,
-  enabledTransitions: [
-    "slide-right",
-    "slide-left",
-    "fade",
-    "scale",
-    "mix-slide-left-fade"
-  ],
-  disabledTransitions: []
+  headerCanvasRandomizeColorsEnabled: true,
+  dropdownOpen: null
 };

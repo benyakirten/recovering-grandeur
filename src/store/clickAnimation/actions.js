@@ -1,64 +1,84 @@
-import { separateRGB, getColorAndVariation } from "@/utils/hexAndDecimals";
-
 export default {
   setAnimationLength(context, payload) {
     context.commit("setClickAnimationLength", payload);
+    context.dispatch("setLocalStorageClickAnimation");
   },
-  setAnimationVariation(context, payload) {
+  setAnimationLengthVariation(context, payload) {
+    console.log("length variation set");
     context.commit("setClickAnimationLengthVariation", payload);
+    context.dispatch("setLocalStorageClickAnimation");
   },
   setAnimationColor(context, payload) {
     context.commit("setClickAnimationColor", payload);
+    context.dispatch("setLocalStorageClickAnimation");
+  },
+  setAnimationRadius(context, payload) {
+    context.commit("setClickAnimationRadius", payload);
+    context.dispatch("setLocalStorageClickAnimation");
+  },
+  incrementRadius(context) {
+    const { clickAnimationRadius } = context.state;
+    context.commit("setClickAnimationRadius", clickAnimationRadius + 1);
+    context.dispatch("setLocalStorageClickAnimation");
+  },
+  decrementRadius(context) {
+    const { clickAnimationRadius } = context.state;
+    context.commit("setClickAnimationRadius", clickAnimationRadius - 1);
+    context.dispatch("setLocalStorageClickAnimation");
+  },
+  loadAll(
+    context,
+    {
+      clickAnimationLength,
+      clickAnimationLengthVariation,
+      clickAnimationColor,
+      clickAnimationRadius
+    }
+  ) {
+    context.commit("setClickAnimationLength", clickAnimationLength || 500);
+    context.commit(
+      "setClickAnimationLengthVariation",
+      clickAnimationLengthVariation || 0
+    );
+    context.commit("setClickAnimationColor", clickAnimationColor || "#c69963");
+    context.commit("setClickAnimationRadius", clickAnimationRadius || 10);
+    context.dispatch("setLocalStorageClickAnimation");
   },
   setDefaults(context) {
-    context.commit("clickAnimationLength", 500);
-    context.commit("clickAnimationLengthVariation", 0);
-    context.commit("clickAnimationColor", "#c69963");
+    context.commit("setClickAnimationLength", 500);
+    context.commit("setClickAnimationLengthVariation", 0);
+    context.commit("setClickAnimationColor", "#c69963");
+    context.commit("setClickAnimationRadius", 10);
+    context.dispatch("setLocalStorageClickAnimation");
   },
   setClickProperties(context, payload) {
     const {
       clickAnimationLength,
       clickAnimationVariation,
-      clickAnimationColor
+      clickAnimationColor,
+      clickAnimationRadius
     } = payload;
     context.commit("setClickAnimationLength", clickAnimationLength);
     context.commit("setClickAnimationVariation", clickAnimationVariation);
     context.commit("setClickAnimationColor", clickAnimationColor);
+    context.commit("setClickAnimationRadius", clickAnimationRadius);
+    context.dispatch("setLocalStorageClickAnimation");
   },
-  changeColorFromVariation(context, payload = 1) {
-    const finalColor = getFinalColor(context, payload);
-    context.commit("setClickAnimationColor", finalColor);
-  },
-  changeColorRandomByVariation(context, payload = 1) {
-    const { clickAnimationColorVariation } = context.state;
-    const mult = Math.floor(
-      Math.random() * (payload * clickAnimationColorVariation)
+  setLocalStorageClickAnimation(context) {
+    const {
+      clickAnimationLength,
+      clickAnimationLengthVariation,
+      clickAnimationColor,
+      clickAnimationRadius
+    } = context.state;
+    localStorage.setItem(
+      "RG_CA",
+      JSON.stringify({
+        clickAnimationLength,
+        clickAnimationLengthVariation,
+        clickAnimationColor,
+        clickAnimationRadius
+      })
     );
-    const finalColor = getFinalColor(context, mult);
-    context.commit("setClickAnimationColor", finalColor);
-  },
-  setRadius(context, payload) {
-    context.commit("setClickAnimationRadius", payload);
-  },
-  incrementRadius(context) {
-    const { clickAnimationRadius } = context.state;
-    context.commit("setClickAnimationRadius", clickAnimationRadius + 1);
-  },
-  decrementRadius(context) {
-    const { clickAnimationRadius } = context.state;
-    context.commit("setClickAnimationRadius", clickAnimationRadius - 1);
   }
-};
-
-const separateColorsAndVariationFromContext = context => {
-  const { clickAnimationColor, clickAnimationColorVariation } = context.state;
-  const separateColors = separateRGB(clickAnimationColor);
-  return [separateColors, clickAnimationColorVariation];
-};
-
-const getFinalColor = (context, mult) => {
-  const [separateColors, animColorVar] = separateColorsAndVariationFromContext(
-    context
-  );
-  return getColorAndVariation(separateColors, animColorVar, mult);
 };

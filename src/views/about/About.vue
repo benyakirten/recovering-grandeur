@@ -13,6 +13,8 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
+
 import BaseLayout from "@/components/ui/BaseLayout";
 import AboutTop from "./top/AboutTop";
 import AboutCenter from "./center/AboutCenter";
@@ -23,6 +25,13 @@ export default {
     AboutTop,
     AboutCenter,
     AboutBottom
+  },
+  methods: {
+    ...mapActions("settings", ["setAllDefaults"]),
+    ...mapActions("links", ["setButtonAction"])
+  },
+  mounted() {
+    this.setButtonAction(() => this.setAllDefaults());
   }
 };
 </script>

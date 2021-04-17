@@ -1,12 +1,12 @@
 <template>
   <div class="container">
-    <section class="section" :style="{ height: topHeight }">
+    <section class="section" :style="{ minHeight: topHeight }">
       <slot name="top"></slot>
     </section>
-    <section class="section" :style="{ height: centerHeight }">
+    <section class="section" :style="{ minHeight: centerHeight }">
       <slot name="center"></slot>
     </section>
-    <section class="section" :style="{ height: bottomHeight }">
+    <section class="section" :style="{ minHeight: bottomHeight }">
       <slot name="bottom"></slot>
     </section>
   </div>

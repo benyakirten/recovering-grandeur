@@ -1,14 +1,26 @@
 export default {
-  clickAnimationEnabled(state) {
-    return state.clickAnimationEnabled;
+  breakpointEnabled({ breakpointEnabled }) {
+    return breakpointEnabled;
   },
-  headerCanvasEnabled(state) {
-    return state.headerCanvasEnabled;
+  clickAnimationEnabled({ clickAnimationEnabled }) {
+    return clickAnimationEnabled;
   },
-  enabledTransitions(state) {
-    return state.enabledTransitions;
+  headerCanvasEnabled({ headerCanvasEnabled }) {
+    return headerCanvasEnabled;
   },
-  disabledTransitions(state) {
-    return state.disabledTransitions;
+  headerCanvasRandomizeColorsEnabled({ headerCanvasRandomizeColorsEnabled }) {
+    return headerCanvasRandomizeColorsEnabled;
+  },
+  whichDropdownIsOpen({ dropdownOpen }) {
+    return dropdownOpen;
+  },
+  defaultSettings() {
+    return {
+      breakpointEnabled: true,
+      clickAnimationEnabled: true,
+      headerCanvasEnabled: true,
+      headerCanvasRandomizeColorsEnabled: true,
+      dropdownOpen: null
+    };
   }
 };

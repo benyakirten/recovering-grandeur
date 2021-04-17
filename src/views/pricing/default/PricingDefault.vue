@@ -1,5 +1,5 @@
 <template>
-  <base-layout centerHeight="75rem" bottomHeight="85rem">
+  <base-layout>
     <template #top>
       <PricingTop />
     </template>
@@ -29,7 +29,7 @@ export default {
   methods: {
     ...mapActions("links", ["setAnchorId", "setButtonAction"])
   },
-  created() {
+  mounted() {
     this.setAnchorId("centerTableId");
     this.setButtonAction(() => {
       const table = document.getElementById("centerTableId");

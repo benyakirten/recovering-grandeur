@@ -1,9 +1,9 @@
 const explanation = {
   heading: "What Recovering Grandeur Has to Say",
-  firstParagraph: `The website introduces the story of the book minorly through if the links
-  are read in order, but that's not the major focus of the Restoring Grandeur. Rather, it is
-  to address the two major themes of A Brief Repose: 1. the inhumanity of humans and
-  2. a refutation of Platonic truths.`,
+  firstParagraph: `The website (and all its jankiness) is the point. It's supposed to be
+  a website designed by robots with only a passing knowledge of humans. It only minorly addresses
+  the plot of A Brief Repose. Rather, it adddresses the two major themes of A Brief Repose:
+  1. the inhumanity of humans and 2. a refutation of Platonic truths.`,
   secondParagraph: `The former is expressed through the content and story of the website.
   Basic compassion is a foregone thought: why shouldn't you trade an organ for some insulin? Look at the bravery of a child who gave up
   life and existence to become integrated with our computers! And so it goes on, with no actual

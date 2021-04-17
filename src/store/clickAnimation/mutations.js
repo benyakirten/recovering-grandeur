@@ -2,7 +2,7 @@ export default {
   setClickAnimationLength(state, payload) {
     state.clickAnimationLength = payload;
   },
-  setclickAnimationLengthVariation(state, payload) {
+  setClickAnimationLengthVariation(state, payload) {
     state.clickAnimationLengthVariation = payload;
   },
   setClickAnimationColor(state, payload) {

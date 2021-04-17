@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import SlideCheckbox from "@/components/general/SlideCheckbox";
+import SlideCheckbox from "@/components/inputs/SlideCheckbox";
 import HoverModal from "@/components/general/HoverModal";
 export default {
   emits: ["toggle"],

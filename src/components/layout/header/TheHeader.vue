@@ -40,7 +40,10 @@ export default {
       "getHeaderBackgroundColor",
       "getHeaderOpacity"
     ]),
-    ...mapGetters("settings", ["headerCanvasEnabled"]),
+    ...mapGetters("settings", [
+      "headerCanvasEnabled",
+      "headerCanvasRandomizeColorsEnabled"
+    ]),
     headerBackground() {
       const rgbaString = getRGBAStringFromHex(
         this.getHeaderBackgroundColor,
@@ -78,6 +81,9 @@ export default {
       if (!this.headerCanvasEnabled) {
         return;
       }
+      if (this.headerCanvasRandomizeColorsEnabled) {
+        this.setRandomStartAndEndColors();
+      }
       const { x, y } = this.HeaderCanvasController.getNearestCornerPosition(
         e.clientX,
         e.clientY
@@ -88,7 +94,6 @@ export default {
         this.numberOfCircles
       );
       requestAnimationFrame(() => this.canvasWave(x, y, this.startRadius));
-      this.setRandomStartAndEndColors();
     },
     canvasWave(x, y, r) {
       if (r < 400) {
@@ -128,9 +133,7 @@ export default {
   }
 }
 
-// VUE COMPONENT TRANSITIONS
-
-// HEADER-LINK
+// HEADER-LINK TRANSITIONS
 .link-fall-leave-from,
 .link-fall-enter-to {
   transform: translateY(0) skewX(25deg) scale(1);

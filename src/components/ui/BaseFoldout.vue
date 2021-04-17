@@ -7,7 +7,7 @@
       </span>
     </div>
     <transition name="content">
-      <div class="content" v-if="showContent && enableContent">
+      <div class="content" v-if="showDropdownContent">
         <slot></slot>
       </div>
     </transition>
@@ -16,17 +16,22 @@
 
 <script>
 export default {
+  emits: ["broadcast-click"],
   props: {
     enableContent: {
       type: Boolean,
       required: false,
       default: () => true
+    },
+    name: {
+      type: String,
+      required: false,
+      default: () => "BaseFoldout"
+    },
+    showContent: {
+      type: Boolean,
+      required: true
     }
-  },
-  data() {
-    return {
-      showContent: false
-    };
   },
   computed: {
     itemStyle() {
@@ -40,12 +45,15 @@ export default {
       return {
         transform: this.showContent ? "rotate(270deg)" : "rotate(90deg)"
       };
+    },
+    showDropdownContent() {
+      return this.enableContent && this.showContent;
     }
   },
   methods: {
     toggleContent() {
       if (this.enableContent) {
-        this.showContent = !this.showContent;
+        this.$emit("broadcast-click", this.name);
       }
     }
   }
@@ -54,7 +62,8 @@ export default {
 
 <style lang="scss" scoped>
 .container {
-  margin-bottom: 2rem;
+  margin: 0 4rem 2rem;
+  min-width: 40rem;
 }
 .top-bar {
   display: flex;
@@ -63,8 +72,8 @@ export default {
   border: 1px solid $color-black;
   border-radius: $border-radius-standard;
 
-  padding-left: 2rem;
   text-align: left;
+  padding: 0 2rem;
 
   &__item {
     display: flex;

@@ -18,5 +18,14 @@ export default {
   },
   setButtonAction(state, payload) {
     state.buttonAction = payload;
+  },
+  setTransitions(state, payload) {
+    state.transitions = payload;
+  },
+  setEnabledLinks(state, payload) {
+    state.links = payload;
+  },
+  setDisabledLinks(state, payload) {
+    state.disabledLinks = payload;
   }
 };

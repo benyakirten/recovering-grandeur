@@ -26,7 +26,6 @@ const enableDefaultSettings = to => {
       headerOpacity: to.meta.headerOpacityDefault || 0.4
     });
   }
-  setTimeout(() => store.dispatch("links/enlivenLinks"), 1000);
 };
 
 export default beforeEach;

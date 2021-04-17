@@ -23,6 +23,11 @@ export default {
       type: String,
       required: false,
       default: () => "#b28451"
+    },
+    leftMargin: {
+      type: String,
+      required: false,
+      default: () => "0.5rem"
     }
   },
   data() {
@@ -33,7 +38,10 @@ export default {
   },
   computed: {
     spanStyle() {
-      return { color: this.iconColor };
+      return {
+        color: this.iconColor,
+        marginLeft: this.leftMargin
+      };
     }
   },
   methods: {
@@ -49,14 +57,19 @@ export default {
 <style lang="scss" scoped>
 .container {
   position: relative;
+  display: inline-block;
 
   &__span {
     cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
     font-size: $font-size-medium;
     border: 1px solid $color-black;
     border-radius: 50%;
-    margin-left: 0.5rem;
   }
+
   &__modal {
     position: absolute;
     top: 0;
@@ -64,7 +77,8 @@ export default {
 
     border-radius: 1rem;
     padding: 0.5rem;
-    min-width: 15rem;
+    min-width: 25rem;
+    z-index: 100;
 
     font-size: $font-size-small;
     box-shadow: $shadow-xs;

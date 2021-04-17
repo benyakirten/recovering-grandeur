@@ -1,5 +1,5 @@
 export default {
-  breakpoint: null,
-  DEFAULT_ADD: 5,
-  DEFAULT_SUB: -5
+  breakpoint: 0,
+  maxAdd: 5,
+  maxSub: -5
 };
