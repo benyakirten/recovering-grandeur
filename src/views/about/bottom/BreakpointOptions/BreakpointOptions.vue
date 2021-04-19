@@ -65,19 +65,3 @@ export default {
   }
 };
 </script>
-
-<style lang="scss" scoped>
-.checkbox {
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-
-  &__slider {
-    width: 35rem;
-  }
-}
-.slider-desc {
-  color: $color-primary-dark;
-  font-size: $font-size-medium;
-}
-</style>

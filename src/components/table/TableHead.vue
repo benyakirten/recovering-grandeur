@@ -37,10 +37,17 @@ export default {
     &__lead {
       padding: 2rem;
       text-align: left;
+
+      @include respond(tab-port) {
+        padding: 0.5rem;
+      }
       background-color: $color-white;
     }
     &__item {
       padding: 2rem;
+      @include respond(tab-port) {
+        padding: 0.5rem;
+      }
       border-left: 1px solid $color-black;
     }
   }

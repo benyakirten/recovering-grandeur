@@ -1,5 +1,5 @@
 <template>
-  <div class="container" :style="containerStyling">
+  <div class="columns-container" :style="containerStyling">
     <div
       class="section"
       @mouseenter="highlight"
@@ -95,7 +95,13 @@ export default {
     },
     sectionStyling() {
       return {
-        width: this.sectionWidth,
+        width: window.matchMedia("only screen and (max-width: 37.5em)").matches
+          ? "80%"
+          : window.matchMedia("only screen and (max-width: 56.25em)").matches
+          ? "45%"
+          : window.matchMedia("only screen and (max-width: 75em)").matches
+          ? "40%"
+          : this.sectionWidth,
         border: this.normalBorder,
         boxShadow: this.computedChildBoxShadow
       };
@@ -125,13 +131,31 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.container {
+.columns-container {
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
   border-radius: $border-radius-standard;
+
+  @include respond(tab-land) {
+    flex-wrap: wrap;
+  }
+
+  @include respond(phone) {
+    align-items: center;
+    flex-direction: column;
+  }
 }
 .section {
   border-radius: $border-radius-standard;
+  @include respond(tab-land) {
+    margin-bottom: 2rem;
+  }
+
+  @include respond(phone) {
+    &:not(:last-child) {
+      margin-bottom: 1rem;
+    }
+  }
 }
 </style>

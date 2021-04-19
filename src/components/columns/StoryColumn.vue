@@ -3,25 +3,25 @@
     <h2 class="heading">
       <slot name="heading"></slot>
     </h2>
-    <p class="text">
+    <p class="story-text">
       <slot name="first-paragraph"></slot>
     </p>
-    <p class="text">
+    <p class="story-text">
       <slot name="second-paragraph"></slot>
     </p>
     <blockquote class="blockquote" v-if="blockquote">
       <slot name="blockquote"></slot>
     </blockquote>
-    <p class="text">
+    <p class="story-text">
       <slot name="third-paragraph"></slot>
     </p>
-    <p class="text">
+    <p class="story-text">
       <slot name="fourth-paragraph"></slot>
     </p>
-    <p class="text">
+    <p class="story-text">
       <slot name="fifth-paragraph"></slot>
     </p>
-    <p class="text" v-if="extraPara">
+    <p class="story-text" v-if="extraPara">
       <slot name="sixth-paragraph"></slot>
     </p>
     <p class="disclaimer" v-if="disclaimer">
@@ -74,7 +74,7 @@ export default {
   margin: 2rem 0;
 }
 
-.text {
+.story-text {
   font-size: $font-size-medium;
   margin: 1rem 0;
 }

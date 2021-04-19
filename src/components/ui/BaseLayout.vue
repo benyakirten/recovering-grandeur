@@ -1,12 +1,12 @@
 <template>
   <div class="container">
-    <section class="section" :style="{ minHeight: topHeight }">
+    <section class="section" :style="columnHeight(topHeight)">
       <slot name="top"></slot>
     </section>
-    <section class="section" :style="{ minHeight: centerHeight }">
+    <section class="section" :style="columnHeight(centerHeight)">
       <slot name="center"></slot>
     </section>
-    <section class="section" :style="{ minHeight: bottomHeight }">
+    <section class="section" :style="columnHeight(bottomHeight)">
       <slot name="bottom"></slot>
     </section>
   </div>
@@ -30,6 +30,16 @@ export default {
       required: false,
       default: () => "80rem"
     }
+  },
+  methods: {
+    columnHeight(itemHeight) {
+      return {
+        minHeight: window.matchMedia("only screen and (max-width: 37.5em)")
+          .matches
+          ? "50rem"
+          : itemHeight
+      };
+    }
   }
 };
 </script>
@@ -41,11 +51,24 @@ export default {
 }
 .section {
   margin: 2rem;
+
+  @include respond(phone) {
+    margin: 0 0.5rem;
+  }
+
   margin-bottom: 4rem;
 
   &:first-child {
     margin-top: 0;
     padding-top: 2rem;
+
+    @include respond(tab-port) {
+      padding-top: 1rem;
+    }
+
+    @include respond(phone) {
+      padding-top: 0;
+    }
   }
 
   &:last-child {

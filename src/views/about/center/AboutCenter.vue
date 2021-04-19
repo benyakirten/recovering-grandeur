@@ -1,23 +1,20 @@
 <template>
-  <base-two-pages>
-    <template #front>
-      <AboutCenterFront />
-    </template>
-    <template #back>
-      <AboutCenterBack />
-    </template>
-  </base-two-pages>
+  <AboutCenterNormal v-if="normalScreen" />
+  <AboutCenterPhone v-else />
 </template>
 
 <script>
-import BaseTwoPages from "@/components/ui/BaseTwoPages";
-import AboutCenterFront from "./front/AboutCenterFront";
-import AboutCenterBack from "./back/AboutCenterBack";
+import AboutCenterNormal from "./normal/AboutCenterNormal";
+import AboutCenterPhone from "./phone/AboutCenterPhone";
 export default {
   components: {
-    BaseTwoPages,
-    AboutCenterFront,
-    AboutCenterBack
+    AboutCenterNormal,
+    AboutCenterPhone
+  },
+  computed: {
+    normalScreen() {
+      return !window.matchMedia("only screen and (max-width: 37.5em)").matches;
+    }
   }
 };
 </script>

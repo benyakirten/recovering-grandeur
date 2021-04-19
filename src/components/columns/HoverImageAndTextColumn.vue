@@ -92,15 +92,23 @@ export default {
 .content {
   &__heading {
     font-size: $font-size-large;
+    @include respond(tab-port) {
+      font-size: reduce($font-size-large, 0.4);
+    }
     font-family: $font-family-sans;
     text-align: left;
-    padding-bottom: 0.5rem;
+    padding: 2rem 0 0.5rem;
     letter-spacing: 3px;
     font-weight: lighter;
   }
   &__para {
     text-align: left;
     font-size: $font-size-medium;
+
+    @include respond(tab-port) {
+      font-size: reduce($font-size-medium, 0.2);
+    }
+
     letter-spacing: 1px;
     &:not(:last-child) {
       margin-bottom: 2rem;

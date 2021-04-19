@@ -3,7 +3,9 @@
     <template #left>
       <text-column>
         <template #leading>
-          Leg broken? Failing kidneys? Get the best bang for your buck!
+          <p class="leading-text">
+            Leg broken? Failing kidneys? Get the best bang for your buck!
+          </p>
         </template>
         <template #main>
           <p class="text">
@@ -72,7 +74,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.text {
-  margin: 1.5rem 0;
+.leading-text {
+  @include respond(phone) {
+    padding-top: 2rem;
+  }
 }
 </style>

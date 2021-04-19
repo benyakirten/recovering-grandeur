@@ -4,7 +4,7 @@
       A sick man has never left our hospital
     </template>
     <template #content>
-      <base-two-columns>
+      <base-two-columns tabHeight="100rem">
         <template #left>
           <image-column image="Smokestack">
             Some of our advanced techniques?

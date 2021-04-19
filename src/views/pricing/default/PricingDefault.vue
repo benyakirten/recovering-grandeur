@@ -1,5 +1,5 @@
 <template>
-  <base-layout>
+  <base-layout bottomHeight="60rem">
     <template #top>
       <PricingTop />
     </template>

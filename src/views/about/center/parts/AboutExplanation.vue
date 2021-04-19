@@ -4,22 +4,34 @@
       {{ explanation.heading }}
     </template>
     <template #first-paragraph>
-      {{ explanation.firstParagraph }}
+      <p class="smaller-tab-text">
+        {{ explanation.firstParagraph }}
+      </p>
     </template>
     <template #second-paragraph>
-      {{ explanation.secondParagraph }}
+      <p class="smaller-tab-text">
+        {{ explanation.secondParagraph }}
+      </p>
     </template>
     <template #third-paragraph>
-      {{ explanation.thirdParagraph }}
+      <p class="smaller-tab-text">
+        {{ explanation.thirdParagraph }}
+      </p>
     </template>
     <template #fourth-paragraph>
-      {{ explanation.fourthParagraph }}
+      <p class="smaller-tab-text">
+        {{ explanation.fourthParagraph }}
+      </p>
     </template>
     <template #fifth-paragraph>
-      {{ explanation.fifthParagraph }}
+      <p class="smaller-tab-text">
+        {{ explanation.fifthParagraph }}
+      </p>
     </template>
     <template #sixth-paragraph>
-      {{ explanation.sixthParagraph }}
+      <p class="smaller-tab-text">
+        {{ explanation.sixthParagraph }}
+      </p>
     </template>
   </story-column>
 </template>
@@ -39,4 +51,10 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.smaller-tab-text {
+  @include respond(tab-land) {
+    font-size: reduce($font-size-medium, 0.2);
+  }
+}
+</style>

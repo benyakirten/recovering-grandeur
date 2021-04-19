@@ -30,6 +30,16 @@ export default {
       required: false,
       default: () => "15rem"
     },
+    tabHeight: {
+      type: String,
+      required: false,
+      default: () => ""
+    },
+    tabWidth: {
+      type: String,
+      required: false,
+      default: () => ""
+    },
     shape: {
       type: String,
       required: false,
@@ -70,15 +80,37 @@ export default {
       }
     },
     figureStyle() {
-      const { width, height, float } = this;
+      const { width, height, tabWidth, tabHeight, float } = this;
       let marginDirection =
         float === "left"
           ? (marginDirection = { marginRight: "2rem" })
           : { marginLeft: "2rem" };
+      if (
+        window.matchMedia("only screen and (max-width: 56.25em)").matches &&
+        (tabWidth || tabHeight)
+      ) {
+        return {
+          width: tabWidth,
+          height: tabHeight,
+          float,
+          ...marginDirection,
+          ...this.imgShape
+        };
+      }
       return { width, height, float, ...marginDirection, ...this.imgShape };
     },
     imgStyle() {
-      const { width, height } = this;
+      const { width, height, tabWidth, tabHeight } = this;
+      if (
+        window.matchMedia("only screen and (max-width: 56.25em)").matches &&
+        (tabWidth || tabHeight)
+      ) {
+        return {
+          width: tabWidth,
+          height: tabHeight,
+          ...this.imgShape
+        };
+      }
       return { width, height, ...this.imgShape };
     }
   }
@@ -87,9 +119,6 @@ export default {
 
 <style lang="scss" scoped>
 .figure {
-  width: 15rem;
-  height: 15rem;
-
   position: relative;
   overflow: hidden;
 
@@ -106,7 +135,7 @@ export default {
 
     text-transform: uppercase;
     color: $color-white;
-    font-size: $font-size-medium;
+    font-size: $font-size-small;
     text-align: center;
 
     opacity: 0;

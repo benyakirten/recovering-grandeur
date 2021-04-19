@@ -1,18 +1,18 @@
 <template>
   <div class="container">
     <div
-      :style="{ color }"
+      :style="headingProperties"
       class="container__heading container__heading--primary"
     >
-      <h1 class="text">
+      <h1>
         <slot name="primary"></slot>
       </h1>
     </div>
     <div
-      :style="{ color }"
+      :style="headingProperties"
       class="container__heading container__heading--secondary"
     >
-      <h2 class="text">
+      <h2>
         <slot name="secondary"></slot>
       </h2>
     </div>
@@ -26,6 +26,19 @@ export default {
       type: String,
       required: false,
       default: () => "#ffffff"
+    },
+    headingBackgroundColor: {
+      type: String,
+      required: false,
+      default: () => `rgba(109, 93, 75, 0.3);`
+    }
+  },
+  computed: {
+    headingProperties() {
+      return {
+        color: this.color,
+        backgroundColor: this.headingBackgroundColor
+      };
     }
   }
 };
@@ -52,11 +65,32 @@ export default {
     background-color: rgba($color-gray-dark-2, 0.3);
     font-family: $font-family-serif;
 
+    @include respond(tab-port) {
+      width: 80%;
+    }
+
+    @include respond(phone) {
+      width: 60%;
+      padding: 0 1rem;
+    }
+
     &--primary {
       padding: 1rem;
 
       font-size: $font-size-xl;
       letter-spacing: 4px;
+
+      @include respond(tab-land) {
+        font-size: reduce($font-size-xl, 0.2);
+      }
+
+      @include respond(tab-port) {
+        font-size: reduce($font-size-xl, 0.4);
+      }
+
+      @include respond(phone) {
+        font-size: $font-size-xl;
+      }
 
       opacity: 0;
       animation: load-in 2s forwards 2s;
@@ -68,6 +102,10 @@ export default {
 
       font-size: $font-size-large;
       letter-spacing: 2px;
+
+      @include respond(tab-port) {
+        font-size: reduce($font-size-large, 0.2);
+      }
 
       opacity: 0;
       animation: load-in 2s forwards 2s;

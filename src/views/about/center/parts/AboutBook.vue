@@ -3,7 +3,7 @@
     image="temp-cover"
     height="20rem"
     width="20rem"
-    alt="A Mendicant Repose"
+    :alt="pubInfo.title"
   >
     <template #caption>
       <a class="link" target="blank" :href="pubInfo.links[0].link"
@@ -37,6 +37,9 @@
     <template #heading-3> Miscellaneous Info </template>
     <template #para-3>
       {{ pubInfo.miscInfo }}
+      <span v-if="normalScreen">
+        {{ pubInfo.miscInfoExtra }}
+      </span>
     </template>
   </hover-image-and-text-column>
 </template>
@@ -54,6 +57,9 @@ export default {
   computed: {
     shortStory() {
       return this.pubInfo.shortStory;
+    },
+    normalScreen() {
+      return !window.matchMedia("only screen and (max-width: 37.5em)").matches;
     }
   }
 };

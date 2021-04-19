@@ -95,4 +95,7 @@
     @if $breakpoint == bdesk {
         @media only screen and (min-width: 112.5em) { @content } // 1800px
     }
+    @if $breakpoint == no-hover {
+        @media only screen and (hover: none) { @content }
+    }
 }

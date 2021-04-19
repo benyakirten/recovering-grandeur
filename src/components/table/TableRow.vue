@@ -35,6 +35,12 @@ export default {
 
     letter-spacing: 2px;
     padding: 2rem;
+
+    @include respond(tab-port) {
+      width: 8%;
+      padding: 0.5rem;
+    }
+
     font-family: $font-family-serif;
     font-weight: bold;
 

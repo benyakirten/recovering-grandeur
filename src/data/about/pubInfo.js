@@ -24,7 +24,8 @@ const pubInfo = {
   can be understood without reading any other book. It is loosely based on my own
   experience in a coma. Upon the end of my own experience, I long contemplated
   how I would articulate what happened to me. A Brief Repose captures the feeling
-  of what it's like. Click on the arrow in the top right to read an exegesis of how
+  of what it's like.`,
+  miscInfoExtra: `Click on the arrow in the top right to read an exegesis of how
   this website accompanies the book.`
 };
 

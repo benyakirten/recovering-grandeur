@@ -6,8 +6,43 @@
   transform: translate(-50%, -50%) scale(0.2);
 }
 
+.text {
+  margin: 1.5rem 0;
+
+  @include respond(tab-port) {
+    font-size: reduce($font-size-medium, 0.2);
+  }
+}
+
+.big-tab-text {
+  @include respond(tab-land) {
+    font-size: $font-size-medium;
+  }
+}
+
 .small-text {
-  font-size: 0.8rem;
+  font-size: reduce($font-size-small, 0.4);
+}
+
+.checkbox {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+
+  @include respond(phone) {
+    margin: 0 auto;
+  }
+
+  &__slider {
+    width: 35rem;
+    @include respond(phone) {
+      width: 40rem;
+    }
+  }
+}
+.slider-desc {
+  color: $color-primary-dark;
+  font-size: $font-size-medium;
 }
 
 .background-sliding-gradient {

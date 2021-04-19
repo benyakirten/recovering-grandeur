@@ -1,6 +1,6 @@
 <template>
   <base-background image="Grand-canyon">
-    <hero-text>
+    <hero-text headingBackgroundColor="rgba(70, 60, 48, 0.7)">
       <template #primary>Quality of Care</template>
       <template #secondary>
         A stay at Recovering Grandeur<sup class="small-text">&copy;</sup> is

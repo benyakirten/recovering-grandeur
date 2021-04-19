@@ -7,6 +7,16 @@
 }
 html {
   font-size: 62.5%;
+
+  @include respond(tab-land) { // width <= 1200 px
+    font-size: 56.25%; // 1 rem = 9px
+  }
+  @include respond(tab-port) { // width <= 900px
+      font-size: 50%; // 1 rem = 8px
+  }
+  @include respond(phone) { // <= 600 px
+      font-size: 30%; // 1 rem = 4.8px
+  }
 }
 body {
   box-sizing: border-box;

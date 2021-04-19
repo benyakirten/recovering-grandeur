@@ -62,6 +62,7 @@ export default {
 
 <style lang="scss" scoped>
 .container {
+  position: relative;
   margin: 0 4rem 2rem;
   min-width: 40rem;
 }
@@ -71,6 +72,19 @@ export default {
 
   border: 1px solid $color-black;
   border-radius: $border-radius-standard;
+  width: 70rem;
+
+  @include respond(tab-land) {
+    width: 50rem;
+  }
+
+  @include respond(tab-port) {
+    width: 40rem;
+  }
+
+  @include respond(phone) {
+    width: 20rem;
+  }
 
   text-align: left;
   padding: 0 2rem;
@@ -90,6 +104,13 @@ export default {
 }
 .content {
   border: 1px solid $color-black;
+  @include respond(tab-land) {
+    width: 50rem;
+  }
+  @include respond(phone) {
+    width: 40rem;
+    margin-left: -6rem;
+  }
 }
 
 .content-leave-to,

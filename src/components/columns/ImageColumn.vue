@@ -44,11 +44,24 @@ export default {
         imgStyles = {
           ...imgStyles,
           animation: this.imgAnim,
-          clipPath: this.imgClipPath,
-          height: "55%",
-          marginTop: "10rem",
-          marginBottom: "2rem"
+          clipPath: this.imgClipPath
         };
+        if (!window.matchMedia("only screen and (max-width: 37.5em)").matches) {
+          imgStyles = {
+            ...imgStyles,
+            height: "55%",
+            marginTop: "10rem",
+            marginBottom: "2rem"
+          };
+        } else {
+          imgStyles = {
+            ...imgStyles,
+            height: "10rem",
+            width: "8rem",
+            marginTop: "-2rem",
+            marginBottom: "0"
+          };
+        }
       } else {
         imgStyles = {
           ...imgStyles,
@@ -79,6 +92,11 @@ export default {
 
     width: 60%;
     height: 70%;
+
+    @include respond(phone) {
+      height: 20rem;
+      width: 16rem;
+    }
   }
 
   &__caption {

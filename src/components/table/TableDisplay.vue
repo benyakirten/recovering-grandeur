@@ -35,6 +35,10 @@ export default {
   width: 95%;
   margin: -4rem auto;
 
+  @include respond(phone) {
+    margin: 0 auto;
+  }
+
   font-size: $font-size-large;
 
   box-shadow: $shadow-normal;

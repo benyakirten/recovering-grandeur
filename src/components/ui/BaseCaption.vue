@@ -16,6 +16,11 @@
   width: 80%;
   margin: -8rem auto 4rem;
 
+  @include respond(tab-land) {
+    margin: 4rem auto;
+    padding: 0 0.5rem;
+  }
+
   display: flex;
   justify-content: center;
   align-items: center;
@@ -32,9 +37,14 @@
     $color-white
   );
 
+  @include respond(phone) {
+    background-image: none;
+  }
+
   &__caption {
     text-align: center;
     font-size: $font-size-xl;
+
     letter-spacing: 3px;
     font-family: $font-family-serif;
 

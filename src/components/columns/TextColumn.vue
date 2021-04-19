@@ -38,6 +38,10 @@ export default {
   position: relative;
 
   width: 70%;
+  @include respond(tab-land) {
+    width: 100%;
+    padding: 0 2rem;
+  }
   height: 100%;
   margin: 0 auto;
 
@@ -45,9 +49,20 @@ export default {
     font-size: $font-size-xl;
     font-family: $font-family-serif;
     margin-bottom: 2rem;
+
+    @include respond(tab-port) {
+      margin-bottom: 0;
+    }
   }
   &__main {
     font-size: $font-size-medium;
+    @include respond(tab-port) {
+      font-size: $font-size-large;
+      letter-spacing: 2px;
+    }
+    @include respond(phone) {
+      font-size: increase($font-size-large, 0.2);
+    }
   }
 }
 </style>

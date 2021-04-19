@@ -20,8 +20,9 @@
           :key="item"
           :id="item"
           draggable="true"
+          @click="clickTransfer(item, 'to-right-list')"
           @dragstart="dragStart($event, item)"
-          @dragend="removeHovering"
+          @dragend="onDragend"
         >
           {{ item }}
         </li>
@@ -42,8 +43,9 @@
           :key="item"
           :id="item"
           draggable="true"
+          @click="clickTransfer(item, 'to-left-list')"
           @dragstart="dragStart($event, item)"
-          @dragend="removeHovering"
+          @dragend="onDragend"
         >
           {{ item }}
         </li>
@@ -76,9 +78,15 @@ export default {
     removeClass(id, cls) {
       document.getElementById(id).classList.remove(cls);
     },
+    clickTransfer(item, target) {
+      this.$emit(target, item);
+    },
     emitDrop(e, id) {
       this.$emit(`to-${id}`, e.dataTransfer.getData("transition"));
       this.removeClass(id, "hovered");
+    },
+    onDragend(e) {
+      e.target.classList.remove("hovering");
     }
   }
 };
@@ -112,6 +120,8 @@ export default {
       display: flex;
       align-items: center;
       justify-content: center;
+
+      cursor: pointer;
 
       height: 6rem;
 

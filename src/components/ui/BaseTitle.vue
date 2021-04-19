@@ -1,9 +1,9 @@
 <template>
   <div class="container">
-    <h2 class="text title">
+    <h2 class="heading title">
       <slot name="title"></slot>
     </h2>
-    <h4 class="text subtitle">
+    <h4 class="heading subtitle">
       <slot name="subtitle"></slot>
     </h4>
   </div>
@@ -16,7 +16,7 @@
   height: 100%;
   padding: 1rem 0;
 }
-.text {
+.heading {
   text-align: center;
   min-height: 8rem;
 }

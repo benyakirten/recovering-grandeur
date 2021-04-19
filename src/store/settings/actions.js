@@ -86,13 +86,6 @@ export default {
       settingsData
     }
   ) {
-    console.log(
-      breakpointData,
-      clickAnimationData,
-      headerCanvasData,
-      linksData,
-      settingsData
-    );
     if (breakpointData) {
       context.dispatch("breakpoint/loadAll", breakpointData, { root: true });
     }

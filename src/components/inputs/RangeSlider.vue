@@ -83,12 +83,20 @@ export default {
     min-width: 14rem;
   }
   &__number-input {
+    @include respond(tab-port) {
+      width: 6rem;
+      margin-left: 1rem;
+    }
     &:focus {
       outline: 1px solid $color-primary-dark;
     }
   }
   &__range {
     margin-left: 1rem;
+
+    @include respond(tab-port) {
+      width: 10rem;
+    }
   }
 }
 </style>

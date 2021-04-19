@@ -35,14 +35,28 @@
     </template>
     <template #heading-3> Links </template>
     <template #para-3>
-      <div class="container">
+      <div class="my-links">
         <a href="https://github.com/benyakirten" target="blank">
-          <hover-image image="Github" shape="circle" height="12rem">
+          <hover-image
+            image="Github"
+            shape="circle"
+            height="12rem"
+            width="12rem"
+            tabHeight="8rem"
+            tabWidth="8rem"
+          >
             <span class="dark-text">Github</span>
           </hover-image>
         </a>
         <a href="https://twitter.com/benyakirten" target="blank">
-          <hover-image image="Twitter" shape="circle" height="12rem">
+          <hover-image
+            image="Twitter"
+            shape="circle"
+            height="12rem"
+            width="12rem"
+            tabHeight="8rem"
+            tabWidth="8rem"
+          >
             Twitter
           </hover-image>
         </a>
@@ -52,6 +66,8 @@
             shape="simple-circle"
             height="12rem"
             width="12rem"
+            tabHeight="8rem"
+            tabWidth="8rem"
           >
             Blog
           </hover-image>
@@ -116,8 +132,9 @@ export default {
     }
   }
 }
-.container {
-  display: inline-block;
+.my-links {
+  display: flex;
+  flex-wrap: wrap;
   padding-bottom: 0;
 }
 .dark-text {

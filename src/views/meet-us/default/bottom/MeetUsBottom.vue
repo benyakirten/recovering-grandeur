@@ -1,27 +1,27 @@
 <template>
-  <base-two-columns>
+  <base-two-columns phoneHeight="85rem">
     <template #left>
       <text-column>
         <template #leading> I had much more sympathy </template>
         <template #main>
-          <p class="text">
+          <p class="text big-tab-text">
             I knew what my colleagues had planned. They saw a terrified,
             impotent person. What were their plans? To only get what they needed
             from the situation. Some sort of gratification.
           </p>
-          <p class="text">
+          <p class="text big-tab-text">
             But I knew. There were manifold existences in the human mind. That
             one specifically. It spoke to me as I watched it helpless on a
             hospital bed. There was something it saw, within or without. And we
             need to respect that. After all, what can we know in comparison?
           </p>
-          <p class="text">
+          <p class="text big-tab-text">
             God does not live in a machine. And not in us. Therefore it must
             live within this man. This terrible, pitiful being. Why couldn't
             they all see? We will be judged for our judgment. We suffer for our
             ignorance.
           </p>
-          <p class="text">
+          <p class="text big-tab-text">
             There is so much more than I must see of Jules Winters. This body is
             a harbinger of the infinite, the great beyond of our existence. For
             in him is our creator. Our creator! We must recognize the superior,

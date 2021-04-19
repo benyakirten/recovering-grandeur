@@ -1,5 +1,5 @@
 <template>
-  <div :class="columnsClass">
+  <div :class="columnsClass" :style="columnsHeight">
     <div class="column">
       <slot name="left"></slot>
     </div>
@@ -16,6 +16,16 @@ export default {
       type: String,
       required: false,
       default: () => ""
+    },
+    phoneHeight: {
+      type: String,
+      required: false,
+      default: () => "105rem"
+    },
+    tabHeight: {
+      type: String,
+      required: false,
+      default: () => "85rem"
     }
   },
   computed: {
@@ -25,6 +35,15 @@ export default {
         allClasses += ` ${this.additionalClass}`;
       }
       return allClasses;
+    },
+    columnsHeight() {
+      return {
+        height: window.matchMedia("only screen and (max-width: 37.5em)").matches
+          ? this.phoneHeight
+          : window.matchMedia("only screen and (max-width: 56.25em)").matches
+          ? this.tabHeight
+          : "75rem"
+      };
     }
   }
 };
@@ -34,13 +53,20 @@ export default {
 .columns {
   display: flex;
 
-  height: 75rem;
+  @include respond(phone) {
+    flex-direction: column;
+  }
 
   border-radius: $border-radius-standard;
   box-shadow: $shadow-small;
 }
 .column {
   width: 50%;
+
+  @include respond(phone) {
+    width: 100%;
+  }
+
   text-align: center;
 }
 
@@ -60,9 +86,17 @@ export default {
     $color-white
   );
 
+  @include respond(phone) {
+    background-image: inherit;
+  }
+
   .column {
     &--right {
       box-shadow: $shadow-normal;
+
+      @include respond(phone) {
+        box-shadow: none;
+      }
     }
   }
 }

@@ -1,0 +1,7 @@
+@function reduce($qty, $amt) {
+    @return $qty / (1 + $amt);
+}
+
+@function increase($qty, $amt) {
+    @return $qty * (1 + $amt);
+}

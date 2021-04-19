@@ -8,7 +8,9 @@
     Scene transitions
     <hover-modal>
       Whenever navigating between different pages (such as with the header), one
-      of the enabled transitions is activated at random.
+      of the enabled transitions is activated at random. Transitions can be
+      transferred from one list to the other by either clicking on it or
+      dragging it over.
     </hover-modal>
     <template #left-caption>
       Enabled Transitions

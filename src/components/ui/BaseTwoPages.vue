@@ -186,7 +186,7 @@ export default {
 
 // BOOK/ROOT STYLING
 .book {
-  perspective: 130rem;
+  perspective: 300rem;
   position: relative;
   height: 75rem;
 }
@@ -197,7 +197,7 @@ export default {
   top: 0;
   left: 0;
 
-  height: 75rem;
+  height: 75rem; // MUST always be same height as book
   width: 100%;
 
   border-radius: $border-radius-standard;
