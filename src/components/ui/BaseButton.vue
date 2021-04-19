@@ -25,6 +25,9 @@ export default {
   width: 65%;
 
   color: $color-alt-primary-light;
+  @include respond(no-hover) {
+    color: $color-gray-light-1;
+  }
   border-radius: $border-radius-standard;
   background: linear-gradient(
     to bottom right,

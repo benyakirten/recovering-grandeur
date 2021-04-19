@@ -1,4 +1,4 @@
-# recovering-grandeur
+# Recovering Grandeur
 
 ## Project setup
 ```

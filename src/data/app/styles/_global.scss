@@ -30,7 +30,7 @@
   justify-content: center;
 
   @include respond(phone) {
-    margin: 0 auto;
+    flex-direction: column;
   }
 
   &__slider {

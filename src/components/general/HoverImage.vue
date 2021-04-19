@@ -102,7 +102,7 @@ export default {
     imgStyle() {
       const { width, height, tabWidth, tabHeight } = this;
       if (
-        window.matchMedia("only screen and (max-width: 56.25em)").matches &&
+        window.matchMedia("only screen and (max-width: 75em)").matches &&
         (tabWidth || tabHeight)
       ) {
         return {

@@ -88,6 +88,9 @@ export default {
 <style lang="scss" scoped>
 .container {
   padding: 2rem 4rem;
+  @include respond(tab-land) {
+    padding: 2rem;
+  }
 }
 .content {
   &__heading {
