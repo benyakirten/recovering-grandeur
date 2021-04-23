@@ -5,7 +5,13 @@ export default {
   maxAdd(state) {
     return state.maxAdd;
   },
-  maxSub(state) {
-    return state.maxSub;
+  minimum(state) {
+    return state.minimum;
+  },
+  makeClickWave(state) {
+    return state.makeClickWave;
+  },
+  makeHeaderWave(state) {
+    return state.makeHeaderWave;
   }
 };

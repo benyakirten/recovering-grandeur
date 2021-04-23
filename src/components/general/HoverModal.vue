@@ -6,10 +6,15 @@
       @mouseenter="toggleDialog"
       @mouseleave="toggleDialog"
     >
-      <slot name="hoverable">&#x2139;</slot>
+      <slot name="hoverable">i</slot>
     </span>
     <transition :name="transitionDirection">
-      <dialog class="container__modal" open v-if="dialogOpen">
+      <dialog
+        :style="modalDirection"
+        class="container__modal"
+        v-if="dialogOpen"
+        open
+      >
         <slot></slot>
       </dialog>
     </transition>
@@ -28,6 +33,11 @@ export default {
       type: String,
       required: false,
       default: () => "0.5rem"
+    },
+    direction: {
+      type: String,
+      required: false,
+      default: () => "left"
     }
   },
   data() {
@@ -42,6 +52,12 @@ export default {
         color: this.iconColor,
         marginLeft: this.leftMargin
       };
+    },
+    modalDirection() {
+      if (window.matchMedia("only screen and (max-width: 37.5em)").matches) {
+        return { right: "2rem" };
+      }
+      return this.direction === "left" ? { left: "4rem" } : { right: "1rem" };
     }
   },
   methods: {
@@ -65,7 +81,11 @@ export default {
     justify-content: center;
     align-items: center;
 
-    font-size: $font-size-medium;
+    font-size: $font-size-large;
+
+    @include respond(tab-port) {
+      font-size: $font-size-xl;
+    }
     border: 1px solid $color-black;
     border-radius: 50%;
   }
@@ -73,7 +93,6 @@ export default {
   &__modal {
     position: absolute;
     top: 0;
-    left: 3rem;
 
     border-radius: 1rem;
     padding: 0.5rem;

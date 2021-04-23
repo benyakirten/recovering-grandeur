@@ -29,7 +29,7 @@
   <range-slider
     :variable="clickAnimationRadius"
     min="1"
-    max="100"
+    max="40"
     step="1"
     @emit-number="setAnimationRadius"
   >

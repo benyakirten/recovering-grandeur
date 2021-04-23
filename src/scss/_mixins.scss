@@ -53,7 +53,7 @@
     }
 }
 
-@mixin flash-out {
+@mixin flash-out($flash-color: $color-primary, $speed: 0.4) {
     position: relative;
     transition: $transition-fast;
 
@@ -69,15 +69,16 @@
         height: 100%;
         z-index: -1;
 
+        opacity: 1;
         border-radius: 1rem;
-        background-color: $color-alt-primary;
+        background-color: $flash-color;
         transition: $transition-normal;
     }
 
     &:hover {
         &::after {
-            transform: scale(1.4, 1.6);
             opacity: 0;
+            transform: scale(1.4, 1.6);
         }
     }
 }

@@ -1,4 +1,4 @@
-const headerCanvasToolbars = {
+export default {
   headerCanvasToolbar: `The header canvas displays the circles when hovering over a link.
   Though its ineffeciency is the point, disabling it will improve
   performance.`,
@@ -13,5 +13,3 @@ const headerCanvasToolbars = {
   and 2. a value has to be over 1 for it to work.`,
   concentricCirclesToolbar: `The amount of concentric circles indicates how thick the canvas' radiation is.`
 };
-
-export default headerCanvasToolbars;

@@ -1,64 +1,225 @@
+import { breakpointEnum } from "@/utils/enums";
+import { betweenMinAndMax, getRandomItemFromObject } from "@/utils/other";
+import { namedColorsAndHexes } from "@/utils/namedColors";
+
 export default {
   changeBreakpoint(context, payload) {
-    const newBP = betweenMaxAndMin(context.state.breakpoint, payload);
+    const newBP = betweenMinAndMax(context.state.breakpoint, payload);
     context.commit("setBreakpoint", newBP);
     context.dispatch("setLocalStorageBreakpoint");
   },
   incrementBreakpoint(context) {
-    const newBP = betweenMaxAndMin(context, context.state.maxAdd);
-    context.commit("setBreakpoint", newBP);
-    context.dispatch("setLocalStorageBreakpoint");
-  },
-  decrementBreakpoint(context) {
-    const newBP = betweenMaxAndMin(context, context.state.maxSub);
+    const newBP = betweenMinAndMax(context, context.state.maxAdd);
     context.commit("setBreakpoint", newBP);
     context.dispatch("setLocalStorageBreakpoint");
   },
   setBreakpoint(context, payload) {
-    const newBP = betweenMaxAndMin(payload, 0);
+    const newBP = betweenMinAndMax(payload, 0);
     context.commit("setBreakpoint", newBP);
     context.dispatch("setLocalStorageBreakpoint");
   },
   setMaxAdd(context, payload) {
-    context.commit("setMaxAdd", payload);
+    const newMax = betweenMinAndMax(payload, 0, 0, 10);
+    context.commit("setMaxAdd", newMax);
     context.dispatch("setLocalStorageBreakpoint");
   },
-  setMaxSub(context, payload) {
-    context.commit("setMaxSub", payload);
+  setMinimum(context, payload) {
+    const newMinimum = betweenMinAndMax(payload, 0);
+    context.commit("setMinimum", newMinimum);
     context.dispatch("setLocalStorageBreakpoint");
   },
-  loadAll(context, { breakpoint, maxAdd, maxSub }) {
-    context.commit("setBreakpoint", breakpoint || 0);
-    context.commit("setMaxAdd", maxAdd || 5);
-    context.commit("setMaxSub", maxSub || -5);
+  startClickWave(context) {
+    context.commit("setClickWave", true);
+  },
+  stopClickWave(context) {
+    context.commit("setClickWave", false);
+  },
+  startHeaderWave(context) {
+    context.commit("setHeaderWave", true);
+  },
+  stopHeaderWave(context) {
+    context.commit("setHeaderWave", false);
+  },
+  loadAll(context, { breakpoint, maxAdd, minimum }) {
+    context.commit("setBreakpoint", breakpoint);
+    context.commit("setMaxAdd", maxAdd);
+    context.commit("setMinimum", minimum);
     context.dispatch("setLocalStorageBreakpoint");
   },
   setDefaults(context) {
     context.commit("setMaxAdd", 5);
     context.commit("setMaxSub", -5);
     context.commit("setBreakpoint", 0);
+    context.commit("setMinimum", 10);
     context.dispatch("setLocalStorageBreakpoint");
   },
+  ghostActs(context) {
+    if (!context.rootGetters["settings/breakpointEnabled"]) {
+      return;
+    }
+    const { breakpoint, minimum } = context.state;
+    let interval;
+    let rep = 0;
+    // Note: this dice throw can still fail if it's over the limit, but
+    // the greater the breakpoint, the greater the probability of action
+    if (Math.floor(Math.random() * breakpoint) > minimum) {
+      const randomAction = getRandomItemFromObject(breakpointEnum);
+      switch (randomAction) {
+        case breakpointEnum.changeHeaderColor:
+          context.dispatch(
+            "settings/disableHeaderCanvasColorRandomization",
+            null,
+            { root: true }
+          );
+          context.dispatch("headerCanvas/setRandomStartAndEndColors", null, {
+            root: true
+          });
+          break;
+        case breakpointEnum.changeHeaderRadiusDelta:
+          // The delta must be greater than 1, and it serves nothing for it to be over 1.2
+          context.dispatch(
+            "headerCanvas/setRadiusDelta",
+            1 + Math.random() * 0.2,
+            { root: true }
+          );
+          break;
+        case breakpointEnum.changeHeaderNoCircles:
+          Math.random() > 0.5
+            ? context.dispatch(
+                "headerCanvas/setNumberOfCircles",
+                Math.floor(Math.random() * 150) + 150,
+                { root: true }
+              )
+            : context.dispatch(
+                "headerCanvas/setNumberOfCircles",
+                Math.floor(Math.random() * 100) + 1,
+                { root: true }
+              );
+          break;
+        case breakpointEnum.changeClickAnimationLength:
+          Math.random() > 0.5
+            ? context.dispatch(
+                "clickAnimation/setAnimationLength",
+                Math.floor(Math.random() * 900) + 1000,
+                { root: true }
+              )
+            : context.dispatch(
+                "clickAnimation/setAnimationLength",
+                Math.floor(Math.random() * 350) + 200,
+                { root: true }
+              );
+          break;
+        case breakpointEnum.changeClickAnimatonVariation:
+          context.dispatch(
+            "clickAnimation/setAnimationLengthVariation",
+            // eslint-disable-next-line
+            Math.floor(Math.random() * context.rootGetters["clickAnimation/clickAnimationLength"] * 3 / 4) +
+              // eslint-disable-next-line
+              Math.floor(context.rootGetters["clickAnimation/clickAnimationLength"] / 4),
+            { root: true }
+          );
+          break;
+        case breakpointEnum.changeClickAnimationColor:
+          context.dispatch(
+            "clickAnimation/setAnimationColor",
+            getRandomItemFromObject(namedColorsAndHexes),
+            { root: true }
+          );
+          break;
+        case breakpointEnum.changeClickAnimationInitialRadius:
+          context.dispatch(
+            "clickAnimation/setAnimationRadius",
+            Math.floor(Math.random() * 40) + 1,
+            { root: true }
+          );
+          break;
+        case breakpointEnum.makeClickAnimationWave:
+          context.dispatch("settings/enableClickAnimation", null, {
+            root: true
+          });
+          interval = setInterval(() => {
+            if (rep > 10) {
+              window.clearInterval(interval);
+            }
+            rep++;
+            context.dispatch("startClickWave");
+          }, Math.floor(Math.random() * breakpoint * 2) + 100);
+          break;
+        case breakpointEnum.makeHeaderWave:
+          context.dispatch("settings/enableHeaderCanvas", null, {
+            root: true
+          });
+          interval = setInterval(() => {
+            if (rep > 5) {
+              window.clearInterval(interval);
+            }
+            rep++;
+            context.dispatch("startHeaderWave");
+          }, Math.floor(Math.random() * breakpoint * 2) + 500);
+          break;
+        case breakpointEnum.toggleHeaderCanvas:
+          context.dispatch("settings/toggleHeaderCanvas", null, { root: true });
+          if (Math.floor(Math.random() * breakpoint) < 25) {
+            setTimeout(
+              () =>
+                context.dispatch("settings/toggleHeaderCanvas", null, {
+                  root: true
+                }),
+              Math.floor(Math.random() * breakpoint) * 500
+            );
+          }
+          break;
+        case breakpointEnum.toggleHeaderCanvasColorRandomization:
+          context.dispatch(
+            "settings/toggleHeaderCanvasColorRandomization",
+            null,
+            { root: true }
+          );
+          if (Math.floor(Math.random() * breakpoint) < 25) {
+            setTimeout(
+              () =>
+                context.dispatch(
+                  "settings/toggleHeaderCanvasColorRandomization",
+                  null,
+                  { root: true }
+                ),
+              Math.floor(
+                Math.random() * context.rootGetters["breakpoint/breakpoint"]
+              ) * 500
+            );
+          }
+          break;
+        case breakpointEnum.toggleClickAnimation:
+          context.dispatch("settings/toggleClickAnimation", null, {
+            root: true
+          });
+          if (Math.floor(Math.random() * breakpoint) < 25) {
+            setTimeout(
+              () =>
+                context.dispatch("settings/toggleClickAnimation", null, {
+                  root: true
+                }),
+              Math.floor(
+                Math.random() * context.rootGetters["breakpoint/breakpoint"]
+              ) * 500
+            );
+          }
+          break;
+        default:
+          console.log("How did you get here?");
+          break;
+      }
+    }
+  },
   setLocalStorageBreakpoint(context) {
-    const { breakpoint, maxAdd, maxSub } = context.state;
+    const { breakpoint, maxAdd, minimum } = context.state;
     localStorage.setItem(
       "RG_B",
       JSON.stringify({
         breakpoint,
         maxAdd,
-        maxSub
+        minimum
       })
     );
-  }
-};
-
-const betweenMaxAndMin = (currentBP, newAmount) => {
-  const sum = currentBP + newAmount;
-  if (sum > 100) {
-    return 100;
-  } else if (sum < 0) {
-    return 0;
-  } else {
-    return sum;
   }
 };

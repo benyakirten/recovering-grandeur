@@ -1,16 +1,28 @@
 <template>
-  <HomeDefault />
+  <base-layout>
+    <template #top>
+      <HomeTop />
+    </template>
+    <template #center>
+      <HomeCenter />
+    </template>
+    <template #bottom>
+      <HomeBottom />
+    </template>
+  </base-layout>
 </template>
 
 <script>
-import { mapGetters } from "vuex";
-import HomeDefault from "./default/HomeDefault";
+import BaseLayout from "@/components/ui/BaseLayout";
+import HomeTop from "./top/HomeTop";
+import HomeCenter from "./center/HomeCenter";
+import HomeBottom from "./bottom/HomeBottom";
 export default {
   components: {
-    HomeDefault
-  },
-  computed: {
-    ...mapGetters("breakpoint", ["breakpoint"])
+    BaseLayout,
+    HomeTop,
+    HomeCenter,
+    HomeBottom
   }
 };
 </script>

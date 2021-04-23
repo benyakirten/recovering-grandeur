@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="caption-container">
-      <h2 class="caption-container__caption">
+      <h2 class="caption-container__caption" :class="captionAnimation">
         <slot name="caption"></slot>
       </h2>
     </div>
@@ -10,6 +10,35 @@
     </div>
   </div>
 </template>
+
+<script>
+import { mapGetters } from "vuex";
+import { checkBreakpointActive } from "@/utils/other";
+export default {
+  data() {
+    return {
+      EVENT_NOT_CHANCE: 40
+    };
+  },
+  computed: {
+    ...mapGetters("breakpoint", ["breakpoint", "minimum"]),
+    ...mapGetters("settings", ["breakpointEnabled"]),
+    breakpointActive() {
+      return checkBreakpointActive(
+        this.breakpointEnabled,
+        this.breakpoint,
+        this.minimum,
+        this.EVENT_NOT_CHANCE
+      );
+    },
+    captionAnimation() {
+      return this.breakpointActive
+        ? "alternate-animation"
+        : "default-animation";
+    }
+  }
+};
+</script>
 
 <style lang="scss">
 .caption-container {
@@ -60,10 +89,18 @@
       $color-primary 80%,
       $color-primary-dark
     );
+  }
+}
 
-    &:hover {
-      animation: skew-up-and-down 1s infinite ease;
-    }
+.default-animation {
+  &:hover {
+    animation: skew-up-and-down 1s infinite ease;
+  }
+}
+
+.alternate-animation {
+  &:hover {
+    animation: breathe 0.5s infinite linear;
   }
 }
 </style>

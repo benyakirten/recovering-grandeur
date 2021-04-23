@@ -29,6 +29,19 @@ export default class HeaderCanvasController {
 
     this.canvas = canvas;
   }
+
+  updateCanvasPosition(canvas) {
+    const { left, top, width, height } = getCanvasDimensions(canvas);
+    this.left = left;
+    this.top = top;
+    this.width = width;
+    this.height = height;
+
+    this.absoluteCorners = getAbsoluteCorners(canvas);
+    this.relativeCorners = getRelativeCorners(canvas);
+
+    this.canvas = canvas;
+  }
   getNearestCornerPosition(x, y) {
     const dist = this.absoluteCorners
       .map(p => Math.sqrt((p.x - x) ** 2 + (p.y - y) ** 2))
@@ -67,7 +80,10 @@ export default class HeaderCanvasController {
   clearCanvas() {
     if (this.canvas.getContext) {
       const ctx = this.canvas.getContext("2d");
-      ctx.clearRect(0, 0, this.width, this.height);
+      // I have no idea why this doesn't work if the height is less than 190
+      this.height < 190
+        ? ctx.clearRect(0, 0, this.width, 190)
+        : ctx.clearRect(0, 0, this.width, this.height);
     }
   }
 }

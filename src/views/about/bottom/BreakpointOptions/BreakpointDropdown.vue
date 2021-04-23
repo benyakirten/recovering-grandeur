@@ -24,15 +24,15 @@
     </hover-modal>
   </range-slider>
   <range-slider
-    :variable="maxSub"
-    min="-10"
-    max="0"
+    :variable="minimum"
+    min="0"
+    max="100"
     step="1"
-    @emit-number="setMaxSub"
+    @emit-number="setMinimum"
   >
-    Max Decrement
+    Minimum To Act
     <hover-modal leftMargin="0">
-      {{ maxSubToolbar }}
+      {{ minimumToolbar }}
     </hover-modal>
   </range-slider>
 </template>
@@ -52,19 +52,19 @@ export default {
     const {
       breakpointExplanationToolbar,
       maxAddToolbar,
-      maxSubToolbar
+      minimumToolbar
     } = breakpointToolbars;
     return {
       breakpointExplanationToolbar,
       maxAddToolbar,
-      maxSubToolbar
+      minimumToolbar
     };
   },
   computed: {
-    ...mapGetters("breakpoint", ["breakpoint", "maxAdd", "maxSub"])
+    ...mapGetters("breakpoint", ["breakpoint", "maxAdd", "minimum"])
   },
   methods: {
-    ...mapActions("breakpoint", ["setBreakpoint", "setMaxAdd", "setMaxSub"])
+    ...mapActions("breakpoint", ["setBreakpoint", "setMaxAdd", "setMinimum"])
   }
 };
 </script>

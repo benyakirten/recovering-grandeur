@@ -1,4 +1,4 @@
-const pubInfo = {
+export default {
   links: [
     {
       link: "https://www.amazon.com",
@@ -28,5 +28,3 @@ const pubInfo = {
   miscInfoExtra: `Click on the arrow in the top right to read an exegesis of how
   this website accompanies the book.`
 };
-
-export default pubInfo;

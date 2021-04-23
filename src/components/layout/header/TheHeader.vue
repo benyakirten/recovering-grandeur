@@ -1,12 +1,18 @@
 <template>
-  <header class="header" :style="headerBackground" @mouseenter="beginWave">
-    <header-canvas v-if="headerCanvasEnabled"></header-canvas>
-    <transition-group name="link-fall" tag="span" @afterEnter="afterEnter">
+  <header
+    :class="headerClass"
+    :style="headerBackground"
+    id="header"
+    @mouseenter="beginWave"
+  >
+    <header-canvas></header-canvas>
+    <transition-group name="link-fall" @afterEnter="afterEnter">
       <header-link
         v-for="link in liveLinks"
         :key="link.link"
         :linkRoute="link.link"
         :linkName="link.name"
+        :linkStyle="breakpointActive ? 'alternate' : ''"
       ></header-link>
     </transition-group>
   </header>
@@ -15,6 +21,7 @@
 <script>
 import { mapGetters, mapActions } from "vuex";
 
+import { checkBreakpointActive } from "@/utils/other";
 import HeaderCanvasController from "@/utils/HeaderCanvasController";
 import { separateRGB, getRGBAStringFromHex } from "@/utils/hexAndDecimals";
 
@@ -24,10 +31,12 @@ export default {
   components: { HeaderLink, HeaderCanvas },
   data() {
     return {
-      HeaderCanvasController: null
+      HeaderCanvasController: null,
+      EVENT_NOT_CHANCE: 25
     };
   },
   computed: {
+    ...mapGetters("breakpoint", ["breakpoint", "minimum", "makeHeaderWave"]),
     ...mapGetters("links", ["liveLinks"]),
     ...mapGetters("headerCanvas", [
       "numberOfCircles",
@@ -41,6 +50,7 @@ export default {
       "getHeaderOpacity"
     ]),
     ...mapGetters("settings", [
+      "breakpointEnabled",
       "headerCanvasEnabled",
       "headerCanvasRandomizeColorsEnabled"
     ]),
@@ -61,6 +71,25 @@ export default {
     },
     endColorRGB() {
       return separateRGB(this.endColor);
+    },
+    breakpointActive() {
+      return checkBreakpointActive(
+        this.breakpointEnabled,
+        this.breakpoint,
+        this.minimum,
+        this.EVENT_NOT_CHANCE
+      );
+    },
+    headerClass() {
+      return this.breakpointActive ? `header-alternate` : "header";
+    }
+  },
+  watch: {
+    makeHeaderWave(val) {
+      if (val) {
+        this.beginWave({ clientX: 0, clientY: 0 });
+        this.stopHeaderWave();
+      }
     }
   },
   mounted() {
@@ -73,20 +102,25 @@ export default {
     );
   },
   methods: {
+    ...mapActions("breakpoint", ["stopHeaderWave"]),
     ...mapActions("headerCanvas", ["setRandomStartAndEndColors"]),
     afterEnter(el) {
-      el.classList.add("link-animation");
+      // Prevent the hover animation until the link is in place
+      if (!this.breakpointActive) {
+        el.classList.add("link-animation");
+      }
     },
-    beginWave(e) {
-      if (!this.headerCanvasEnabled) {
+    beginWave({ clientX, clientY }) {
+      if (!this.headerCanvasEnabled || !this.HeaderCanvasController) {
         return;
       }
       if (this.headerCanvasRandomizeColorsEnabled) {
         this.setRandomStartAndEndColors();
       }
+      this.HeaderCanvasController.updateCanvasPosition(this.canvas);
       const { x, y } = this.HeaderCanvasController.getNearestCornerPosition(
-        e.clientX,
-        e.clientY
+        clientX,
+        clientY
       );
       this.HeaderCanvasController.setCircleProperties(
         this.startColorRGB,
@@ -114,17 +148,36 @@ export default {
 .header {
   position: absolute;
   top: 5rem;
-  right: 10rem;
+  right: 12rem;
+
   z-index: 1;
+  border: 1px solid $color-black;
 
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
-  align-items: flex-end;
 
   padding: 1rem;
   padding-right: 5rem;
   transform: skewX(-25deg);
+}
+
+.header-alternate {
+  position: absolute;
+  top: 5rem;
+  left: 50%;
+  transform: translateX(-50%) skewX(-25deg);
+
+  min-width: 80%;
+  height: 5rem;
+  z-index: 1;
+
+  display: flex;
+  padding: 2rem 3rem;
+  @include respond(tab-port) {
+    padding: 1rem 1.5rem;
+  }
+  justify-content: space-between;
+  align-items: center;
 }
 
 .link-animation {

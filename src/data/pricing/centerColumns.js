@@ -1,5 +1,6 @@
 export const costsaverPlan = {
   title: "Costsaver's Plan",
+  price: `Free<sup class="small-text">&ast;</sup>`,
   subtitle: "Access to organ donation in exchange for reduced costs",
   list: [
     "Access to potentially potable water",
@@ -9,7 +10,8 @@ export const costsaverPlan = {
   ]
 };
 export const popularPlan = {
-  title: "The Popular Plan",
+  title: "Popular Plan",
+  price: `Partial Coverage Through Work<sup class="small-text">&ast;&ast;</sup>`,
   subtitle: "The most accessible tier of service. That says it all.",
   list: [
     "Access to bottom tier of hospital restaurant",
@@ -20,6 +22,7 @@ export const popularPlan = {
 };
 export const luxuryPlan = {
   title: "Luxury Plan",
+  price: `PRICING_PLAN ("human" &rarr; true);`,
   subtitle: "Real, helpful service only costs an arm and a leg",
   list: [
     "Service with a smile",
@@ -30,6 +33,7 @@ export const luxuryPlan = {
 };
 export const vipPlan = {
   title: "VIPs Only",
+  price: `Contact us for pricing details`,
   subtitle: "It's quite expensive and invite only. Did you get one?",
   list: [
     "Lunch and Dinner prepared by guest celebrity chefs",

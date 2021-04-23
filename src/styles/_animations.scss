@@ -1,0 +1,75 @@
+@keyframes float-out {
+  50% {
+    transform: translateX(4rem) skewX(25deg);
+  }
+  100% {
+    transform: translateX(4rem) scale(1.03) skewX(25deg);
+  }
+}
+  
+@keyframes load-in {
+  100% {
+    opacity: 1;
+  }
+}
+  
+@keyframes fold-to-kitty-corner {
+  25% {
+    transform: scaleY(0) rotate(180deg);
+  }
+  50% {
+    transform: scaleY(1) rotate(180deg);
+  }
+  75% {
+    transform: scaleY(0) rotate(0deg);
+  }
+}
+  
+@keyframes skew-up-and-down {
+  50% {
+    transform: skewY(2deg);
+  }
+  100% {
+    transform: skewY(-2deg);
+  }
+}
+
+@keyframes breathe {
+  25% {
+    transform: scale(1);
+  }
+  75% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+  
+@keyframes click-flash-out-anim {
+  to {
+    transform: translate(-50%, -50%) scale(2);
+    opacity: 0;
+  }
+}
+  
+@keyframes sliding-background {
+  to {
+    background-position: -200% 0;
+  }
+}
+  
+@keyframes bloat-and-spin {
+  50% {
+    transform: rotate(180deg) scale(1.2) skew(15deg);
+  }
+  100% {
+    transform: rotate(360deg) scale(1);
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

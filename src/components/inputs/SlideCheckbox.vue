@@ -50,10 +50,6 @@ export default {
   align-items: center;
 
   padding: 0.5rem 2rem;
-
-  &:not(:last-child) {
-    margin-bottom: 2rem;
-  }
 }
 
 .input-container {

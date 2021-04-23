@@ -1,5 +1,7 @@
 export default {
   breakpoint: 0,
   maxAdd: 5,
-  maxSub: -5
+  minimum: 10,
+  makeClickWave: false,
+  makeHeaderWave: false
 };

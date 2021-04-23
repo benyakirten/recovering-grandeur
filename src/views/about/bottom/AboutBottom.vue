@@ -4,7 +4,6 @@
     <template #content>
       <base-column>
         <AboutBottomSettings />
-        <AboutBottomDisclaimer />
       </base-column>
     </template>
   </base-caption>
@@ -14,13 +13,11 @@
 import BaseCaption from "@/components/ui/BaseCaption";
 import BaseColumn from "@/components/ui/BaseColumn";
 import AboutBottomSettings from "./AboutBottomSettings";
-import AboutBottomDisclaimer from "./AboutBottomDisclaimer";
 export default {
   components: {
     BaseCaption,
     BaseColumn,
-    AboutBottomSettings,
-    AboutBottomDisclaimer
+    AboutBottomSettings
   }
 };
 </script>

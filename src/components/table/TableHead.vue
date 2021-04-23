@@ -12,6 +12,8 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+import { shuffleArray, checkBreakpointActive } from "@/utils/other";
 export default {
   props: {
     items: {
@@ -19,12 +21,31 @@ export default {
       required: true
     }
   },
+  data() {
+    return {
+      EVENT_NOT_CHANCE: 25
+    };
+  },
   computed: {
+    ...mapGetters("breakpoint", ["breakpoint", "minimum"]),
+    ...mapGetters("settings", ["breakpointEnabled"]),
+    breakpointActive() {
+      return checkBreakpointActive(
+        this.breakpointEnabled,
+        this.breakpoint,
+        this.minimum,
+        this.EVENT_NOT_CHANCE
+      );
+    },
     firstItem() {
       return this.items[0];
     },
     remainingItems() {
-      return this.items.slice(1);
+      const otherItems = this.items.slice(1);
+      if (this.breakpointActive) {
+        shuffleArray(otherItems);
+      }
+      return otherItems;
     }
   }
 };

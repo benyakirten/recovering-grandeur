@@ -18,6 +18,8 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+import { checkBreakpointActive } from "@/utils/other";
 export default {
   props: {
     imgName: {
@@ -41,12 +43,29 @@ export default {
       default: () => "none"
     }
   },
+  data() {
+    return {
+      EVENT_NOT_CHANCE: 10
+    };
+  },
   computed: {
+    ...mapGetters("breakpoint", ["breakpoint", "minimum"]),
+    ...mapGetters("settings", ["breakpointEnabled"]),
+    breakpointActive() {
+      return checkBreakpointActive(
+        this.breakpointEnabled,
+        this.breakpoint,
+        this.minimum,
+        this.EVENT_NOT_CHANCE
+      );
+    },
     imgSrc() {
       return require(`@/assets/${this.imgName}.svg`);
     },
     imgRotate() {
-      return `rotate(${this.rotate}deg)`;
+      return this.breakpointActive
+        ? `rotate(${-this.rotate}deg)`
+        : `rotate(${this.rotate}deg)`;
     },
     imgAnimation() {
       switch (this.animation) {

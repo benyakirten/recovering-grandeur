@@ -5,6 +5,9 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+import { checkBreakpointActive } from "@/utils/other";
+import { constructFilterString } from "@/utils/cssFilters";
 export default {
   props: {
     image: {
@@ -23,13 +26,31 @@ export default {
       default: () => "100vh"
     }
   },
+  data() {
+    return {
+      EVENT_NOT_CHANCE: 25
+    };
+  },
   computed: {
+    ...mapGetters("breakpoint", ["breakpoint", "minimum"]),
+    ...mapGetters("settings", ["breakpointEnabled"]),
+    breakpointActive() {
+      return checkBreakpointActive(
+        this.breakpointEnabled,
+        this.breakpoint,
+        this.minimum,
+        this.EVENT_NOT_CHANCE
+      );
+    },
     backgroundImage() {
       return {
         backgroundImage: `url(${require(`@/assets/${this.image}.svg`)})`,
         backgroundSize: "cover",
         clipPath: this.computedClipPath,
-        height: this.height
+        height: this.height,
+        filter: this.breakpointActive
+          ? constructFilterString(Math.floor(Math.random() * 3) + 1)
+          : ""
       };
     },
     computedClipPath() {

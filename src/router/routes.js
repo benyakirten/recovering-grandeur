@@ -18,7 +18,7 @@ const routes = [
       title: "Solutions and Pricing",
       headerBackgroundColorDefault: "#2c2c2c",
       headerLinkColorDefault: "#7ed56f",
-      headerOpacityDefault: 0.2
+      headerOpacityDefault: 0.5
     }
   },
   {

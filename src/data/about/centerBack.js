@@ -1,4 +1,4 @@
-const explanation = {
+export default {
   heading: "What Recovering Grandeur Has to Say",
   firstParagraph: `The website (and all its jankiness) is the point. It's supposed to be
   a website designed by robots with only a passing knowledge of humans. It only minorly addresses
@@ -30,5 +30,3 @@ const explanation = {
   layout of the website, through which I attempt to play at the concept of a fixed truth, at least
   for the visitors of the website.`
 };
-
-export default explanation;

@@ -1,4 +1,4 @@
-const clickAnimationToolbars = {
+export default {
   clickAnimationToolbar: `The click animation is the brown circle that radiates out from
   anywhere you click. It is not particularly performance intensive, but
   it is highly annoying.`,
@@ -8,5 +8,3 @@ const clickAnimationToolbars = {
   a value between zero and the variation. Minimum is zero (no variation), maximum is the length
   of the click (meaning it can be anywhere between instant and twice its current value)`
 };
-
-export default clickAnimationToolbars;

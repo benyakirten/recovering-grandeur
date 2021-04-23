@@ -1,10 +1,4 @@
 <template>
-  <color-picker :color="startColor" @emit-color="changeHeaderStartColor">
-    Start Color:
-  </color-picker>
-  <color-picker :color="endColor" @emit-color="changeHeaderEndColor">
-    End Color:
-  </color-picker>
   <slide-checkbox
     :property="headerCanvasRandomizeColorsEnabled"
     @toggle-checked="toggleHeaderCanvasColorRandomization"
@@ -17,10 +11,16 @@
       {{ randomizeColorsToolbar }}
     </hover-modal>
   </slide-checkbox>
+  <color-picker :color="startColor" @emit-color="changeHeaderStartColor">
+    Start Color:
+  </color-picker>
+  <color-picker :color="endColor" @emit-color="changeHeaderEndColor">
+    End Color:
+  </color-picker>
   <range-slider
     :variable="radiusDelta"
     min="1.01"
-    max="2"
+    max="1.2"
     step="0.01"
     @emit-number="setRadiusDelta"
   >

@@ -10,5 +10,7 @@
 
   height: 100%;
   width: 100%;
+  border-radius: inherit;
+  z-index: -1;
 }
 </style>

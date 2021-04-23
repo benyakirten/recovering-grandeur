@@ -1,20 +1,26 @@
 <template>
   <TheHeader />
-  <router-view v-slot="slotProps">
-    <transition :name="getRandomTransition()" :mode="transitionMode">
-      <component :is="slotProps.Component"></component>
-    </transition>
-  </router-view>
+  <main class="main">
+    <router-view v-slot="slotProps">
+      <transition :name="getRandomTransition()" :mode="transitionMode">
+        <component :is="slotProps.Component"></component>
+      </transition>
+    </router-view>
+  </main>
+  <TheFooter />
 </template>
 
 <script>
 import { mapActions, mapGetters } from "vuex";
 import TheHeader from "@/components/layout/header/TheHeader";
+import TheFooter from "@/components/layout/footer/TheFooter";
 export default {
   components: {
-    TheHeader
+    TheHeader,
+    TheFooter
   },
   computed: {
+    ...mapGetters("breakpoint", ["breakpoint", "maxAdd", "makeClickWave"]),
     ...mapGetters("clickAnimation", [
       "clickAnimationLength",
       "clickAnimationLengthVariation",
@@ -24,7 +30,7 @@ export default {
     ...mapGetters("settings", ["clickAnimationEnabled"]),
     ...mapGetters("links", ["getEnabledTransitions"]),
     body() {
-      return document.querySelector("body");
+      return document.body;
     },
     transitionMode() {
       if (this.chosenTransition && this.chosenTransition.includes("slide")) {
@@ -36,19 +42,22 @@ export default {
   },
   data() {
     return {
-      chosenTransition: null
+      chosenTransition: null,
+      x: 0,
+      y: 0,
+      interval: null
     };
   },
   methods: {
+    ...mapActions("breakpoint", ["changeBreakpoint", "stopClickWave"]),
     ...mapActions("links", ["enlivenLinks"]),
     ...mapActions("settings", ["loadAllSettings"]),
-    flashFromClick(e) {
+    flashFromClick({ pageX, pageY }) {
       if (!this.clickAnimationEnabled) {
         return;
       }
       const animationLength =
         this.clickAnimationLength + this.getAnimationLengthVariation();
-      const { pageX, pageY } = e;
 
       const circle = document.createElement("span");
       circle.classList.add("click-circle");
@@ -67,7 +76,7 @@ export default {
       }, animationLength);
     },
     getAnimationLengthVariation() {
-      const sign = Math.random() > 5 ? -1 : 1;
+      const sign = Math.random() > 0.5 ? -1 : 1;
       return (
         Math.floor(Math.random() * this.clickAnimationLengthVariation) * sign
       );
@@ -78,27 +87,55 @@ export default {
       );
       this.chosenTransition = this.getEnabledTransitions[transitionIndex];
       return `scene-${this.chosenTransition}`;
+    },
+    setMouseCoordinates({ pageX, pageY }) {
+      this.x = pageX;
+      this.y = pageY;
+    },
+    initEventListeners() {
+      this.body.addEventListener("click", this.flashFromClick);
+      this.body.addEventListener("mousemove", this.setMouseCoordinates);
+    },
+    initInterval() {
+      this.interval = setInterval(() => {
+        if (this.breakpoint >= 100) {
+          window.clearInterval(this.interval);
+        }
+        this.changeBreakpoint(
+          Math.floor(Math.random() * (this.maxAdd - 1)) + 1
+        );
+        Math.random() > 0.5 ? console.log("TICK!") : console.log("TOCK!");
+      }, 15000);
+    },
+    initLoadSettings() {
+      const breakpointData = JSON.parse(localStorage.getItem("RG_B"));
+      const clickAnimationData = JSON.parse(localStorage.getItem("RG_CA"));
+      const headerCanvasData = JSON.parse(localStorage.getItem("RG_HC"));
+      const linksData = JSON.parse(localStorage.getItem("RG_L"));
+      const settingsData = JSON.parse(localStorage.getItem("RG_S"));
+      this.loadAllSettings({
+        breakpointData,
+        clickAnimationData,
+        headerCanvasData,
+        linksData,
+        settingsData
+      });
     }
   },
-  loadAllSettings() {
-    console.log("load all settings");
+  watch: {
+    makeClickWave(val) {
+      if (val) {
+        this.flashFromClick({ pageX: this.x, pageY: this.y });
+        this.stopClickWave();
+      }
+    }
   },
   created() {
-    this.body.addEventListener("click", this.flashFromClick);
-    const breakpointData = JSON.parse(localStorage.getItem("RG_B"));
-    const clickAnimationData = JSON.parse(localStorage.getItem("RG_CA"));
-    const headerCanvasData = JSON.parse(localStorage.getItem("RG_HC"));
-    const linksData = JSON.parse(localStorage.getItem("RG_L"));
-    const settingsData = JSON.parse(localStorage.getItem("RG_S"));
-    this.loadAllSettings({
-      breakpointData,
-      clickAnimationData,
-      headerCanvasData,
-      linksData,
-      settingsData
-    });
+    this.initEventListeners();
+    this.initInterval();
+    this.initLoadSettings();
   }
 };
 </script>
 
-<style lang="scss" src="./data/app/main.scss"></style>
+<style lang="scss" src="./styles/app.scss"></style>

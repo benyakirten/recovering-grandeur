@@ -8,6 +8,9 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+import { checkBreakpointActive } from "@/utils/other";
+import { constructFilterString } from "@/utils/cssFilters";
 export default {
   props: {
     image: {
@@ -31,7 +34,22 @@ export default {
       default: () => null
     }
   },
+  data() {
+    return {
+      EVENT_NOT_CHANCE: 10
+    };
+  },
   computed: {
+    ...mapGetters("breakpoint", ["breakpoint", "minimum"]),
+    ...mapGetters("settings", ["breakpointEnabled"]),
+    breakpointActive() {
+      return checkBreakpointActive(
+        this.breakpointEnabled,
+        this.breakpoint,
+        this.minimum,
+        this.EVENT_NOT_CHANCE
+      );
+    },
     imgStyle() {
       const _imgPath = this.image.match(/\.\w+$/)
         ? this.image
@@ -65,13 +83,23 @@ export default {
       } else {
         imgStyles = {
           ...imgStyles,
-          borderRadius: "2rem"
+          borderRadius: this.breakpointActive
+            ? `${Math.random() * this.breakpoint}%`
+            : "2rem"
         };
       }
       if (this.imgRotate) {
         imgStyles = {
           ...imgStyles,
-          transform: `rotate(${this.imgRotate}deg)`
+          transform: this.breakpointActive
+            ? `rotate(${-this.imgRotate}deg)`
+            : `rotate(${this.imgRotate}deg)`
+        };
+      }
+      if (this.breakpointActive) {
+        imgStyles = {
+          ...imgStyles,
+          filter: constructFilterString(Math.floor(Math.random() * 3) + 1)
         };
       }
       return imgStyles;

@@ -7,6 +7,8 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+import { checkBreakpointActive } from "@/utils/other";
 export default {
   props: {
     skew: {
@@ -15,15 +17,37 @@ export default {
       default: () => 25
     }
   },
+  data() {
+    return {
+      EVENT_NOT_CHANCE: 25
+    };
+  },
   computed: {
+    ...mapGetters("breakpoint", ["breakpoint", "minimum"]),
+    ...mapGetters("settings", ["breakpointEnabled"]),
+    breakpointActive() {
+      return checkBreakpointActive(
+        this.breakpointEnabled,
+        this.breakpoint,
+        this.minimum,
+        this.EVENT_NOT_CHANCE
+      );
+    },
+    randomSkew() {
+      return Math.floor((this.skew + 10) * Math.random());
+    },
     skewParent() {
       return {
-        transform: `skewX(${this.skew}deg)`
+        transform: this.breakpointActive
+          ? `skewX(${-this.skew}deg)`
+          : `skewX(${this.randomSkew}deg)`
       };
     },
     skewChild() {
       return {
-        transform: `skewX(${-this.skew}deg)`
+        transform: this.breakpointActive
+          ? `skewX(${this.skew}deg)`
+          : `skewX(${-1 * this.randomSkew}deg)`
       };
     }
   }

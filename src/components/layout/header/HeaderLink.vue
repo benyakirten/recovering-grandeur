@@ -1,6 +1,6 @@
 <template>
-  <div class="link-container" @click="linkClicked">
-    <p class="link-container__link" :style="headerLinkColor">
+  <div :class="containerClass" @click="onClick">
+    <p :class="linkClass" :style="headerLinkColor">
       {{ linkName }}
     </p>
   </div>
@@ -17,6 +17,11 @@ export default {
     linkName: {
       type: String,
       required: true
+    },
+    linkStyle: {
+      type: String,
+      required: false,
+      default: () => ""
     }
   },
   computed: {
@@ -25,11 +30,21 @@ export default {
       return {
         color: this.getHeaderLinkColor
       };
+    },
+    containerClass() {
+      return this.linkStyle
+        ? `link-container-${this.linkStyle}`
+        : "link-container";
+    },
+    linkClass() {
+      return this.linkStyle
+        ? `link-container-${this.linkStyle}__link`
+        : "link-container__link";
     }
   },
   methods: {
     ...mapActions("links", ["toggleLink"]),
-    linkClicked() {
+    onClick() {
       if (this.$route.fullPath !== this.linkRoute) {
         this.toggleLink(this.linkName);
         this.$router.push(this.linkRoute);
@@ -41,9 +56,8 @@ export default {
 
 <style lang="scss" scoped>
 .link-container {
-  height: 100%;
-  transform: skewX(25deg);
   cursor: pointer;
+  transform: skewX(25deg);
 
   &:not(:first-child) {
     margin-top: 2rem;
@@ -55,8 +69,32 @@ export default {
     // that made the router link redundant
     font-size: $font-size-xl;
     text-decoration: none;
-
     transition: $transition-normal;
+  }
+}
+
+.link-container-alternate {
+  &:not(:last-child) {
+    margin-right: 1rem;
+  }
+  &__link {
+    cursor: pointer;
+    font-size: $font-size-large;
+    @include respond(tab-port) {
+      font-size: reduce($font-size-large, 0.2);
+    }
+    @include respond(phone) {
+      font-size: increase($font-size-large, 0.2);
+    }
+    opacity: 0.9;
+    transform: skewX(25deg);
+    transition: $transition-slow;
+
+    &:hover {
+      opacity: 1;
+      transform: scale(1.05) skewX(25deg);
+      letter-spacing: 1px;
+    }
   }
 }
 </style>

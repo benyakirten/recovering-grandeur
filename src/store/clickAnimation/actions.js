@@ -1,10 +1,11 @@
+import { betweenMinAndMax } from "@/utils/other";
+
 export default {
   setAnimationLength(context, payload) {
     context.commit("setClickAnimationLength", payload);
     context.dispatch("setLocalStorageClickAnimation");
   },
   setAnimationLengthVariation(context, payload) {
-    console.log("length variation set");
     context.commit("setClickAnimationLengthVariation", payload);
     context.dispatch("setLocalStorageClickAnimation");
   },
@@ -18,12 +19,14 @@ export default {
   },
   incrementRadius(context) {
     const { clickAnimationRadius } = context.state;
-    context.commit("setClickAnimationRadius", clickAnimationRadius + 1);
+    const radius = betweenMinAndMax(clickAnimationRadius, 1, 1, 40);
+    context.commit("setClickAnimationRadius", radius);
     context.dispatch("setLocalStorageClickAnimation");
   },
   decrementRadius(context) {
     const { clickAnimationRadius } = context.state;
-    context.commit("setClickAnimationRadius", clickAnimationRadius - 1);
+    const radius = betweenMinAndMax(clickAnimationRadius, -1, 1, 40);
+    context.commit("setClickAnimationRadius", radius);
     context.dispatch("setLocalStorageClickAnimation");
   },
   loadAll(

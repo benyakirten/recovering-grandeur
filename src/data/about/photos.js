@@ -1,4 +1,4 @@
-const photos = [
+export default [
   {
     photoTitle: "person coated in gold",
     photoLink: "https://unsplash.com/photos/LV7lkepljdM",
@@ -24,5 +24,3 @@ const photos = [
     authorLink: "https://unsplash.com/@alexbelogub"
   }
 ];
-
-export default photos;

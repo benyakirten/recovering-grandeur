@@ -16,9 +16,6 @@
       :value="color"
       @input="emitColor"
       :name="randomId"
-      :min="min"
-      :max="max"
-      :step="step"
     />
   </div>
 </template>

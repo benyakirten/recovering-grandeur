@@ -1,12 +1,28 @@
 <template>
-  <MeetUsDefault />
+  <base-layout>
+    <template #top>
+      <MeetUsTop />
+    </template>
+    <template #center>
+      <MeetUsCenter />
+    </template>
+    <template #bottom>
+      <MeetUsBottom />
+    </template>
+  </base-layout>
 </template>
 
 <script>
-import MeetUsDefault from "./default/MeetUsDefault";
+import BaseLayout from "@/components/ui/BaseLayout";
+import MeetUsTop from "./top/MeetUsTop";
+import MeetUsCenter from "./center/MeetUsCenter";
+import MeetUsBottom from "./bottom/MeetUsBottom";
 export default {
   components: {
-    MeetUsDefault
+    BaseLayout,
+    MeetUsTop,
+    MeetUsCenter,
+    MeetUsBottom
   }
 };
 </script>

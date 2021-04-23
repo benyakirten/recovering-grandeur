@@ -1,5 +1,5 @@
 /* eslint-disable */
-export const pricingTable = [
+export const plans = [
   ["Our Plan Details", "Costsaver's", "Popular", "Luxury", "VIP"],
   ["Organ Donation", "Obligatory", "Optional", "Never", "On request"],
   ["Customer Service", "", "12/3", "24/7", "You'll never need it"],
