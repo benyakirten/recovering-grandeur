@@ -24,7 +24,7 @@ export default {
   padding: 1rem 0.5rem;
   width: 65%;
 
-  color: $color-alt-primary-light;
+  color: lighten($color-alt-primary-light, 15%);
   @include respond(no-hover) {
     color: $color-gray-light-1;
   }
@@ -49,7 +49,7 @@ export default {
     transform: translateY(-3px);
     box-shadow: $shadow-small;
     opacity: 1;
-    color: $color-alt-tertiary-light;
+    color: $color-gray-light-1;
   }
 
   &:active {

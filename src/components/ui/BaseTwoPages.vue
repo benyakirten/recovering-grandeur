@@ -18,6 +18,7 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from "vuex";
 export default {
   props: {
     bookId: {
@@ -37,6 +38,7 @@ export default {
     };
   },
   computed: {
+    ...mapGetters("settings", ["breakpointEnabled"]),
     book() {
       return document.getElementById(this.bookId);
     },
@@ -63,10 +65,14 @@ export default {
     }
   },
   methods: {
+    ...mapActions("breakpoint", ["incrementBreakpoint"]),
     flipPage() {
       this.flipper.style.opacity = 0;
       this.flipped ? this.flipPageBackward() : this.flipPageForward();
       this.flipped = !this.flipped;
+      if (this.breakpointEnabled) {
+        this.incrementBreakpoint();
+      }
       setTimeout(() => {
         this.flipper.style.opacity = 1;
       }, 800);

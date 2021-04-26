@@ -20,8 +20,8 @@
           :key="item"
           :id="item"
           draggable="true"
-          @click="clickTransfer(item, 'to-right-list')"
-          @dragstart="dragStart($event, item)"
+          @click="onClick(item, 'to-right-list')"
+          @dragstart="onDragstart($event, item)"
           @dragend="onDragend"
         >
           {{ item }}
@@ -43,8 +43,8 @@
           :key="item"
           :id="item"
           draggable="true"
-          @click="clickTransfer(item, 'to-left-list')"
-          @dragstart="dragStart($event, item)"
+          @click="onClick(item, 'to-left-list')"
+          @dragstart="onDragstart($event, item)"
           @dragend="onDragend"
         >
           {{ item }}
@@ -68,9 +68,9 @@ export default {
     }
   },
   methods: {
-    dragStart(e, item) {
+    onDragstart(e, item) {
       e.dataTransfer.setData("transition", item);
-      this.addClass(e.srcElement.id, "hovering");
+      this.addClass(e.target.id, "hovering");
     },
     addClass(id, cls) {
       document.getElementById(id).classList.add(cls);
@@ -78,7 +78,7 @@ export default {
     removeClass(id, cls) {
       document.getElementById(id).classList.remove(cls);
     },
-    clickTransfer(item, target) {
+    onClick(item, target) {
       this.$emit(target, item);
     },
     emitDrop(e, id) {

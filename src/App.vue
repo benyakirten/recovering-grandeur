@@ -20,7 +20,7 @@ export default {
     TheFooter
   },
   computed: {
-    ...mapGetters("breakpoint", ["breakpoint", "maxAdd", "makeClickWave"]),
+    ...mapGetters("breakpoint", ["breakpoint", "makeClickWave"]),
     ...mapGetters("clickAnimation", [
       "clickAnimationLength",
       "clickAnimationLengthVariation",
@@ -49,7 +49,7 @@ export default {
     };
   },
   methods: {
-    ...mapActions("breakpoint", ["changeBreakpoint", "stopClickWave"]),
+    ...mapActions("breakpoint", ["incrementBreakpoint", "stopClickWave"]),
     ...mapActions("links", ["enlivenLinks"]),
     ...mapActions("settings", ["loadAllSettings"]),
     flashFromClick({ pageX, pageY }) {
@@ -101,9 +101,7 @@ export default {
         if (this.breakpoint >= 100) {
           window.clearInterval(this.interval);
         }
-        this.changeBreakpoint(
-          Math.floor(Math.random() * (this.maxAdd - 1)) + 1
-        );
+        this.incrementBreakpoint();
         Math.random() > 0.5 ? console.log("TICK!") : console.log("TOCK!");
       }, 15000);
     },

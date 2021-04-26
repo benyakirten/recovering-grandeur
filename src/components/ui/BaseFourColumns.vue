@@ -36,6 +36,8 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+import { checkBreakpointActive } from "@/utils/other";
 export default {
   props: {
     containerWidth: {
@@ -79,7 +81,22 @@ export default {
       default: () => "none"
     }
   },
+  data() {
+    return {
+      EVENT_NOT_CHANCE: 10
+    };
+  },
   computed: {
+    ...mapGetters("breakpoint", ["breakpoint", "minimum"]),
+    ...mapGetters("settings", ["breakpointEnabled"]),
+    breakpointActive() {
+      return checkBreakpointActive(
+        this.breakpointEnabled,
+        this.breakpoint,
+        this.minimum,
+        this.EVENT_NOT_CHANCE
+      );
+    },
     computedBoxShadow() {
       return this.getBoxShadow(this.boxShadow);
     },
@@ -103,7 +120,8 @@ export default {
           ? "40%"
           : this.sectionWidth,
         border: this.normalBorder,
-        boxShadow: this.computedChildBoxShadow
+        boxShadow: this.computedChildBoxShadow,
+        animation: this.breakpointActive ? "spin-off 5s infinite linear" : ""
       };
     }
   },

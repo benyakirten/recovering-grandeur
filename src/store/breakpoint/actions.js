@@ -9,7 +9,10 @@ export default {
     context.dispatch("setLocalStorageBreakpoint");
   },
   incrementBreakpoint(context) {
-    const newBP = betweenMinAndMax(context, context.state.maxAdd);
+    const newBP = betweenMinAndMax(
+      context.state.breakpoint,
+      Math.floor(Math.random() * (context.state.maxAdd - 1)) + 1
+    );
     context.commit("setBreakpoint", newBP);
     context.dispatch("setLocalStorageBreakpoint");
   },
@@ -48,7 +51,6 @@ export default {
   },
   setDefaults(context) {
     context.commit("setMaxAdd", 5);
-    context.commit("setMaxSub", -5);
     context.commit("setBreakpoint", 0);
     context.commit("setMinimum", 10);
     context.dispatch("setLocalStorageBreakpoint");

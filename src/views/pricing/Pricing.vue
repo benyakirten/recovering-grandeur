@@ -4,16 +4,22 @@
       <PricingTop />
     </template>
     <template #center>
-      <PricingCenter />
+      <div :style="altCenterStyle">
+        <PricingCenter />
+      </div>
     </template>
     <template #bottom>
-      <PricingBottom />
+      <div :style="altBottomStyle">
+        <PricingBottom />
+      </div>
     </template>
   </base-layout>
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapActions, mapGetters } from "vuex";
+
+import { checkBreakpointActive } from "@/utils/other";
 
 import BaseLayout from "@/components/ui/BaseLayout";
 import PricingTop from "./top/PricingTop";
@@ -25,6 +31,40 @@ export default {
     PricingTop,
     PricingCenter,
     PricingBottom
+  },
+  data() {
+    return {
+      EVENT_NOT_CHANCE: 80
+    };
+  },
+  computed: {
+    ...mapGetters("breakpoint", ["breakpoint", "minimum"]),
+    ...mapGetters("settings", ["breakpointEnabled"]),
+    breakpointActive() {
+      return checkBreakpointActive(
+        this.breakpointEnabled,
+        this.breakpoint,
+        this.minimum,
+        this.EVENT_NOT_CHANCE
+      );
+    },
+    altCenterStyle() {
+      if (this.breakpointActive) {
+        return {
+          animation: "bounce-up-down 2s infinite linear"
+        };
+      }
+      return {};
+    },
+    altBottomStyle() {
+      if (this.breakpointActive) {
+        return {
+          marginTop: "-50rem",
+          opacity: 0.7
+        };
+      }
+      return {};
+    }
   },
   methods: {
     ...mapActions("links", ["setAnchorId", "setButtonAction"])

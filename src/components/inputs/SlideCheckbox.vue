@@ -8,7 +8,7 @@
         :aria-labelledby="randomId"
         :checked="property"
       />
-      <label :for="randomId" class="input-container__label" @click="notify" />
+      <label :for="randomId" class="input-container__label" @click="onClick" />
     </div>
     <slot>{{ property }}</slot>
   </div>
@@ -37,7 +37,7 @@ export default {
     }
   },
   methods: {
-    notify() {
+    onClick() {
       this.$emit("toggle-checked", this.randomId);
     }
   }

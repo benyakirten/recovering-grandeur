@@ -4,15 +4,21 @@
       <HomeTop />
     </template>
     <template #center>
-      <HomeCenter />
+      <HomeCenter v-if="!breakpointActive" />
+      <HomeBottom v-else />
     </template>
     <template #bottom>
-      <HomeBottom />
+      <HomeBottom v-if="!breakpointActive" />
+      <HomeCenter v-else />
     </template>
   </base-layout>
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+
+import { checkBreakpointActive } from "@/utils/other";
+
 import BaseLayout from "@/components/ui/BaseLayout";
 import HomeTop from "./top/HomeTop";
 import HomeCenter from "./center/HomeCenter";
@@ -23,6 +29,23 @@ export default {
     HomeTop,
     HomeCenter,
     HomeBottom
+  },
+  data() {
+    return {
+      EVENT_NOT_CHANCE: 80
+    };
+  },
+  computed: {
+    ...mapGetters("breakpoint", ["breakpoint", "minimum"]),
+    ...mapGetters("settings", ["breakpointEnabled"]),
+    breakpointActive() {
+      return checkBreakpointActive(
+        this.breakpointEnabled,
+        this.breakpoint,
+        this.minimum,
+        this.EVENT_NOT_CHANCE
+      );
+    }
   }
 };
 </script>

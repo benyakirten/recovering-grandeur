@@ -7,14 +7,14 @@
       type="text"
       class="picker__text-input"
       :value="color"
-      @keyup.enter="emitColor"
-      @input="emitColor"
+      @keyup.enter="onEnter"
+      @input="onInput"
     />
     <input
       type="color"
       class="picker__color-input"
       :value="color"
-      @input="emitColor"
+      @input="onInput"
       :name="randomId"
     />
   </div>
@@ -35,7 +35,11 @@ export default {
     }
   },
   methods: {
-    emitColor(e) {
+    onEnter(e) {
+      e.target.blur();
+      this.onInput(e);
+    },
+    onInput(e) {
       this.$emit("emit-color", e.target.value);
     }
   }

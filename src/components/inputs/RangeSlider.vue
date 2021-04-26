@@ -6,7 +6,8 @@
     <input
       type="text"
       class="range-input__number-input"
-      @input="validateNumberThenEmit"
+      @input="onRangeInput"
+      @keyup.enter="onRangeEnter"
       :min="min"
       :max="max"
       :step="step"
@@ -15,7 +16,7 @@
     <input
       type="range"
       class="range-input__range"
-      @input="emitNumber"
+      @input="onTextInput"
       :name="randomId"
       :min="min"
       :max="max"
@@ -52,10 +53,14 @@ export default {
     }
   },
   methods: {
-    emitNumber(e) {
+    onTextInput(e) {
       this.$emit("emit-number", +e.target.value);
     },
-    validateNumberThenEmit(e) {
+    onRangeEnter(e) {
+      e.target.blur();
+      this.onRangeInput(e);
+    },
+    onRangeInput(e) {
       const value = +e.target.value;
       if (
         +this.max >= value &&

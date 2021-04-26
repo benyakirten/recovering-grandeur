@@ -68,8 +68,29 @@
   }
 }
 
+@keyframes bounce-up-down {
+  0% {
+    transform: translateY(-50rem);
+  }
+  50% {
+    transform: translateY(50rem);
+  }
+  100% {
+    transform: translateY(-50rem);
+  }
+}
+
 @keyframes spin {
   to {
     transform: rotate(360deg);
+  }
+}
+
+@keyframes spin-off {
+  from {
+    transform: translateX(-150rem) rotate(-1080deg);
+  }
+  to {
+    transform: translateX(150rem) rotate(1080deg);
   }
 }
