@@ -24,8 +24,5 @@ export default {
   },
   setEnabledLinks(state, payload) {
     state.links = payload;
-  },
-  setDisabledLinks(state, payload) {
-    state.disabledLinks = payload;
   }
 };

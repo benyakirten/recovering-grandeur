@@ -9,6 +9,7 @@
 > yarn build / npm run build
 ### Run your unit tests
 > yarn test:unit / npm run test:unit
+> NOTE: Test development was halted as of beta distro 1 (April 24th) because the vue test utils were not letting me run createLocalVue so I couldn't test any component that used the router. Therefore, I stopped developing the tests until this could be resolved.
 
 ## What is this website?
 It is written to accompany my (at this point) upcoming book, A Brief Recovery. The website provides a cursory introduction to the story of the book, but its main emphasis is on its functionality: a 'ghost' that, based on certian criteria and random chance, changes the website.
@@ -16,7 +17,7 @@ It is written to accompany my (at this point) upcoming book, A Brief Recovery. T
 Since I learned programming, I've wanted to create somethign that could (at least loosely) be called art on the computer. I'm not talking about pretty pictures or whatever but something with meaning. It's something that I find lacking in, especially, webpages besides many other sectors of programming. I want to convey, along with the book, the theme of mental impermanence, as in the world, what we conceive of it and even our personality is hardly as permanent as we would like it to be.
 
 ## How does it work?
-Superficially, this is a somewhat-shoddily made corporate website that uses Vue. On it (thematically because the corporate overlords are out of touch), there are a number of superfluous features. A circle expands from wherever the user clicks. The header will show waves of expanding circles when moused over. There's a hidden score called the breakpoint. These (and their properties) can all be modified from the about page--the only page relatively safe from the 'ghost'.
+Superficially, this is a somewhat-shoddily made corporate website (that I made using Vue). On it (thematically because the corporate overlords are out of touch), there are a number of superfluous features. A circle expands from wherever the user clicks. The header will show waves of expanding circles when moused over. There's a hidden score called the breakpoint. These (and their properties) can all be modified from the about page--the only page relatively safe from the 'ghost'.
 
 Otherwise, breakpoint grows over time and as pages are changed. The higher it is, the more likely for certain events to occur (possible actions are under src/utils/enums.js, how they work is in src/store/breakpoint/actions.js lines 67-224). Other actions occur inside of the components, such as the hero splash image gainin random filter properties.
 

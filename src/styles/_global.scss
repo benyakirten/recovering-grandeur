@@ -57,16 +57,3 @@
   color: $color-primary-dark;
   font-size: $font-size-medium;
 }
-
-.background-sliding-gradient {
-  color: transparent;
-  background-image: linear-gradient(
-    to right,
-    $color-hero-2,
-    $color-hero-2-complementary-1
-  );
-  background-size: 200% 100%;
-  background-clip: text;
-
-  animation: sliding-background 4s infinite linear;
-}

@@ -56,7 +56,7 @@ export default {
     transform: translateY(-1px);
     box-shadow: $shadow-small;
     opacity: 1;
-    color: $color-alt-secondary-light;
+    color: $color-alt-secondary;
   }
 }
 </style>

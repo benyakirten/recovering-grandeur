@@ -31,48 +31,6 @@ export default {
   setAnchorId(context, payload) {
     context.commit("setAnchorId", payload);
   },
-  activateLink(context, payload) {
-    const { links, disabledLinks } = context.state;
-    const link = disabledLinks.find(l => l.name === payload);
-    context.commit(
-      "setDisabledLinks",
-      disabledLinks.filter(l => l.name !== payload)
-    );
-    context.commit("setEnabledLinks", [...links, link]);
-    context.dispatch("setLocalStorageLinks");
-  },
-  activateRandomLink(context) {
-    const { links, disabledLinks } = context.state;
-    const randomLink =
-      disabledLinks[Math.floor(Math.random() * disabledLinks.length)];
-    context.commit(
-      "setDisabledLinks",
-      disabledLinks.filter(l => l.name !== randomLink.name)
-    );
-    context.commit("setEnabledLinks", [...links, randomLink]);
-    context.dispatch("setLocalStorageLinks");
-  },
-  deactivateLink(context, payload) {
-    const { links, disabledLinks } = context.state;
-    const link = links.find(l => l.name === payload);
-    context.commit(
-      "setEnabledLinks",
-      links.filter(l => l.name !== payload)
-    );
-    context.commit("setDisabledLinks", [...disabledLinks, link]);
-    context.dispatch("setLocalStorageLinks");
-  },
-  deactiveRandomLink(context) {
-    const { links, disabledLinks } = context.state;
-    const safeLinks = links.filter(l => !l.name.includes("About"));
-    const randomLink = safeLinks[Math.floor(Math.random() * safeLinks.length)];
-    context.commit(
-      "setEnabledLinks",
-      links.filter(l => l.name !== randomLink.name)
-    );
-    context.commit("setDisabledLinks", [...disabledLinks, randomLink]);
-    context.dispatch("setLocalStorageLinks");
-  },
   disableTransition(context, payload) {
     const { transitions } = context.state;
     context.commit(
@@ -99,7 +57,7 @@ export default {
     );
     context.dispatch("setLocalStorageLinks");
   },
-  loadAll(context, { links, disabledLinks, transitions }) {
+  loadAll(context, { links, transitions }) {
     context.commit(
       "setTransitions",
       transitions || [
@@ -120,13 +78,6 @@ export default {
         { link: "/about", name: "About & Settings", live: true }
       ]
     );
-    context.commit(
-      "setDisabledLinks",
-      disabledLinks || [
-        { link: "/contact", name: "Contact Us", live: false },
-        { link: "/builder", name: "Page Builder", live: false }
-      ]
-    );
     context.dispatch("setLocalStorageLinks");
   },
   setDefaults(context) {
@@ -137,10 +88,6 @@ export default {
       { link: "/meet-us", name: "Meet Us", live: true },
       { link: "/about", name: "About & Settings", live: true }
     ];
-    const disabledLinks = [
-      { link: "/contact", name: "Contact Us", live: false },
-      { link: "/builder", name: "Page Builder", live: false }
-    ];
     const transitions = [
       { name: "slide-right", enabled: true },
       { name: "slide-left", enabled: true },
@@ -150,16 +97,14 @@ export default {
     ];
     context.commit("setTransitions", transitions);
     context.commit("setEnabledLinks", links);
-    context.commit("setDisabledLinks", disabledLinks);
     context.dispatch("setLocalStorageLinks");
   },
   setLocalStorageLinks(context) {
-    const { links, disabledLinks, transitions } = context.state;
+    const { links, transitions } = context.state;
     localStorage.setItem(
       "RG_L",
       JSON.stringify({
         links,
-        disabledLinks,
         transitions
       })
     );

@@ -56,8 +56,9 @@ export default {
   position: relative;
   width: 8rem;
   height: 3.5rem;
-
   margin-right: 1rem;
+
+  flex-shrink: 0;
 
   &__checkbox:checked + &__label {
     background-color: $color-gray-dark-2;

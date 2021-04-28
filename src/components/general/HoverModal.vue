@@ -81,6 +81,7 @@ export default {
     justify-content: center;
     align-items: center;
 
+    font-family: $font-family-serif;
     font-size: $font-size-large;
 
     @include respond(tab-port) {

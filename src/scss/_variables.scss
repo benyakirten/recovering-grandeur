@@ -2,8 +2,6 @@
 $color-primary: #c69963;
 $color-primary-dark: #B28451;
 
-$color-secondary: #101d2c;
-
 $color-gray: #fcf8ec;
 $color-brown: #484018;
 
@@ -20,19 +18,11 @@ $color-alt-primary: #55c57a;
 $color-alt-primary-light: #7ed56f;
 $color-alt-primary-dark: #28b485;
 
-$color-alt-secondary-light: #ffb900;
-$color-alt-secondary-dark: #ff7730;
-
-$color-alt-tertiary-light: #2998ff;
-$color-alt-tertiary-dark: #5643fa;
+$color-alt-secondary: #ffb900;
 
 $color-hero-1: #925f45;
-$color-hero-1-complementary-1: #459286;
-$color-hero-1-complementary-2: #455292;
-
 $color-hero-2: #F5A365;
-$color-hero-2-complementary-1: #65f5eb;
-$color-hero-2-complementary-2: #656ff5;
+$color-hero-2-complementary: #65f5eb;
 
 
 // FONT SIZE
@@ -40,7 +30,6 @@ $font-size-small: 1.2rem;
 $font-size-medium: 1.8rem;
 $font-size-large: 2.4rem;
 $font-size-xl: 3.6rem;
-$font-size-xxl: 6rem;
 
 // FONT FAMILY
 $font-family-sans: 'Yantramanav', sans-serif;
@@ -51,7 +40,6 @@ $border-radius-standard: 3rem;
 $border-radius-circle: 50%;
 
 // BOX SHADOW
-$navigation-shadow: -1px .4rem 2.3rem -.6rem rgba($color-black, 0.77);
 $shadow-normal: 0 2rem 4rem rgba($color-black, 0.4);
 $shadow-small: 0 1rem 2rem rgba($color-black, 0.4);
 $shadow-xs: 0 0.5rem 1rem rgba($color-black, 0.4);
@@ -60,4 +48,3 @@ $shadow-xs: 0 0.5rem 1rem rgba($color-black, 0.4);
 $transition-super-slow: all .8s ease;
 $transition-slow: all .6s;
 $transition-normal: all .4s;
-$transition-fast: all .2s;

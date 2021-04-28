@@ -53,12 +53,6 @@
   }
 }
   
-@keyframes sliding-background {
-  to {
-    background-position: -200% 0;
-  }
-}
-  
 @keyframes bloat-and-spin {
   50% {
     transform: rotate(180deg) scale(1.2) skew(15deg);

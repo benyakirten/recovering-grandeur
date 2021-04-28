@@ -8,10 +8,6 @@ export default {
   ],
   buttonAction: null,
   anchorId: null,
-  disabledLinks: [
-    { link: "/contact", name: "Contact Us", live: false },
-    { link: "/builder", name: "Page Builder", live: false }
-  ],
   transitions: [
     { name: "slide-right", enabled: true },
     { name: "slide-left", enabled: true },
