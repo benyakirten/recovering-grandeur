@@ -2,7 +2,7 @@
   <range-slider
     :variable="breakpoint"
     min="0"
-    max="100"
+    :max="breakpointMaximum.toString()"
     step="1"
     @emit-number="setBreakpoint"
   >
