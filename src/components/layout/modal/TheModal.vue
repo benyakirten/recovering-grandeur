@@ -54,9 +54,7 @@ export default {
   watch: {
     showModal(val) {
       if (val) {
-        document
-          .getElementById("the-modal")
-          .scrollIntoView({ behavior: "smooth" });
+        window.scrollTo(0, 0);
         this.body.style.overflow = "hidden";
       } else {
         this.body.style.overflow = "visible";
