@@ -38,7 +38,7 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from "vuex";
+import { mapActions, mapState } from "vuex";
 
 import clickAnimationToolbars from "@/data/about/clickAnimationToolbars";
 import RangeSlider from "@/components/inputs/RangeSlider";
@@ -61,7 +61,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters("clickAnimation", [
+    ...mapState("clickAnimation", [
       "clickAnimationLength",
       "clickAnimationLengthVariation",
       "clickAnimationColor",

@@ -18,18 +18,18 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from "vuex";
+import { mapActions, mapState } from "vuex";
 export default {
   props: {
     bookId: {
       type: String,
       required: false,
-      default: () => "two-pages-book"
+      default: "two-pages-book"
     },
     transitionStyle: {
       type: String,
       required: false,
-      default: () => "right"
+      default: "right"
     }
   },
   data() {
@@ -38,7 +38,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters("settings", ["breakpointEnabled"]),
+    ...mapState("settings", ["breakpointEnabled"]),
     book() {
       return document.getElementById(this.bookId);
     },

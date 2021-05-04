@@ -2,6 +2,9 @@ export default {
   setBreakpoint(state, payload) {
     state.breakpoint = payload;
   },
+  setBreakpointMaximum(state, payload) {
+    state.breakpointMaximum = payload;
+  },
   setMaxAdd(state, payload) {
     state.maxAdd = payload;
   },

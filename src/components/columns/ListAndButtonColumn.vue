@@ -18,7 +18,7 @@
     <div class="list">
       <vertical-list :list="list"></vertical-list>
     </div>
-    <base-button>
+    <base-button :click="onButtonClick">
       {{ buttonCaption }}
     </base-button>
   </div>
@@ -54,6 +54,19 @@ export default {
       type: String,
       required: false,
       default: () => "Learn More"
+    },
+    buttonAction: {
+      type: Function,
+      required: false,
+      default: null
+    }
+  },
+  computed: {
+    onButtonClick() {
+      if (this.buttonAction) {
+        return this.buttonAction;
+      }
+      return null;
     }
   }
 };

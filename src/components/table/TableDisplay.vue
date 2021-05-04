@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapState } from "vuex";
 import { checkBreakpointActive } from "@/utils/other";
 import TableHead from "./TableHead";
 import TableBody from "./TableBody";
@@ -27,8 +27,8 @@ export default {
     };
   },
   computed: {
-    ...mapGetters("breakpoint", ["breakpoint", "minimum"]),
-    ...mapGetters("settings", ["breakpointEnabled"]),
+    ...mapState("breakpoint", ["breakpoint", "minimum"]),
+    ...mapState("settings", ["breakpointEnabled"]),
     breakpointActive() {
       return checkBreakpointActive(
         this.breakpointEnabled,

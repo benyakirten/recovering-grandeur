@@ -2,13 +2,25 @@
   <range-slider
     :variable="breakpoint"
     min="0"
-    max="100"
+    :max="this.breakpointMaximum.toString()"
     step="1"
     @emit-number="setBreakpoint"
   >
     Breakpoint
     <hover-modal leftMargin="0">
       {{ breakpointExplanationToolbar }}
+    </hover-modal>
+  </range-slider>
+  <range-slider
+    :variable="breakpointMaximum"
+    min="100"
+    max="500"
+    step="5"
+    @emit-number="setBreakpointMaximum"
+  >
+    Breakpoint Maximum
+    <hover-modal leftMargin="0">
+      {{ breakpointMaximumToolbar }}
     </hover-modal>
   </range-slider>
   <range-slider
@@ -38,7 +50,7 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from "vuex";
+import { mapActions, mapState } from "vuex";
 
 import breakpointToolbars from "@/data/about/breakpointToolbars";
 import RangeSlider from "@/components/inputs/RangeSlider";
@@ -51,20 +63,32 @@ export default {
   data() {
     const {
       breakpointExplanationToolbar,
+      breakpointMaximumToolbar,
       maxAddToolbar,
       minimumToolbar
     } = breakpointToolbars;
     return {
       breakpointExplanationToolbar,
+      breakpointMaximumToolbar,
       maxAddToolbar,
       minimumToolbar
     };
   },
   computed: {
-    ...mapGetters("breakpoint", ["breakpoint", "maxAdd", "minimum"])
+    ...mapState("breakpoint", [
+      "breakpoint",
+      "breakpointMaximum",
+      "maxAdd",
+      "minimum"
+    ])
   },
   methods: {
-    ...mapActions("breakpoint", ["setBreakpoint", "setMaxAdd", "setMinimum"])
+    ...mapActions("breakpoint", [
+      "setBreakpoint",
+      "setBreakpointMaximum",
+      "setMaxAdd",
+      "setMinimum"
+    ])
   }
 };
 </script>

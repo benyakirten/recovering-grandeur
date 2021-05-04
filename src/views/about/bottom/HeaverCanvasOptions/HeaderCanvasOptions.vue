@@ -17,7 +17,7 @@
     <base-foldout
       :enableContent="headerCanvasEnabled"
       name="headerCanvas"
-      :showContent="whichDropdownIsOpen === 'headerCanvas'"
+      :showContent="dropdownOpen === 'headerCanvas'"
       @broadcast-click="toggleOpenDropdown"
     >
       <template #top> Header Canvas Options </template>
@@ -27,7 +27,7 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from "vuex";
+import { mapActions, mapState } from "vuex";
 
 import headerCanvasToolbars from "@/data/about/headerCanvasToolbars";
 import SlideCheckbox from "@/components/inputs/SlideCheckbox";
@@ -48,7 +48,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters("settings", ["headerCanvasEnabled", "whichDropdownIsOpen"])
+    ...mapState("settings", ["headerCanvasEnabled", "dropdownOpen"])
   },
   methods: {
     ...mapActions("settings", [
@@ -58,7 +58,7 @@ export default {
     ]),
     toggleCanvas() {
       this.toggleHeaderCanvas();
-      if (this.whichDropdownIsOpen === "headerCanvas") {
+      if (this.dropdownOpen === "headerCanvas") {
         this.closeDropdowns();
       }
     }

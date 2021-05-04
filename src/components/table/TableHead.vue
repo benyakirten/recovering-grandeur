@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapState } from "vuex";
 import { shuffleArray, checkBreakpointActive } from "@/utils/other";
 export default {
   props: {
@@ -27,8 +27,8 @@ export default {
     };
   },
   computed: {
-    ...mapGetters("breakpoint", ["breakpoint", "minimum"]),
-    ...mapGetters("settings", ["breakpointEnabled"]),
+    ...mapState("breakpoint", ["breakpoint", "minimum"]),
+    ...mapState("settings", ["breakpointEnabled"]),
     breakpointActive() {
       return checkBreakpointActive(
         this.breakpointEnabled,

@@ -3,6 +3,9 @@ import { betweenMinAndMax } from "@/utils/other";
 export default {
   setAnimationLength(context, payload) {
     context.commit("setClickAnimationLength", payload);
+    if (context.state.clickAnimationLengthVariation > payload) {
+      context.commit("setClickAnimationLengthVariation", payload);
+    }
     context.dispatch("setLocalStorageClickAnimation");
   },
   setAnimationLengthVariation(context, payload) {

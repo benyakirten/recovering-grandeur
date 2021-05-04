@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapState } from "vuex";
 import { checkBreakpointActive } from "@/utils/other";
 import { constructFilterString } from "@/utils/cssFilters";
 export default {
@@ -32,8 +32,8 @@ export default {
     };
   },
   computed: {
-    ...mapGetters("breakpoint", ["breakpoint", "minimum"]),
-    ...mapGetters("settings", ["breakpointEnabled"]),
+    ...mapState("breakpoint", ["breakpoint", "minimum"]),
+    ...mapState("settings", ["breakpointEnabled"]),
     breakpointActive() {
       return checkBreakpointActive(
         this.breakpointEnabled,

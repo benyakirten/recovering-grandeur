@@ -4,21 +4,41 @@ import { namedColorsAndHexes } from "@/utils/namedColors";
 
 export default {
   changeBreakpoint(context, payload) {
-    const newBP = betweenMinAndMax(context.state.breakpoint, payload);
+    const newBP = betweenMinAndMax(
+      context.state.breakpoint,
+      payload,
+      0,
+      context.state.breakpointMaximum
+    );
     context.commit("setBreakpoint", newBP);
     context.dispatch("setLocalStorageBreakpoint");
   },
   incrementBreakpoint(context) {
     const newBP = betweenMinAndMax(
       context.state.breakpoint,
-      Math.floor(Math.random() * (context.state.maxAdd - 1)) + 1
+      Math.floor(Math.random() * (context.state.maxAdd - 1)) + 1,
+      0,
+      context.state.breakpointMaximum
     );
     context.commit("setBreakpoint", newBP);
     context.dispatch("setLocalStorageBreakpoint");
   },
   setBreakpoint(context, payload) {
-    const newBP = betweenMinAndMax(payload, 0);
+    const newBP = betweenMinAndMax(
+      payload,
+      0,
+      0,
+      context.state.breakpointMaximum
+    );
     context.commit("setBreakpoint", newBP);
+    context.dispatch("setLocalStorageBreakpoint");
+  },
+  setBreakpointMaximum(context, payload) {
+    const newBPM = betweenMinAndMax(payload, 0, 100, 500);
+    context.commit("setBreakpointMaximum", newBPM);
+    if (newBPM < context.state.breakpoint) {
+      context.commit("setBreakpoint", newBPM);
+    }
     context.dispatch("setLocalStorageBreakpoint");
   },
   setMaxAdd(context, payload) {
@@ -37,21 +57,23 @@ export default {
   stopClickWave(context) {
     context.commit("setClickWave", false);
   },
-  startHeaderWave(context) {
-    context.commit("setHeaderWave", true);
+  startHeaderWave(context, payload) {
+    context.commit("setHeaderWave", payload || true);
   },
   stopHeaderWave(context) {
     context.commit("setHeaderWave", false);
   },
-  loadAll(context, { breakpoint, maxAdd, minimum }) {
+  loadAll(context, { breakpoint, breakpointMaximum, maxAdd, minimum }) {
     context.commit("setBreakpoint", breakpoint);
+    context.commit("setBreakpointMaximum", breakpointMaximum);
     context.commit("setMaxAdd", maxAdd);
     context.commit("setMinimum", minimum);
     context.dispatch("setLocalStorageBreakpoint");
   },
   setDefaults(context) {
-    context.commit("setMaxAdd", 5);
     context.commit("setBreakpoint", 0);
+    context.commit("setBreakpointMaximum", 150);
+    context.commit("setMaxAdd", 5);
     context.commit("setMinimum", 10);
     context.dispatch("setLocalStorageBreakpoint");
   },
@@ -214,11 +236,12 @@ export default {
     }
   },
   setLocalStorageBreakpoint(context) {
-    const { breakpoint, maxAdd, minimum } = context.state;
+    const { breakpoint, breakpointMaximum, maxAdd, minimum } = context.state;
     localStorage.setItem(
       "RG_B",
       JSON.stringify({
         breakpoint,
+        breakpointMaximum,
         maxAdd,
         minimum
       })

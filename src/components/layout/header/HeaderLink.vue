@@ -1,13 +1,13 @@
 <template>
   <div :class="containerClass" @click="onClick">
-    <p :class="linkClass" :style="headerLinkColor">
+    <p :class="linkClass" :style="{ color: headerLinkColor }">
       {{ linkName }}
     </p>
   </div>
 </template>
 
 <script>
-import { mapActions, mapGetters } from "vuex";
+import { mapActions, mapState } from "vuex";
 export default {
   props: {
     linkRoute: {
@@ -25,12 +25,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters("colorScheme", ["getHeaderLinkColor"]),
-    headerLinkColor() {
-      return {
-        color: this.getHeaderLinkColor
-      };
-    },
+    ...mapState("colorScheme", ["headerLinkColor"]),
     containerClass() {
       return this.linkStyle
         ? `link-container-${this.linkStyle}`
@@ -58,10 +53,7 @@ export default {
 .link-container {
   cursor: pointer;
   transform: skewX(25deg);
-
-  &:not(:first-child) {
-    margin-top: 2rem;
-  }
+  margin-top: 2rem;
 
   &__link {
     // The links are no longer router links

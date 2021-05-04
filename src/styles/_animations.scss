@@ -47,8 +47,12 @@
 }
   
 @keyframes click-flash-out-anim {
+  from {
+    transform: translate(-50%, -50%) scale(1) rotate(0);
+    opacity: 1;
+  }
   to {
-    transform: translate(-50%, -50%) scale(2);
+    transform: translate(-50%, -50%) scale(2) rotate(360deg);
     opacity: 0;
   }
 }

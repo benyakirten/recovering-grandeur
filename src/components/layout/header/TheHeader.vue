@@ -3,7 +3,7 @@
     :class="headerClass"
     :style="headerBackground"
     id="header"
-    @mouseenter="beginWave"
+    @mouseenter="startHeaderWave($event)"
   >
     <header-canvas></header-canvas>
     <transition-group name="link-fall" @afterEnter="afterEnter">
@@ -19,11 +19,10 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from "vuex";
+import { mapState, mapActions, mapGetters } from "vuex";
 
 import { checkBreakpointActive } from "@/utils/other";
-import HeaderCanvasController from "@/utils/HeaderCanvasController";
-import { separateRGB, getRGBAStringFromHex } from "@/utils/hexAndDecimals";
+import { getRGBAStringFromHex } from "@/utils/hexAndDecimals";
 
 import HeaderLink from "./HeaderLink";
 import HeaderCanvas from "./HeaderCanvas";
@@ -31,46 +30,21 @@ export default {
   components: { HeaderLink, HeaderCanvas },
   data() {
     return {
-      HeaderCanvasController: null,
       EVENT_NOT_CHANCE: 25
     };
   },
   computed: {
-    ...mapGetters("breakpoint", ["breakpoint", "minimum", "makeHeaderWave"]),
+    ...mapState("breakpoint", ["breakpoint", "minimum", "makeHeaderWave"]),
+    ...mapState("colorScheme", ["headerBackgroundColor", "headerOpacity"]),
     ...mapGetters("links", ["liveLinks"]),
-    ...mapGetters("headerCanvas", [
-      "numberOfCircles",
-      "startColor",
-      "endColor",
-      "startRadius",
-      "radiusDelta"
-    ]),
-    ...mapGetters("colorScheme", [
-      "getHeaderBackgroundColor",
-      "getHeaderOpacity"
-    ]),
-    ...mapGetters("settings", [
-      "breakpointEnabled",
-      "headerCanvasEnabled",
-      "headerCanvasRandomizeColorsEnabled"
-    ]),
+    ...mapState("settings", ["breakpointEnabled"]),
     headerBackground() {
-      const rgbaString = getRGBAStringFromHex(
-        this.getHeaderBackgroundColor,
-        this.getHeaderOpacity
-      );
       return {
-        background: rgbaString
+        background: getRGBAStringFromHex(
+          this.headerBackgroundColor,
+          this.headerOpacity
+        )
       };
-    },
-    canvas() {
-      return document.querySelector(".header-canvas");
-    },
-    startColorRGB() {
-      return separateRGB(this.startColor);
-    },
-    endColorRGB() {
-      return separateRGB(this.endColor);
     },
     breakpointActive() {
       return checkBreakpointActive(
@@ -84,61 +58,12 @@ export default {
       return this.breakpointActive ? `header-alternate` : "header";
     }
   },
-  watch: {
-    makeHeaderWave(val) {
-      if (val) {
-        this.beginWave({ clientX: 0, clientY: 0 });
-        this.stopHeaderWave();
-      }
-    }
-  },
-  mounted() {
-    // If we run this function right on mount, then the canvas won't be
-    // properly mounted so the dimensions will be slightly off for the controller
-    setTimeout(
-      () =>
-        (this.HeaderCanvasController = new HeaderCanvasController(this.canvas)),
-      10
-    );
-  },
   methods: {
-    ...mapActions("breakpoint", ["stopHeaderWave"]),
+    ...mapActions("breakpoint", ["startHeaderWave"]),
     ...mapActions("headerCanvas", ["setRandomStartAndEndColors"]),
     afterEnter(el) {
       // Prevent the hover animation until the link is in place
-      if (!this.breakpointActive) {
-        el.classList.add("link-animation");
-      }
-    },
-    beginWave({ clientX, clientY }) {
-      if (!this.headerCanvasEnabled || !this.HeaderCanvasController) {
-        return;
-      }
-      if (this.headerCanvasRandomizeColorsEnabled) {
-        this.setRandomStartAndEndColors();
-      }
-      this.HeaderCanvasController.updateCanvasPosition(this.canvas);
-      const { x, y } = this.HeaderCanvasController.getNearestCornerPosition(
-        clientX,
-        clientY
-      );
-      this.HeaderCanvasController.setCircleProperties(
-        this.startColorRGB,
-        this.endColorRGB,
-        this.numberOfCircles
-      );
-      requestAnimationFrame(() => this.canvasWave(x, y, this.startRadius));
-    },
-    canvasWave(x, y, r) {
-      if (r < 400) {
-        this.HeaderCanvasController.clearCanvas();
-        this.HeaderCanvasController.makeConcentricCircles(x, y, r);
-        requestAnimationFrame(() =>
-          this.canvasWave(x, y, r * this.radiusDelta)
-        );
-      } else {
-        this.HeaderCanvasController.clearCanvas();
-      }
+      el.classList.add("link-animation");
     }
   }
 };
@@ -156,8 +81,7 @@ export default {
   display: flex;
   flex-direction: column;
 
-  padding: 1rem;
-  padding-right: 5rem;
+  padding: 0 5rem 1rem 1rem;
   transform: skewX(-25deg);
 }
 

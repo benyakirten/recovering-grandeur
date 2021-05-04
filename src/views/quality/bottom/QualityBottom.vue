@@ -33,7 +33,7 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapState } from "vuex";
 
 import { checkBreakpointActive, shuffleArray } from "@/utils/other";
 import { heading, paras } from "@/data/quality/qualityBottom";
@@ -48,8 +48,8 @@ export default {
     return { heading, paras, EVENT_NOT_CHANCE: 10 };
   },
   computed: {
-    ...mapGetters("breakpoint", ["breakpoint", "minimum"]),
-    ...mapGetters("settings", ["breakpointEnabled"]),
+    ...mapState("breakpoint", ["breakpoint", "minimum"]),
+    ...mapState("settings", ["breakpointEnabled"]),
     breakpointActive() {
       return checkBreakpointActive(
         this.breakpointEnabled,

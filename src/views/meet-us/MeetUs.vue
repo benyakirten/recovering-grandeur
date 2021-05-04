@@ -4,12 +4,12 @@
       <MeetUsTop />
     </template>
     <template #center>
-      <div :style="altStyle">
+      <div :style="sectionStyle">
         <MeetUsCenter />
       </div>
     </template>
     <template #bottom>
-      <div :style="altStyle">
+      <div :style="sectionStyle">
         <MeetUsBottom />
       </div>
     </template>
@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapState } from "vuex";
 
 import { checkBreakpointActive } from "@/utils/other";
 
@@ -38,8 +38,8 @@ export default {
     };
   },
   computed: {
-    ...mapGetters("breakpoint", ["breakpoint", "minimum"]),
-    ...mapGetters("settings", ["breakpointEnabled"]),
+    ...mapState("breakpoint", ["breakpoint", "minimum"]),
+    ...mapState("settings", ["breakpointEnabled"]),
     breakpointActive() {
       return checkBreakpointActive(
         this.breakpointEnabled,
@@ -48,7 +48,7 @@ export default {
         this.EVENT_NOT_CHANCE
       );
     },
-    altStyle() {
+    sectionStyle() {
       if (this.breakpointActive) {
         return {
           transform: "rotate(180deg)"

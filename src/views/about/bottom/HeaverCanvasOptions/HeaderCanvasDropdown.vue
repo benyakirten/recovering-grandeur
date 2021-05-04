@@ -44,7 +44,7 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from "vuex";
+import { mapActions, mapState } from "vuex";
 
 import headerCanvasToolbars from "@/data/about/headerCanvasToolbars";
 import ColorPicker from "@/components/inputs/ColorPicker";
@@ -72,13 +72,13 @@ export default {
     };
   },
   computed: {
-    ...mapGetters("headerCanvas", [
+    ...mapState("headerCanvas", [
       "startColor",
       "endColor",
       "radiusDelta",
       "numberOfCircles"
     ]),
-    ...mapGetters("settings", ["headerCanvasRandomizeColorsEnabled"])
+    ...mapState("settings", ["headerCanvasRandomizeColorsEnabled"])
   },
   methods: {
     ...mapActions("headerCanvas", [

@@ -17,7 +17,7 @@
     <base-foldout
       :enableContent="breakpointEnabled"
       name="breakpoint"
-      :showContent="whichDropdownIsOpen === 'breakpoint'"
+      :showContent="dropdownOpen === 'breakpoint'"
       @broadcast-click="toggleOpenDropdown"
     >
       <template #top> Breakpoint Options </template>
@@ -27,7 +27,7 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from "vuex";
+import { mapActions, mapState } from "vuex";
 
 import breakpointToolbars from "@/data/about/breakpointToolbars";
 import SlideCheckbox from "@/components/inputs/SlideCheckbox";
@@ -48,7 +48,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters("settings", ["breakpointEnabled", "whichDropdownIsOpen"])
+    ...mapState("settings", ["breakpointEnabled", "dropdownOpen"])
   },
   methods: {
     ...mapActions("settings", [

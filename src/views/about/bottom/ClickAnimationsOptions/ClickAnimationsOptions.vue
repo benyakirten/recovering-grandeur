@@ -17,7 +17,7 @@
     <base-foldout
       :enableContent="clickAnimationEnabled"
       name="clickAnimation"
-      :showContent="whichDropdownIsOpen === 'clickAnimation'"
+      :showContent="dropdownOpen === 'clickAnimation'"
       @broadcast-click="toggleOpenDropdown"
     >
       <template #top>Click Animation Settings</template>
@@ -27,7 +27,7 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from "vuex";
+import { mapActions, mapState } from "vuex";
 
 import clickAnimationToolbars from "@/data/about/clickAnimationToolbars";
 import SlideCheckbox from "@/components/inputs/SlideCheckbox";
@@ -48,7 +48,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters("settings", ["clickAnimationEnabled", "whichDropdownIsOpen"])
+    ...mapState("settings", ["clickAnimationEnabled", "dropdownOpen"])
   },
   methods: {
     ...mapActions("settings", [
@@ -58,7 +58,7 @@ export default {
     ]),
     toggleAnimation() {
       this.toggleClickAnimation();
-      if (this.whichDropdownIsOpen === "clickAnimation") {
+      if (this.dropdownOpen === "clickAnimation") {
         this.closeDropdowns();
       }
     }

@@ -1,9 +1,9 @@
 <template>
-  <table-display :items="plans" :id="getAnchorId"></table-display>
+  <table-display :items="plans" :id="anchorId"></table-display>
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapState } from "vuex";
 
 import { plans } from "@/data/pricing/centerTable";
 import TableDisplay from "@/components/table/TableDisplay";
@@ -17,7 +17,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters("links", ["getAnchorId"])
+    ...mapState("links", ["anchorId"])
   }
 };
 </script>

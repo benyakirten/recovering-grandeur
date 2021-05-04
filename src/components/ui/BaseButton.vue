@@ -1,5 +1,5 @@
 <template>
-  <button class="button" @click="getButtonAction">
+  <button class="button" @click="onClick">
     <slot>
       Call To Action!
     </slot>
@@ -7,10 +7,22 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapState } from "vuex";
 export default {
+  props: {
+    click: {
+      type: Function,
+      required: false,
+      default: null
+    }
+  },
   computed: {
-    ...mapGetters("links", ["getButtonAction"])
+    ...mapState("links", ["buttonAction"])
+  },
+  methods: {
+    onClick() {
+      this.click ? this.click() : this.buttonAction();
+    }
   }
 };
 </script>

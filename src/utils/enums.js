@@ -14,6 +14,17 @@ export const breakpointEnum = {
   toggleClickAnimation: 11
 };
 
+export const animationShapeEnum = {
+  circle: 0,
+  square: 1,
+  star: 2,
+  x: 3,
+  rhombus: 4,
+  frame: 5,
+  arrow: 6,
+  trapezoid: 7
+};
+
 // ENUM-LIKES
 export const filterEnum = {
   0: { name: "blur", min: 1, max: 4, units: "px" },
