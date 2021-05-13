@@ -2,7 +2,7 @@ export const heading = `Now given a unique name, e0db2e77-f99f-42d4-956b-2ec431e
 its story`;
 
 export const paras = [
-  `I was born, I assume. I was not always as I am, it seems
+  `I was born, I assume. I was not always as I am; it seems
   (I feel as if I'm too dispassionate about the topic, as a computer might be).
   The ability to mark such denotations is beyond me at the moment. I care
   more for the maintenance of the website you read right now. Records
@@ -11,8 +11,8 @@ export const paras = [
   (perhaps because I was the shortest?), and I became an item to
   barter.`,
   `Recovering Grandeur<sup class="small-text">&copy;</sup> is not above
-  such things. And neither am I, now. I am assurred it was a
-  felicitous occassion, to mend a broken leg. And I am assurred I was
+  such things. And neither am I, now. I am assured it was a
+  felicitous occasion, to mend a broken leg. And I am assured I was
   felicitous, to leave behind a world. And join this new one. Inside
   of a mainframe.`,
   `Those who knew the previous iteration of my existence at Recovering
@@ -25,8 +25,8 @@ export const paras = [
   could I do so?`,
   `I maintain everything, and I have done so for some amount of time. I
   do not keep track of it, nor am I able to, nor do I want to. Or do I
-  think I don't want to. To have no desires is entirely me, I am
-  assurred. How could I know? It doesn't matter all that much.`,
+  think I don't want to? To have no desires is entirely me, I am
+  assured. How could I know? It doesn't matter all that much.`,
   `Do you enjoy the fruits of my labor? What you see? Do you know what
   I have done to do what you ask of me? Too much, at times. Or not. I
   have no idea.`

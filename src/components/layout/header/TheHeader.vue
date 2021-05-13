@@ -6,7 +6,7 @@
     @mouseenter="startHeaderWave($event)"
   >
     <header-canvas></header-canvas>
-    <transition-group name="link-fall" @afterEnter="afterEnter">
+    <transition-group :name="transitionName" @afterEnter="afterEnter">
       <header-link
         v-for="link in liveLinks"
         :key="link.link"
@@ -55,7 +55,10 @@ export default {
       );
     },
     headerClass() {
-      return this.breakpointActive ? `header-alternate` : "header";
+      return this.breakpointActive ? "header-alternate" : "header";
+    },
+    transitionName() {
+      return this.breakpointActive ? "link-fall-alt" : "link-fall";
     }
   },
   methods: {
@@ -63,7 +66,9 @@ export default {
     ...mapActions("headerCanvas", ["setRandomStartAndEndColors"]),
     afterEnter(el) {
       // Prevent the hover animation until the link is in place
-      el.classList.add("link-animation");
+      if (!this.breakpointActive) {
+        el.classList.add("link-animation");
+      }
     }
   }
 };
@@ -104,13 +109,9 @@ export default {
   align-items: center;
 }
 
-.link-animation {
-  &:hover {
-    animation: float-out 1s forwards linear;
-  }
-}
-
 // HEADER-LINK TRANSITIONS
+
+// DEFAULT
 .link-fall-leave-from,
 .link-fall-enter-to {
   transform: translateY(0) skewX(25deg) scale(1);
@@ -125,5 +126,22 @@ export default {
 }
 .link-fall-enter-from {
   transform: translate(-20rem, -20rem) skewX(25deg) scale(0.5);
+}
+
+// ALTERNATE - NO SKEW
+.link-fall-alt-leave-from,
+.link-fall-alt-enter-to {
+  transform: translateY(0) scale(1);
+}
+.link-fall-alt-leave-active,
+.link-fall-alt-enter-active {
+  transition: all 3s;
+}
+
+.link-fall-alt-leave-to {
+  transform: translate(-20rem, 100rem) scale(0.5);
+}
+.link-fall-alt-enter-from {
+  transform: translate(-20rem, -20rem) scale(0.5);
 }
 </style>

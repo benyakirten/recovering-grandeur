@@ -19,9 +19,9 @@
   </color-picker>
   <range-slider
     :variable="radiusDelta"
-    min="1.01"
-    max="1.2"
-    step="0.01"
+    :min="1.01"
+    :max="1.2"
+    :step="0.01"
     @emit-number="setRadiusDelta"
   >
     Radius Delta
@@ -31,9 +31,9 @@
   </range-slider>
   <range-slider
     :variable="numberOfCircles"
-    min="1"
-    max="300"
-    step="1"
+    :min="1"
+    :max="300"
+    :step="1"
     @emit-number="setNumberOfCircles"
   >
     No. Concentric Circles

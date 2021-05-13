@@ -1,5 +1,5 @@
 <template>
-  <div class="background"></div>
+  <div class="background" @click="onDismiss"></div>
   <div class="modal">
     <slot></slot>
     <span class="modal__close" @click="onDismiss">&times;</span>

@@ -1,5 +1,5 @@
 import { getHexFromNamedColor, namedColorsAndHexes } from "@/utils/namedColors";
-import { getRandomItemFromObject } from "@/utils/other";
+import { getRandomValueFromObject } from "@/utils/other";
 
 export default {
   setNumberOfCircles(context, payload) {
@@ -15,11 +15,11 @@ export default {
     context.dispatch("setLocalStorageHeaderCanvas");
   },
   setRandomStartAndEndColors(context) {
-    const randomStartColor = getRandomItemFromObject(namedColorsAndHexes);
-    let randomEndColor = getRandomItemFromObject(namedColorsAndHexes);
+    const randomStartColor = getRandomValueFromObject(namedColorsAndHexes);
+    let randomEndColor = getRandomValueFromObject(namedColorsAndHexes);
     // Keep choosing until these are two different colors
     while (randomEndColor === randomStartColor) {
-      randomEndColor = getRandomItemFromObject(namedColorsAndHexes);
+      randomEndColor = getRandomValueFromObject(namedColorsAndHexes);
     }
     context.commit("changeStartColor", randomStartColor);
     context.commit("changeEndColor", randomEndColor);

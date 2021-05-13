@@ -36,6 +36,12 @@
   padding: 1rem;
 }
 
+.link-animation {
+  &:hover {
+    animation: float-out 1s forwards linear;
+  }
+}
+
 .checkbox {
   display: flex;
   align-items: flex-start;

@@ -1,5 +1,5 @@
 import { breakpointEnum } from "@/utils/enums";
-import { betweenMinAndMax, getRandomItemFromObject } from "@/utils/other";
+import { betweenMinAndMax, getRandomValueFromObject } from "@/utils/other";
 import { namedColorsAndHexes } from "@/utils/namedColors";
 
 export default {
@@ -87,7 +87,7 @@ export default {
     // Note: this dice throw can still fail if it's over the limit, but
     // the greater the breakpoint, the greater the probability of action
     if (Math.floor(Math.random() * breakpoint) > minimum) {
-      const randomAction = getRandomItemFromObject(breakpointEnum);
+      const randomAction = getRandomValueFromObject(breakpointEnum);
       switch (randomAction) {
         case breakpointEnum.changeHeaderColor:
           context.dispatch(
@@ -146,7 +146,7 @@ export default {
         case breakpointEnum.changeClickAnimationColor:
           context.dispatch(
             "clickAnimation/setAnimationColor",
-            getRandomItemFromObject(namedColorsAndHexes),
+            getRandomValueFromObject(namedColorsAndHexes),
             { root: true }
           );
           break;

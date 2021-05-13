@@ -1,9 +1,9 @@
 <template>
   <range-slider
     :variable="clickAnimationLength"
-    min="50"
-    max="2000"
-    step="10"
+    :min="50"
+    :max="2000"
+    :step="10"
     @emit-number="setAnimationLength"
   >
     Click Animation Length
@@ -13,9 +13,9 @@
   </range-slider>
   <range-slider
     :variable="clickAnimationLengthVariation"
-    min="0"
-    :max="clickAnimationLength.toString()"
-    step="10"
+    :min="0"
+    :max="clickAnimationLength"
+    :step="10"
     @emit-number="setAnimationLengthVariation"
   >
     Animation Variation
@@ -28,9 +28,9 @@
   </color-picker>
   <range-slider
     :variable="clickAnimationRadius"
-    min="1"
-    max="40"
-    step="1"
+    :min="1"
+    :max="40"
+    :step="1"
     @emit-number="setAnimationRadius"
   >
     Initial Radius:

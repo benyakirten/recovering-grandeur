@@ -13,7 +13,10 @@
 
 <script>
 import { mapActions, mapState, mapGetters } from "vuex";
+
 import { animationShapeEnum } from "@/utils/enums";
+import { checkBreakpointActive } from "@/utils/other";
+
 import TheModal from "@/components/layout/modal/TheModal";
 import TheHeader from "@/components/layout/header/TheHeader";
 import TheFooter from "@/components/layout/footer/TheFooter";
@@ -23,9 +26,19 @@ export default {
     TheHeader,
     TheFooter
   },
+  data() {
+    return {
+      chosenTransition: null,
+      x: 0,
+      y: 0,
+      interval: null,
+      EVENT_NOT_CHANCE: 50
+    };
+  },
   computed: {
     ...mapState("breakpoint", [
       "breakpoint",
+      "minimum",
       "breakpointMaximum",
       "makeClickWave"
     ]),
@@ -40,6 +53,14 @@ export default {
     body() {
       return document.body;
     },
+    breakpointActive() {
+      return checkBreakpointActive(
+        this.breakpointEnabled,
+        this.breakpoint,
+        this.minimum,
+        this.EVENT_NOT_CHANCE
+      );
+    },
     transitionMode() {
       if (this.chosenTransition && this.chosenTransition.includes("slide")) {
         return "";
@@ -47,14 +68,6 @@ export default {
         return "out-in";
       }
     }
-  },
-  data() {
-    return {
-      chosenTransition: null,
-      x: 0,
-      y: 0,
-      interval: null
-    };
   },
   methods: {
     ...mapActions("breakpoint", [
@@ -77,7 +90,7 @@ export default {
       clickAnimation.style.left = `${pageX}px`;
       clickAnimation.style.top = `${pageY}px`;
 
-      this.breakpointEnabled && this.breakpoint > 50
+      this.breakpointActive
         ? (clickAnimation.style.clipPath = this.getAnimationClipPath(shape))
         : (clickAnimation.style.borderRadius = "50%");
 
@@ -88,11 +101,7 @@ export default {
       clickAnimation.style.backgroundColor = this.clickAnimationColor;
       clickAnimation.style.animation = `click-flash-out-anim ${animationLength}ms forwards`;
 
-      if (
-        this.breakpointEnabled &&
-        this.breakpoint > 50 &&
-        Math.random() > 0.7
-      ) {
+      if (this.breakpointActive) {
         this.ghostActs();
       }
 

@@ -135,6 +135,7 @@ export default {
 .my-links {
   display: flex;
   flex-wrap: wrap;
+
   padding-bottom: 0;
 }
 .dark-text {

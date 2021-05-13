@@ -26,7 +26,8 @@ export default {
   props: {
     color: {
       type: String,
-      required: true
+      required: true,
+      validator: value => /^#(?:[0-9A-F]{3}|[0-9A-F]{6})$/i.test(value)
     }
   },
   computed: {

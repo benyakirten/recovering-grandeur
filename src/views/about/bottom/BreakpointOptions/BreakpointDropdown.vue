@@ -1,9 +1,9 @@
 <template>
   <range-slider
     :variable="breakpoint"
-    min="0"
-    :max="breakpointMaximum.toString()"
-    step="1"
+    :min="0"
+    :max="breakpointMaximum"
+    :step="1"
     @emit-number="setBreakpoint"
   >
     Breakpoint
@@ -13,9 +13,9 @@
   </range-slider>
   <range-slider
     :variable="breakpointMaximum"
-    min="100"
-    max="500"
-    step="5"
+    :min="100"
+    :max="500"
+    :step="5"
     @emit-number="setBreakpointMaximum"
   >
     Breakpoint Maximum
@@ -25,9 +25,9 @@
   </range-slider>
   <range-slider
     :variable="maxAdd"
-    min="0"
-    max="10"
-    step="1"
+    :min="0"
+    :max="10"
+    :step="1"
     @emit-number="setMaxAdd"
   >
     Max Increment
@@ -37,9 +37,9 @@
   </range-slider>
   <range-slider
     :variable="minimum"
-    min="0"
-    max="100"
-    step="1"
+    :min="0"
+    :max="100"
+    :step="1"
     @emit-number="setMinimum"
   >
     Minimum To Act

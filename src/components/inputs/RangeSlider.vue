@@ -4,23 +4,23 @@
       <slot></slot>
     </label>
     <input
-      type="text"
+      type="number"
       class="range-input__number-input"
-      @input="onRangeInput"
-      @keyup.enter="onRangeEnter"
-      :min="min"
-      :max="max"
-      :step="step"
+      @input="onNumberInput"
+      @keyup.enter="onNumberEnter"
+      :min="min.toString()"
+      :max="max.toString()"
+      :step="step.toString()"
       :value="variable"
     />
     <input
       type="range"
       class="range-input__range"
-      @input="onTextInput"
+      @input="onNumberInput"
       :name="randomId"
-      :min="min"
-      :max="max"
-      :step="step"
+      :min="min.toString()"
+      :max="max.toString()"
+      :step="step.toString()"
       :value="variable"
     />
   </div>
@@ -35,15 +35,15 @@ export default {
       required: true
     },
     min: {
-      type: String,
+      type: Number,
       required: true
     },
     max: {
-      type: String,
+      type: Number,
       required: true
     },
     step: {
-      type: String,
+      type: Number,
       required: true
     }
   },
@@ -53,19 +53,17 @@ export default {
     }
   },
   methods: {
-    onTextInput(e) {
-      this.$emit("emit-number", +e.target.value);
-    },
-    onRangeEnter(e) {
+    onNumberEnter(e) {
       e.target.blur();
-      this.onRangeInput(e);
+      this.onNumberInput(e);
     },
-    onRangeInput(e) {
+    onNumberInput(e) {
       const value = +e.target.value;
+      const mult = this.step < 1 ? 1 / this.step : 1;
       if (
-        +this.max >= value &&
-        value >= +this.min &&
-        value % +this.step === 0
+        this.max >= value &&
+        this.min <= value &&
+        (value * mult) % (this.step * mult) === 0
       ) {
         this.$emit("emit-number", value);
       }

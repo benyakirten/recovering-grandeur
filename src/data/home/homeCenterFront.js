@@ -3,12 +3,12 @@ export const paragraphs = [
   Grandeur<sup class="small-text">&copy;</sup> have given us at least
   a 9 out of 23.7 satisfaction score on their post-op compulsory
   evaluation.`,
-  `We know you have a lot of choice out there. But not all of them
-  offer free bodily replacement<sup class="small-text">1</sup> if
-  something goes wrong. It's a gaurantee you can count on<sup class="small-text">2</sup>,
+  `We know you have a lot of choices out there. But not all of them
+  offer a free bodily replacement<sup class="small-text">1</sup> if
+  something goes wrong. It's a guarantee you can count on<sup class="small-text">2</sup>,
   so our customers can have some peace (or a literal piece) of mind.`,
-  `UNHANDLED EXCEPTION: [Object object] between lines 355-49870:
-  default_overwrite(undefined);`,
+  `Exception Caught in runtime: Unable to truly express how much Recovering Grandeur
+  <sup class="small-text">&copy;</sup> cares for its customers.`,
   `We want to let you know that we take your health seriously<sup class="small-text">3</sup>.
   So seriously that our chief content aggregator algorithm wants to share a story with you.
   Click on the top-right arrow to see it.`,
@@ -20,6 +20,6 @@ export const paragraphs = [
   `<sup>3</sup>&nbsp;Customers are solely responsible for their health.`
 ];
 
-export const name = `88e87a27-4562-4f99-a8b4-0fa8f442e79b, CCAA and cout<<"Cool dude";`;
+export const name = `88e87a27-4562-4f99-a8b4-0fa8f442e79b, CCAA`;
 
 export const title = `Leg broken? Failing kidneys? Get the best bang for your buck!`;

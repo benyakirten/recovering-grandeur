@@ -22,7 +22,7 @@ export const popularPlan = {
 };
 export const luxuryPlan = {
   title: "Luxury Plan",
-  price: `PRICING_PLAN ("human" &rarr; true);`,
+  price: `PRICING_PLAN (being.human)`,
   subtitle: "Real, helpful service only costs an arm and a leg",
   list: [
     "Service with a smile",

@@ -9,7 +9,11 @@
 > yarn build / npm run build
 ### Run your unit tests
 > yarn test:unit / npm run test:unit
-> NOTE: Test development was halted as of beta distro 1 (April 24th) because the vue test utils were not letting me run createLocalVue so I couldn't test any component that used the router. Therefore, I stopped developing the tests until this could be resolved.
+> NOTE: Test coverage was severely limited because my version of @vue/test-utils was not able to use the createLocalVue function so any components that used the router/store could not be tested. Therefore, tests includes few Vue components and all the util functions and classes written in JavaScript. 
+> These were the only components that made sense to write test coverage for:
+> * General: HoverModal
+> * Inputs: ColorPicker, DragAndDropLists, RangeSlider, SlideCheckbox (NOTE: Testing drag and drop functionality isn't easy, so DropAndDropLists isn't tested extensively)
+> * UI: BaseFoldout
 
 ## What is this website?
 It is written to accompany my (at this point) upcoming book, A Brief Recovery. The website provides a cursory introduction to the story of the book, but its main emphasis is on its functionality: a 'ghost' that, based on certian criteria and random chance, changes the website.

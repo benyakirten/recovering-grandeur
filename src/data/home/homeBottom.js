@@ -1,9 +1,9 @@
 export const caption = `Boulder As Seen From Recovering Grandeur<sup class="small-text">&copy;</sup>`;
 
 export const names = [
-  `Surgeon.__init__(), Very Human`,
+  `Surgeon, Very Human`,
   `Anonymous Director, undefined Manager`,
-  `Custodian.__call__(), Spongiform`
+  `Custodian(), Spongiform`
 ];
 
 export const paragraphs = [

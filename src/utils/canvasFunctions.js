@@ -17,6 +17,9 @@ export const getAbsoluteCorners = canvas => {
 };
 export const getRelativeCorners = canvas => {
   // Get the corners of the canvas based on its dimensions
+  if (!canvas.width || !canvas.height) {
+    throw new TypeError("Canvas does not have a width and/or height");
+  }
   const { width, height } = canvas;
   return [
     { x: 0, y: 0 }, // Top left
@@ -40,6 +43,9 @@ export const getNearestCornerPosition = (canvas, x, y) => {
   return { x: corrected.x, y: corrected.y };
 };
 export const clearCanvas = canvas => {
+  if (typeof canvas.getContext !== "function") {
+    throw new TypeError("Canvas does not have a getContext method");
+  }
   if (canvas.getContext) {
     const ctx = canvas.getContext("2d");
     const { width, height } = getCanvasDimensions(canvas);

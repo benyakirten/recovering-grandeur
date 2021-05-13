@@ -95,7 +95,6 @@ export default {
     position: absolute;
     top: 0;
 
-    border-radius: 1rem;
     padding: 0.5rem;
     min-width: 25rem;
     z-index: 100;
@@ -103,7 +102,9 @@ export default {
     font-size: $font-size-small;
     box-shadow: $shadow-xs;
 
+    border-radius: 1rem;
     border: 3px solid $color-black;
+
     background-color: rgba($color-white, 1);
     transition: $transition-normal;
   }

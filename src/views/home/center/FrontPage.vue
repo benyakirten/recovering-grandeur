@@ -48,7 +48,7 @@ export default {
       title,
       paragraphs,
       name,
-      EVENT_NOT_CHANCE: 10
+      EVENT_NOT_CHANCE: 20
     };
   },
   computed: {
