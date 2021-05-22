@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <hover-image v-bind="hoverProps">
+    <hover-image v-bind="hoverProps" @click="emitClick">
       <slot name="caption"></slot>
     </hover-image>
     <div class="content">
@@ -41,6 +41,7 @@
 <script>
 import HoverImage from "@/components/general/HoverImage";
 export default {
+  emits: ["click"],
   props: {
     image: {
       type: String,
@@ -71,16 +72,26 @@ export default {
       type: String,
       required: false,
       default: () => "left"
+    },
+    cursor: {
+      type: String,
+      required: false,
+      default: () => "default"
     }
   },
   components: {
     HoverImage
   },
   data() {
-    const { image, alt, height, width, shape, float } = this;
+    const { image, alt, height, width, shape, float, cursor } = this;
     return {
-      hoverProps: { image, alt, height, width, shape, float }
+      hoverProps: { image, alt, height, width, shape, float, cursor }
     };
+  },
+  methods: {
+    emitClick() {
+      this.$emit("click");
+    }
   }
 };
 </script>

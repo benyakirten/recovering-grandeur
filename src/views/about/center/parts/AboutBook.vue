@@ -1,14 +1,35 @@
 <template>
+  <base-modal @dismiss="hidePopup" v-if="popupShown">
+    <div class="cover">
+      <div class="cover__info" v-html="pubInfo.coverDesignerInfo" />
+      <div class="cover__links">
+        <span
+          class="cover__links__link"
+          v-for="link in pubInfo.coverDesignerLinks"
+          :key="link.raw"
+        >
+          <a
+            class="link link--dark"
+            :href="link.raw"
+            target="_blank"
+            rel="noopener"
+          >
+            {{ link.title }}
+          </a>
+        </span>
+      </div>
+    </div>
+  </base-modal>
   <hover-image-and-text-column
     image="temp-cover"
     height="20rem"
     width="20rem"
+    cursor="pointer"
+    @click="showPopup"
     :alt="pubInfo.title"
   >
     <template #caption>
-      <a class="link" target="blank" :href="pubInfo.links[0].link"
-        >Find it on {{ pubInfo.links[0].name }}</a
-      >
+      <span class="link"> About the Cover </span>
     </template>
     <template #heading-1> About {{ pubInfo.title }} </template>
     <template #para-1>
@@ -21,14 +42,23 @@
         <li class="pub-info__item">
           <span>Available:&nbsp;</span>
           <span v-for="link in pubInfo.links" :key="link.name">
-            <a :href="link.link" target="blank" class="link link--dark"
+            <a
+              :href="link.link"
+              target="_blank"
+              rel="noopener"
+              class="link link--dark"
               >{{ link.name }}&nbsp;
             </a>
           </span>
         </li>
         <li class="pub-info__item">
           <span>Related Short Story:&nbsp;</span>
-          <a target="blank" :href="shortStory.link" class="link link--dark">
+          <a
+            target="_blank"
+            rel="noopener"
+            :href="shortStory.link"
+            class="link link--dark"
+          >
             {{ shortStory.title }}
           </a>
         </li>
@@ -46,13 +76,18 @@
 
 <script>
 import HoverImageAndTextColumn from "@/components/columns/HoverImageAndTextColumn";
+import BaseModal from "@/components/ui/BaseModal";
 import pubInfo from "@/data/about/pubInfo";
 export default {
   components: {
-    HoverImageAndTextColumn
+    HoverImageAndTextColumn,
+    BaseModal
   },
   data() {
-    return { pubInfo };
+    return {
+      pubInfo,
+      popupShown: false
+    };
   },
   computed: {
     shortStory() {
@@ -60,6 +95,14 @@ export default {
     },
     normalScreen() {
       return !window.matchMedia("only screen and (max-width: 37.5em)").matches;
+    }
+  },
+  methods: {
+    showPopup() {
+      this.popupShown = true;
+    },
+    hidePopup() {
+      this.popupShown = false;
     }
   }
 };
@@ -80,6 +123,24 @@ export default {
     &::before {
       content: "\27A4";
       margin-right: 1rem;
+    }
+  }
+}
+.cover {
+  padding: 3rem 1rem;
+  font-size: $font-size-large;
+  text-align: left;
+
+  &__info {
+    margin-left: 1rem;
+    margin-bottom: 2rem;
+  }
+  &__links {
+    &__link {
+      padding: 0 1rem;
+      &:not(:last-child) {
+        border-right: 1px solid rgba($color-black, 0.5);
+      }
     }
   }
 }

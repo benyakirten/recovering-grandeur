@@ -1,5 +1,5 @@
 <template>
-  <figure class="figure" :style="figureStyle">
+  <figure class="figure" :style="figureStyle" @click="emitClick">
     <img :src="imgSrc" :style="imgStyle" :alt="alt" class="figure__img" />
     <figcaption class="figure__caption" aria-hidden="true">
       <slot></slot>
@@ -9,6 +9,7 @@
 
 <script>
 export default {
+  emits: ["click"],
   props: {
     image: {
       type: String,
@@ -24,6 +25,11 @@ export default {
       type: String,
       required: false,
       default: () => "15rem"
+    },
+    cursor: {
+      type: String,
+      required: false,
+      default: () => "default"
     },
     width: {
       type: String,
@@ -93,11 +99,19 @@ export default {
           width: tabWidth,
           height: tabHeight,
           float,
+          cursor: this.cursor,
           ...marginDirection,
           ...this.imgShape
         };
       }
-      return { width, height, float, ...marginDirection, ...this.imgShape };
+      return {
+        width,
+        height,
+        float,
+        ...marginDirection,
+        ...this.imgShape,
+        cursor: this.cursor
+      };
     },
     imgStyle() {
       const { width, height, tabWidth, tabHeight } = this;
@@ -112,6 +126,11 @@ export default {
         };
       }
       return { width, height, ...this.imgShape };
+    }
+  },
+  methods: {
+    emitClick() {
+      this.$emit("click");
     }
   }
 };

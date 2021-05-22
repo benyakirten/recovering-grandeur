@@ -23,7 +23,7 @@ export default {
   top: 0;
   left: 0;
 
-  height: 100vh;
+  height: 200vh;
   width: 100vw;
   background: rgba($color-black, 0.8);
   z-index: 100;
@@ -35,7 +35,7 @@ export default {
   left: 50%;
   transform: translate(-50%, -5%);
 
-  height: 15%;
+  min-height: 15%;
   width: 60%;
   @include respond(phone) {
     height: 20%;

@@ -32,4 +32,8 @@ export default {
     padding: 2rem 0;
   }
 }
+.about-book {
+  position: relative;
+  overflow: hidden;
+}
 </style>

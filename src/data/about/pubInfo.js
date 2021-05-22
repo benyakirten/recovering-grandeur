@@ -3,29 +3,40 @@ export default {
     {
       link: "https://www.amazon.com",
       name: "Amazon"
-    },
-    {
-      link: "https://google.com",
-      name: "Google"
     }
   ],
   title: "Delusions of Form",
-  description: `The Recovering Grandeur website accompanies Delusions of Form, a book telling
-  the story of John Albuquerque and the recovery from his coma.
-  Between visions of cosmological abandonment and vague scenes from others' lives,
-  he starts to piece together who he is: a recently graduated high schooler who was
-  getting ready to move on with his life. But with no idea of who or what he is,
-  he has to make sense of what life means to and for him.`,
+  description: `The Recovering Grandeur website accompanies Delusions of Form:
+    The world has lost all sense, or John Albuquerque cannot find any sense to it.
+    Reality drops into the abyss as he crosses an endless desert.
+    A factory disassembles his memories as he investigates his unresolved feelings.
+    A house party ends with the disintegration of his body. But forget that.
+    He only cares about one thing: that he exists. Well, he can’t say that with certainty.
+    The cosmos has abandoned him, and likewise, any way to know the truth is long gone, much less if such a concept exists.
+    Inspired by the author’s experiences in a coma, follow John Albuquerque on the many paths of a mind in decline.`,
   publishDate: "May 1st, 2021",
   shortStory: {
     title: "The Human Error",
     link: "https://benyakiredits.com"
   },
   miscInfo: `Set in the same universe and city as The Human Automata, Delusions of Form
-  can be understood without reading any other book. It is loosely based on my own
-  experience in a coma. Upon the end of my own experience, I long contemplated
-  how I would articulate what happened to me. Delusions of Form attempts to capture the feeling,
-  rather than the truth of the situation.`,
+    can be understood without reading any other book. It is loosely based on my own
+    experience in a coma. Upon the end of my own experience, I long contemplated
+    how I would articulate what happened to me. Delusions of Form attempts to capture the feeling,
+    rather than the truth of the situation.`,
   miscInfoExtra: `Click on the arrow in the top right to read an exegesis of how
-  this website accompanies the book.`
+    this website accompanies the book.`,
+  coverDesignerInfo: `Cover designed by Mais Ahmad. As soon as I saw what Mais produced,
+    I knew it captured exactly what I aimed to write.
+    If you are interested in seeing more of Mais&rsquo; work, please visit her websites:`,
+  coverDesignerLinks: [
+    {
+      raw: "https://www.behance.net/themaisahmad",
+      title: "Behance"
+    },
+    {
+      raw: "https://www.instagram.com/themaisahmad/",
+      title: "Instagram"
+    }
+  ]
 };
