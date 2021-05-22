@@ -38,7 +38,7 @@ export default {
   min-height: 15%;
   width: 60%;
   @include respond(phone) {
-    height: 20%;
+    min-height: 20%;
     width: 80%;
   }
 

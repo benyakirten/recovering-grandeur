@@ -18,6 +18,10 @@
   }
 }
 
+.bold {
+  font-weight: bold;
+}
+
 .big-tab-text {
   @include respond(tab-land) {
     font-size: $font-size-medium;
@@ -39,6 +43,9 @@
 .link-animation {
   &:hover {
     animation: float-out 1s forwards linear;
+    @include respond(no-hover) {
+      animation: none;
+    }
   }
 }
 

@@ -32,6 +32,11 @@ export default {
       type: Number,
       required: false,
       default: () => null
+    },
+    disableBreakpoint: {
+      type: Boolean,
+      required: false,
+      default: () => false
     }
   },
   data() {
@@ -43,12 +48,15 @@ export default {
     ...mapState("breakpoint", ["breakpoint", "minimum"]),
     ...mapState("settings", ["breakpointEnabled"]),
     breakpointActive() {
-      return checkBreakpointActive(
-        this.breakpointEnabled,
-        this.breakpoint,
-        this.minimum,
-        this.EVENT_NOT_CHANCE
-      );
+      if (!this.disableBreakpoint) {
+        return checkBreakpointActive(
+          this.breakpointEnabled,
+          this.breakpoint,
+          this.minimum,
+          this.EVENT_NOT_CHANCE
+        );
+      }
+      return false;
     },
     imgStyle() {
       const _imgPath = this.image.match(/\.\w+$/)

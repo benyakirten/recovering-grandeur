@@ -88,7 +88,7 @@ export default {
       font-size: $font-size-xl;
     }
     border: 1px solid $color-black;
-    border-radius: 50%;
+    border-radius: $border-radius-circle;
   }
 
   &__modal {
@@ -102,7 +102,7 @@ export default {
     font-size: $font-size-small;
     box-shadow: $shadow-xs;
 
-    border-radius: 1rem;
+    border-radius: $border-radius-corners;
     border: 3px solid $color-black;
 
     background-color: rgba($color-white, 1);

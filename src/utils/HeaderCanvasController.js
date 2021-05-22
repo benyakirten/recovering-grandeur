@@ -42,9 +42,11 @@ export default class HeaderCanvasController {
     if (this.canvas.getContext) {
       const ctx = this.canvas.getContext("2d");
       // I have no idea why this doesn't work if the height is less than 190
+      // The width is * 1.05 because on small screens, there can be a small
+      // amount left over. This ways it clears no matter what
       this.height < 190
-        ? ctx.clearRect(0, 0, this.width, 190)
-        : ctx.clearRect(0, 0, this.width, this.height);
+        ? ctx.clearRect(0, 0, this.width * 1.05, 190)
+        : ctx.clearRect(0, 0, this.width * 1.05, this.height);
     }
   }
 }

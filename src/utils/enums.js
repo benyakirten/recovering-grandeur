@@ -28,7 +28,7 @@ export const animationShapeEnum = {
 // ENUM-LIKES
 export const filterEnum = {
   0: { name: "blur", min: 1, max: 4, units: "px" },
-  1: { name: "brightness", min: 50, max: 200, units: "%" },
+  1: { name: "brightness", min: 50, max: 110, units: "%" },
   2: { name: "contrast", min: 50, max: 200, units: "%" },
   3: { name: "hue-rotate", min: 15, max: 345, units: "deg" },
   4: { name: "invert", min: 5, max: 100, units: "%" },

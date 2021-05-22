@@ -1,23 +1,34 @@
 <template>
   <base-modal @dismiss="hidePopup" v-if="popupShown">
     <div class="cover">
-      <div class="cover__info" v-html="pubInfo.coverDesignerInfo" />
-      <div class="cover__links">
-        <span
-          class="cover__links__link"
-          v-for="link in pubInfo.coverDesignerLinks"
-          :key="link.raw"
-        >
-          <a
-            class="link link--dark"
-            :href="link.raw"
-            target="_blank"
-            rel="noopener"
+      <article class="cover__left">
+        <figure class="cover__figure">
+          <img class="cover__figure__img" :src="coverImage" />
+          <figcaption class="cover__figure__caption">
+            <div class="bold">Delusions of Form</div>
+            <div>Mais Ahmad</div>
+          </figcaption>
+        </figure>
+      </article>
+      <article class="cover__right">
+        <div class="cover__info" v-html="pubInfo.coverDesignerInfo" />
+        <div class="cover__links">
+          <span
+            class="cover__links__link"
+            v-for="link in pubInfo.coverDesignerLinks"
+            :key="link.raw"
           >
-            {{ link.title }}
-          </a>
-        </span>
-      </div>
+            <a
+              class="link link--dark"
+              :href="link.raw"
+              target="_blank"
+              rel="noopener"
+            >
+              {{ link.title }}
+            </a>
+          </span>
+        </div>
+      </article>
     </div>
   </base-modal>
   <hover-image-and-text-column
@@ -95,6 +106,9 @@ export default {
     },
     normalScreen() {
       return !window.matchMedia("only screen and (max-width: 37.5em)").matches;
+    },
+    coverImage() {
+      return require("@/assets/temp-cover.svg");
     }
   },
   methods: {
@@ -110,8 +124,11 @@ export default {
 
 <style lang="scss" scoped>
 .link {
+  cursor: pointer;
+
   color: $color-white;
   text-decoration: none;
+  letter-spacing: 0;
 
   &--dark {
     color: $color-alt-primary-dark;
@@ -127,9 +144,60 @@ export default {
   }
 }
 .cover {
-  padding: 3rem 1rem;
-  font-size: $font-size-large;
-  text-align: left;
+  display: flex;
+  margin-top: 2rem;
+
+  &__figure {
+    &__img {
+      height: 40rem;
+      border-radius: $border-radius-small;
+      box-shadow: $shadow-small;
+
+      transition: $transition-normal;
+      transform-origin: top left;
+
+      @include respond(tab-port) {
+        height: 25rem;
+      }
+
+      &:hover {
+        transform: scale(1.5);
+      }
+    }
+    &__caption {
+      margin: 2rem 0;
+      padding: 1rem;
+
+      font-size: $font-size-medium;
+      text-align: center;
+
+      border: 2px solid $color-alt-secondary;
+      box-shadow: $shadow-small;
+      border-radius: $border-radius-standard;
+    }
+  }
+  &__left {
+    width: 100%;
+    height: 100%;
+  }
+  &__right {
+    margin-left: 2rem;
+    padding: 3rem 1rem;
+
+    font-size: $font-size-large;
+
+    @include respond(tab-port) {
+      font-size: $font-size-medium;
+    }
+
+    @include respond(phone) {
+      margin-left: 1rem;
+      font-size: $font-size-large;
+    }
+
+    letter-spacing: 1px;
+    text-align: left;
+  }
 
   &__info {
     margin-left: 1rem;
