@@ -9,7 +9,7 @@
 > yarn build / npm run build
 ### Run your unit tests
 > yarn test:unit / npm run test:unit
-> NOTE: Test coverage was severely limited because my version of @vue/test-utils was not able to use the createLocalVue function so any components that used the router/store could not be tested. Therefore, tests includes few Vue components and all the util functions and classes written in JavaScript. 
+> NOTE: Test coverage was severely limited because my version of @vue/test-utils was not able to use the createLocalVue function. Therefore, any components that used the router/store could not be tested. Tests include only a few Vue components and but all the util functions and classes written in JavaScript.
 > These were the only components that made sense to write test coverage for:
 > * General: HoverModal
 > * Inputs: ColorPicker, DragAndDropLists, RangeSlider, SlideCheckbox (NOTE: Testing drag and drop functionality isn't easy, so DropAndDropLists isn't tested extensively)
@@ -36,4 +36,4 @@ Inside of the source folder, the folders are the folowing:
 5. scss - functions, mixins and variables accessible to every file (c.f. vue.config.js). Note: if any styles are defined outside of functions/mixins/variables, they'll be prepended to EVERY component, so only include scss items that are only included on demand.
 6. styles - Animations, base and global styles and scene transitions for router views are imported into app.scss, which is imported into App.vue (the src for the style section).
 7. utils - various functions that can are either used multiple times in components or to simplify component logic (notably the header with its color changes)
-8. views - stateful components that the routes lead to. They are composed of the components. Each uses BaseLayout for its design and a BaseBackground with a HeroText as the the first item viewed.
+8. views - stateful components that the routes lead to, composed of the non-stateful components. Each uses BaseLayout for its design and a BaseBackground with a HeroText as the the first item viewed.

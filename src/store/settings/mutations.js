@@ -25,5 +25,8 @@ export default {
   },
   setDropdown(state, payload) {
     state.dropdownOpen = payload;
+  },
+  setScrollY(state, payload) {
+    state.scrollY = payload;
   }
 };

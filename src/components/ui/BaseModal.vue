@@ -1,18 +1,37 @@
 <template>
-  <div class="background" @click="onDismiss"></div>
-  <div class="modal">
-    <slot></slot>
-    <span class="modal__close" @click="onDismiss">&times;</span>
-  </div>
+  <teleport to="#modal-teleport">
+    <div
+      class="background"
+      @click="onDismiss"
+      :style="{ top: `${scrollY - 50}px` }"
+    />
+    <div class="modal" :style="{ top: `${scrollY + 100}px` }">
+      <slot></slot>
+      <span class="modal__close" @click="onDismiss">&times;</span>
+    </div>
+  </teleport>
 </template>
 
 <script>
+import { mapState } from "vuex";
 export default {
   emits: ["dismiss"],
+  computed: {
+    ...mapState("settings", ["scrollY"]),
+    body() {
+      return document.body;
+    }
+  },
   methods: {
     onDismiss() {
       this.$emit("dismiss");
     }
+  },
+  mounted() {
+    this.body.style.overflow = "hidden";
+  },
+  unmounted() {
+    this.body.style.overflow = "visible";
   }
 };
 </script>
@@ -31,7 +50,7 @@ export default {
 }
 .modal {
   position: absolute;
-  top: 5%;
+  // top: 5%;
   left: 50%;
   transform: translate(-50%, -5%);
 

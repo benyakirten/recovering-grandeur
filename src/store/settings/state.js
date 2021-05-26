@@ -3,5 +3,6 @@ export default {
   clickAnimationEnabled: true,
   headerCanvasEnabled: true,
   headerCanvasRandomizeColorsEnabled: true,
-  dropdownOpen: null
+  dropdownOpen: null,
+  scrollY: 0
 };

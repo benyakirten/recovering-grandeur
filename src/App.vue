@@ -1,6 +1,7 @@
 <template>
   <TheModal />
   <TheHeader />
+  <div id="modal-teleport" />
   <main class="main">
     <router-view v-slot="slotProps">
       <transition :name="getRandomTransition()" :mode="transitionMode">
@@ -12,7 +13,7 @@
 </template>
 
 <script>
-import { mapActions, mapState, mapGetters } from "vuex";
+import { mapActions, mapState, mapGetters, mapMutations } from "vuex";
 
 import { animationShapeEnum } from "@/utils/enums";
 import { checkBreakpointActive } from "@/utils/other";
@@ -48,7 +49,11 @@ export default {
       "clickAnimationColor",
       "clickAnimationRadius"
     ]),
-    ...mapState("settings", ["clickAnimationEnabled", "breakpointEnabled"]),
+    ...mapState("settings", [
+      "clickAnimationEnabled",
+      "breakpointEnabled",
+      "scrollY"
+    ]),
     ...mapGetters("links", ["getEnabledTransitions"]),
     body() {
       return document.body;
@@ -77,6 +82,7 @@ export default {
     ]),
     ...mapActions("links", ["enlivenLinks"]),
     ...mapActions("settings", ["loadAllSettings"]),
+    ...mapMutations("settings", ["setScrollY"]),
     flashFromClick({ pageX, pageY }) {
       if (!this.clickAnimationEnabled) {
         return;
@@ -151,9 +157,18 @@ export default {
       this.x = pageX;
       this.y = pageY;
     },
+    setScrollHeight() {
+      this.setScrollY(window.scrollY);
+    },
     initEventListeners() {
       this.body.addEventListener("click", this.flashFromClick);
       this.body.addEventListener("mousemove", this.setMouseCoordinates);
+      window.addEventListener("scroll", this.setScrollHeight);
+    },
+    endEventListeners() {
+      this.body.removeEventListener("click", this.flashFromClick);
+      this.body.removeEventListener("mousemove", this.setMouseCoordinates);
+      window.removeEventListener("scroll", this.setScrollHeight);
     },
     initInterval() {
       this.interval = setInterval(() => {
@@ -190,10 +205,11 @@ export default {
     this.initInterval();
     this.initLoadSettings();
   },
-  destroy() {
+  unmounted() {
     if (this.interval) {
       window.clearInterval(this.interval);
     }
+    this.endEventListeners();
   }
 };
 </script>

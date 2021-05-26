@@ -46,20 +46,9 @@ export default {
   },
   computed: {
     ...mapState("breakpoint", ["breakpoint", "breakpointMaximum"]),
-    ...mapState("settings", ["breakpointEnabled"]),
-    body() {
-      return document.querySelector("body");
-    }
+    ...mapState("settings", ["breakpointEnabled"])
   },
   watch: {
-    showModal(val) {
-      if (val) {
-        window.scrollTo(0, 0);
-        this.body.style.overflow = "hidden";
-      } else {
-        this.body.style.overflow = "visible";
-      }
-    },
     breakpoint(val) {
       this.showModal =
         this.breakpointEnabled && val === this.breakpointMaximum ? true : false;
