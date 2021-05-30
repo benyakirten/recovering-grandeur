@@ -1,5 +1,9 @@
 import { breakpointEnum } from "@/utils/enums";
-import { betweenMinAndMax, getRandomValueFromObject } from "@/utils/other";
+import {
+  betweenMinAndMax,
+  getRandomValueFromObject,
+  shuffleSmallArray
+} from "@/utils/other";
 import { namedColorsAndHexes } from "@/utils/namedColors";
 
 export default {
@@ -78,12 +82,16 @@ export default {
     context.dispatch("setLocalStorageBreakpoint");
   },
   ghostActs(context) {
-    if (!context.rootGetters["settings/breakpointEnabled"]) {
+    if (!context.rootState.settings.breakpointEnabled) {
       return;
     }
     const { breakpoint, minimum } = context.state;
     let interval;
     let rep = 0;
+    let links;
+    let about;
+    let otherLink;
+    let hiddenLink;
     // Note: this dice throw can still fail if it's over the limit, but
     // the greater the breakpoint, the greater the probability of action
     if (Math.floor(Math.random() * breakpoint) > minimum) {
@@ -137,9 +145,9 @@ export default {
           context.dispatch(
             "clickAnimation/setAnimationLengthVariation",
             // eslint-disable-next-line
-            Math.floor(Math.random() * context.rootGetters["clickAnimation/clickAnimationLength"] * 3 / 4) +
+            Math.floor(Math.random() * context.rootState.clickAnimation.clickAnimationLength * 3 / 4) +
               // eslint-disable-next-line
-              Math.floor(context.rootGetters["clickAnimation/clickAnimationLength"] / 4),
+              Math.floor(context.rootState.clickAnimation.clickAnimationLength / 4),
             { root: true }
           );
           break;
@@ -183,15 +191,11 @@ export default {
           break;
         case breakpointEnum.toggleHeaderCanvas:
           context.dispatch("settings/toggleHeaderCanvas", null, { root: true });
-          if (Math.floor(Math.random() * breakpoint) < 25) {
-            setTimeout(
-              () =>
-                context.dispatch("settings/toggleHeaderCanvas", null, {
-                  root: true
-                }),
-              Math.floor(Math.random() * breakpoint) * 500
-            );
-          }
+          setTimeout(() => {
+            context.dispatch("settings/toggleHeaderCanvas", null, {
+              root: true
+            });
+          }, Math.floor(Math.random() * breakpoint) * 2 + 500);
           break;
         case breakpointEnum.toggleHeaderCanvasColorRandomization:
           context.dispatch(
@@ -199,35 +203,50 @@ export default {
             null,
             { root: true }
           );
-          if (Math.floor(Math.random() * breakpoint) < 25) {
-            setTimeout(
-              () =>
-                context.dispatch(
-                  "settings/toggleHeaderCanvasColorRandomization",
-                  null,
-                  { root: true }
-                ),
-              Math.floor(
-                Math.random() * context.rootGetters["breakpoint/breakpoint"]
-              ) * 500
+          setTimeout(() => {
+            context.dispatch(
+              "settings/toggleHeaderCanvasColorRandomization",
+              null,
+              { root: true }
             );
-          }
+          }, Math.floor(Math.random() * breakpoint) * 2 + 500);
           break;
         case breakpointEnum.toggleClickAnimation:
           context.dispatch("settings/toggleClickAnimation", null, {
             root: true
           });
-          if (Math.floor(Math.random() * breakpoint) < 25) {
-            setTimeout(
-              () =>
-                context.dispatch("settings/toggleClickAnimation", null, {
-                  root: true
-                }),
-              Math.floor(
-                Math.random() * context.rootGetters["breakpoint/breakpoint"]
-              ) * 500
-            );
-          }
+          setTimeout(() => {
+            context.dispatch("settings/toggleClickAnimation", null, {
+              root: true
+            });
+          }, Math.floor(Math.random() * breakpoint) * 2 + 500);
+          break;
+        case breakpointEnum.shuffleLinks:
+          links = context.rootState.links.links;
+          about = links.pop();
+          // Remove the about link - it needs to always be there
+          shuffleSmallArray(links);
+          // Shuffle the rest
+          context.commit("links/setEnabledLinks", [...links, about], {
+            root: true
+          });
+          // Add the about link again
+          break;
+        case breakpointEnum.toggleGamesLink:
+          links = context.rootState.links.links;
+          about = links.pop();
+          // Remove the about link
+          hiddenLink = context.rootState.links.hiddenLink;
+          [otherLink] = links.splice(0, 1);
+          // Get the hidden link, then remove the first link
+          links.unshift(hiddenLink);
+          // Add the hidden link in the place of the first link
+          context.commit("links/setEnabledLinks", [...links, about], {
+            root: true
+          });
+          // Set the links
+          context.commit("links/setHiddenLink", otherLink, { root: true });
+          // Store the hidden link for later
           break;
         default:
           console.log("How did you get here?");

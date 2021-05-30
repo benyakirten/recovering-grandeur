@@ -15,17 +15,25 @@ export default {
     additionalClass: {
       type: String,
       required: false,
-      default: () => ""
+      default: ""
     },
     phoneHeight: {
       type: String,
       required: false,
-      default: () => "105rem"
+      default: "105rem",
+      validator: value =>
+        /(^auto$|^initial$|^inherit$|^0$)|(^((0\.)?\d+|\d+\.\d+)(rem|em|ex|ch|%|vw|vh|vmin|vmax|cm|mm|in|px|pt|pt|pc))$/i.test(
+          value
+        )
     },
     tabHeight: {
       type: String,
       required: false,
-      default: () => "85rem"
+      default: "85rem",
+      validator: value =>
+        /(^auto$|^initial$|^inherit$|^0$)|(^((0\.)?\d+|\d+\.\d+)(rem|em|ex|ch|%|vw|vh|vmin|vmax|cm|mm|in|px|pt|pt|pc))$/i.test(
+          value
+        )
     }
   },
   computed: {

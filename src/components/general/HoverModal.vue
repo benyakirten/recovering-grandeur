@@ -27,17 +27,31 @@ export default {
     iconColor: {
       type: String,
       required: false,
-      default: () => "#b28451"
+      default: "#b28451",
+      validator: value =>
+        /^rgba\([\d]{1,3},\s?[\d]{1,3},\s?[\d]{1,3},\s?(0?\.)?[\d]{1,2}\)$|^#(?:[0-9A-F]{3}|[0-9A-F]{6})$/i.test(
+          value
+        )
     },
     leftMargin: {
       type: String,
       required: false,
-      default: () => "0.5rem"
+      default: "0.5rem",
+      validator: value =>
+        /(^auto$|^initial$|^inherit$|^0$)|(^((0\.)?\d+|\d+\.\d+)(rem|em|ex|ch|%|vw|vh|vmin|vmax|cm|mm|in|px|pt|pt|pc))$/i.test(
+          value
+        )
     },
     direction: {
       type: String,
       required: false,
-      default: () => "left"
+      default: "left",
+      validator: value => /left|right/.test(value)
+    },
+    tinyArea: {
+      type: Boolean,
+      required: false,
+      default: false
     }
   },
   data() {
@@ -55,6 +69,9 @@ export default {
     },
     modalDirection() {
       if (window.matchMedia("only screen and (max-width: 37.5em)").matches) {
+        if (this.tinyArea) {
+          return { left: "1rem" };
+        }
         return { right: "2rem" };
       }
       return this.direction === "left" ? { left: "4rem" } : { right: "1rem" };

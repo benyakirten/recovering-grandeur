@@ -50,14 +50,11 @@ export default {
 }
 .modal {
   position: absolute;
-  // top: 5%;
   left: 50%;
   transform: translate(-50%, -5%);
 
-  min-height: 15%;
   width: 60%;
   @include respond(phone) {
-    min-height: 20%;
     width: 80%;
   }
 

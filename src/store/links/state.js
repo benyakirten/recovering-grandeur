@@ -6,6 +6,7 @@ export default {
     { link: "/meet-us", name: "Meet Us", live: true },
     { link: "/about", name: "About & Settings", live: true }
   ],
+  hiddenLink: { link: "/games", name: "Games", live: true },
   buttonAction: null,
   anchorId: null,
   transitions: [

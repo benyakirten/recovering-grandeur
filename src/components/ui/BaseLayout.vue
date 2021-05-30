@@ -18,17 +18,29 @@ export default {
     topHeight: {
       type: String,
       required: false,
-      default: () => "90rem"
+      default: "90rem",
+      validator: value =>
+        /(^auto$|^initial$|^inherit$|^0$)|(^((0\.)?\d+|\d+\.\d+)(rem|em|ex|ch|%|vw|vh|vmin|vmax|cm|mm|in|px|pt|pt|pc))$/.test(
+          value
+        )
     },
     centerHeight: {
       type: String,
       required: false,
-      default: () => "90rem"
+      default: "90rem",
+      validator: value =>
+        /(^auto$|^initial$|^inherit$|^0$)|(^((0\.)?\d+|\d+\.\d+)(rem|em|ex|ch|%|vw|vh|vmin|vmax|cm|mm|in|px|pt|pt|pc))$/.test(
+          value
+        )
     },
     bottomHeight: {
       type: String,
       required: false,
-      default: () => "80rem"
+      default: "80rem",
+      validator: value =>
+        /(^auto$|^initial$|^inherit$|^0$)|(^((0\.)?\d+|\d+\.\d+)(rem|em|ex|ch|%|vw|vh|vmin|vmax|cm|mm|in|px|pt|pt|pc))$/.test(
+          value
+        )
     }
   },
   methods: {

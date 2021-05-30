@@ -23,7 +23,11 @@ export default {
     height: {
       type: String,
       required: false,
-      default: () => "100vh"
+      default: () => "100vh",
+      validator: value =>
+        /(^auto$|^initial$|^inherit$|^0$)|^((0\.)?\d+|\d+\.\d+)(rem|em|ex|ch|%|vw|vh|vmin|vmax|cm|mm|in|px|pt|pt|pc)$/.test(
+          value
+        )
     }
   },
   data() {

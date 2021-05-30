@@ -40,6 +40,24 @@
   padding: 1rem;
 }
 
+.margin-bottom-s {
+  margin-bottom: 1rem;
+}
+
+.center-text {
+  text-align: center;
+}
+
+.center-item {
+  margin: 0 auto;
+}
+
+.center-vertical-items {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .link-animation {
   &:hover {
     animation: float-out 1s forwards linear;

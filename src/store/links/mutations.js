@@ -24,5 +24,8 @@ export default {
   },
   setEnabledLinks(state, payload) {
     state.links = payload;
+  },
+  setHiddenLink(state, payload) {
+    state.hiddenLink = payload;
   }
 };

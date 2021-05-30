@@ -25,7 +25,7 @@ export default {
     shadow: {
       type: String,
       required: false,
-      default: () => ""
+      default: ""
     }
   },
   computed: {

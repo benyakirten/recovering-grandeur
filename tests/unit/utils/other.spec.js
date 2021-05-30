@@ -4,7 +4,7 @@ import {
     getRandomItemFromArray,
     getRandomValueFromObject,
     getRandomKeyFromObject,
-    shuffleArray
+    shuffleSmallArray
 } from "../../../src/utils/other";
 
 describe("other", () => {
@@ -155,7 +155,7 @@ describe("other", () => {
         expect(() => getRandomKeyFromObject({})).toThrow(Error);
     });
 
-    it("shuffleArray makes two arrays, equal prior, unequal after invocation on one array", () => {
+    it("shuffleSmallArray makes two arrays, equal prior, unequal after invocation on one array", () => {
         const firstArray = [1, 2, 3, 4];
         const secondArray = [1, 2, 3, 4];
 
@@ -170,7 +170,7 @@ describe("other", () => {
             if (!firstArray.every((val, idx) => val === secondArray[idx])) {
                 break;
             }
-            shuffleArray(firstArray);
+            shuffleSmallArray(firstArray);
         }
         expect(firstArray).not.toEqual(secondArray);
     });

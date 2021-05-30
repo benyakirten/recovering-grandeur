@@ -5,6 +5,9 @@ export default {
   deadLinks({ links }) {
     return links.filter(l => !l.live);
   },
+  getActiveLinks({ links }) {
+    return links;
+  },
   getEnabledTransitions({ transitions }) {
     return transitions.filter(t => !!t.enabled).map(t => t.name);
   },

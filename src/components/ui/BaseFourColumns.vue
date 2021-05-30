@@ -43,42 +43,58 @@ export default {
     containerWidth: {
       type: String,
       required: false,
-      default: () => "100%"
+      default: "100%",
+      validator: value =>
+        /(^auto$|^initial$|^inherit$|^0$)|(^((0\.)?\d+|\d+\.\d+)(rem|em|ex|ch|%|vw|vh|vmin|vmax|cm|mm|in|px|pt|pt|pc))$/.test(
+          value
+        )
     },
     sectionWidth: {
       type: String,
       required: false,
-      default: () => "25%"
+      default: "25%",
+      validator: value =>
+        /(^auto$|^initial$|^inherit$|^0$)|(^((0\.)?\d+|\d+\.\d+)(rem|em|ex|ch|%|vw|vh|vmin|vmax|cm|mm|in|px|pt|pt|pc))$/.test(
+          value
+        )
     },
     paddingVertical: {
       type: String,
       required: false,
-      default: () => "0"
+      default: "0",
+      validator: value =>
+        /(^auto$|^initial$|^inherit$|^0$)|(^((0\.)?\d+|\d+\.\d+)(rem|em|ex|ch|%|vw|vh|vmin|vmax|cm|mm|in|px|pt|pt|pc))$/.test(
+          value
+        )
     },
     paddingHorizontal: {
       type: String,
       required: false,
-      default: () => "0"
+      default: "0",
+      validator: value =>
+        /(^auto$|^initial$|^inherit$|^0$)|(^((0\.)?\d+|\d+\.\d+)(rem|em|ex|ch|%|vw|vh|vmin|vmax|cm|mm|in|px|pt|pt|pc))$/.test(
+          value
+        )
     },
     boxShadow: {
       type: String,
       required: false,
-      default: () => "none"
+      default: "none"
     },
     normalBorder: {
       type: String,
       required: false,
-      default: () => "none"
+      default: "none"
     },
     highlightedBorder: {
       type: String,
       required: false,
-      default: () => "none"
+      default: "none"
     },
     childBoxShadow: {
       type: String,
       required: false,
-      default: () => "none"
+      default: "none"
     }
   },
   data() {

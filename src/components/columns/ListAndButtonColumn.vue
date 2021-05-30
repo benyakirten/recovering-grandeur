@@ -44,7 +44,7 @@ export default {
     subtitle: {
       type: String,
       required: false,
-      default: () => ""
+      default: ""
     },
     list: {
       type: Array,
@@ -53,7 +53,7 @@ export default {
     buttonCaption: {
       type: String,
       required: false,
-      default: () => "Learn More"
+      default: "Learn More"
     },
     buttonAction: {
       type: Function,

@@ -35,7 +35,7 @@
 <script>
 import { mapState } from "vuex";
 
-import { checkBreakpointActive, shuffleArray } from "@/utils/other";
+import { checkBreakpointActive, shuffleSmallArray } from "@/utils/other";
 import { paras } from "@/data/meet-us/meetUsCenter";
 
 import BaseCaption from "@/components/ui/BaseCaption";
@@ -66,7 +66,7 @@ export default {
   },
   mounted() {
     if (this.breakpointActive) {
-      shuffleArray(this.paras);
+      shuffleSmallArray(this.paras);
     }
   }
 };

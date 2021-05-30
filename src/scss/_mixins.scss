@@ -83,6 +83,19 @@
     }
 }
 
+@mixin clarify-on-hover {
+    opacity: 0.8;
+    transition: $transition-normal;
+
+    &:hover {
+        opacity: 1;
+    }
+
+    @include respond(no-hover) {
+        opacity: 1;
+    }
+}
+
 @mixin respond($breakpoint) {
     @if $breakpoint == phone {
         @media only screen and (max-width: 37.5em) { @content } // 600px

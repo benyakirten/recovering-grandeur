@@ -62,7 +62,7 @@
 <script>
 import { mapState } from "vuex";
 
-import { checkBreakpointActive, shuffleArray } from "@/utils/other";
+import { checkBreakpointActive, shuffleSmallArray } from "@/utils/other";
 import { captions, content } from "@/data/quality/qualityCenter";
 
 import BaseCaption from "@/components/ui/BaseCaption";
@@ -99,8 +99,8 @@ export default {
   },
   mounted() {
     if (this.breakpointActive) {
-      shuffleArray(this.captions);
-      shuffleArray(this.content);
+      shuffleSmallArray(this.captions);
+      shuffleSmallArray(this.content);
     }
   }
 };

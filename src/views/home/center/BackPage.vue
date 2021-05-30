@@ -27,7 +27,7 @@
 <script>
 import { mapState } from "vuex";
 
-import { checkBreakpointActive, shuffleArray } from "@/utils/other";
+import { checkBreakpointActive, shuffleSmallArray } from "@/utils/other";
 import { heading, paragraphs } from "@/data/home/homeCenterBack";
 import StoryColumn from "@/components/columns/StoryColumn";
 export default {
@@ -51,7 +51,7 @@ export default {
   },
   mounted() {
     if (this.breakpointActive) {
-      shuffleArray(this.paragraphs);
+      shuffleSmallArray(this.paragraphs);
     }
   }
 };

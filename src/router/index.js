@@ -13,7 +13,6 @@ const router = createRouter({
 // and enable them
 router.beforeEach((to, from, next) => {
   Object.values(beforeEach).forEach(fn => fn(to, from, next));
-  next();
 });
 
 router.afterEach((to, from) => {

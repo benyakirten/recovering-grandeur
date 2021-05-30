@@ -38,17 +38,17 @@ export default {
     disclaimer: {
       type: Boolean,
       required: false,
-      default: () => true
+      default: true
     },
     blockquote: {
       type: Boolean,
       required: false,
-      default: () => true
+      default: true
     },
     extraPara: {
       type: Boolean,
       required: false,
-      default: () => false
+      default: false
     }
   }
 };

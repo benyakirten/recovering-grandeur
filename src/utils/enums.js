@@ -11,7 +11,9 @@ export const breakpointEnum = {
   makeHeaderWave: 8,
   toggleHeaderCanvas: 9,
   toggleHeaderCanvasColorRandomization: 10,
-  toggleClickAnimation: 11
+  toggleClickAnimation: 11,
+  shuffleAvailableLinks: 12,
+  toggleGamesLink: 13
 };
 
 export const animationShapeEnum = {
@@ -23,6 +25,25 @@ export const animationShapeEnum = {
   frame: 5,
   arrow: 6,
   trapezoid: 7
+};
+
+// ENUMS FOR /GAMES ROUTE
+export const memoryEnum = {
+  default: 0,
+  selected: 1,
+  matched: 2
+};
+
+export const gameStateEnum = {
+  paused: 0,
+  started: 1,
+  ended: 2
+};
+
+export const gameOutcomeEnum = {
+  unfinished: 0,
+  victory: 1,
+  defeat: 2
 };
 
 // ENUM-LIKES

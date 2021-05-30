@@ -16,7 +16,7 @@ export default {
     image: {
       type: String,
       required: false,
-      default: () => "Tech"
+      default: "Tech"
     },
     imgAnim: {
       type: String,
@@ -36,7 +36,7 @@ export default {
     disableBreakpoint: {
       type: Boolean,
       required: false,
-      default: () => false
+      default: false
     }
   },
   data() {

@@ -46,37 +46,46 @@ export default {
     image: {
       type: String,
       required: false,
-      default: () => "Tech"
+      default: "Tech"
     },
     alt: {
       type: String,
       required: false,
-      default: () => "I'm sure it's related"
+      default: "I'm sure it's related"
     },
     height: {
       type: String,
       required: false,
-      default: () => "15rem"
+      default: "15rem",
+      validator: value =>
+        /(^auto$|^initial$|^inherit$|^0$)|(^((0\.)?\d+|\d+\.\d+)(rem|em|ex|ch|%|vw|vh|vmin|vmax|cm|mm|in|px|pt|pt|pc))$/.test(
+          value
+        )
     },
     width: {
       type: String,
       required: false,
-      default: () => "15rem"
+      default: "15rem",
+      validator: value =>
+        /(^auto$|^initial$|^inherit$|^0$)|(^((0\.)?\d+|\d+\.\d+)(rem|em|ex|ch|%|vw|vh|vmin|vmax|cm|mm|in|px|pt|pt|pc))$/.test(
+          value
+        )
     },
     shape: {
       type: String,
       required: false,
-      default: () => "square"
+      default: "square"
     },
     float: {
       type: String,
       required: false,
-      default: () => "left"
+      default: "left",
+      validator: value => /left|right/.test(value)
     },
     cursor: {
       type: String,
       required: false,
-      default: () => "default"
+      default: "default"
     }
   },
   components: {

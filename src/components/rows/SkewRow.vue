@@ -14,7 +14,7 @@ export default {
     skew: {
       type: Number,
       required: false,
-      default: () => 25
+      default: 25
     }
   },
   data() {

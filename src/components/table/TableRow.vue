@@ -11,7 +11,7 @@
 
 <script>
 import { mapState } from "vuex";
-import { shuffleArray, checkBreakpointActive } from "@/utils/other";
+import { shuffleSmallArray, checkBreakpointActive } from "@/utils/other";
 export default {
   props: {
     row: {
@@ -41,7 +41,7 @@ export default {
     allOtherItems() {
       const otherItems = this.row.slice(1);
       if (this.breakpointActive) {
-        shuffleArray(otherItems);
+        shuffleSmallArray(otherItems);
       }
       return otherItems;
     }

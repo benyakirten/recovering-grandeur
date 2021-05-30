@@ -25,22 +25,22 @@ export default {
     imgName: {
       type: String,
       required: false,
-      default: () => "Tech"
+      default: "Tech"
     },
     imgAlt: {
       type: String,
       required: false,
-      default: () => "Something to do with the picture"
+      default: "Something to do with the picture"
     },
     rotate: {
       type: Number,
       required: false,
-      default: () => 0
+      default: 0
     },
     animation: {
       type: String,
       required: false,
-      default: () => "none"
+      default: "none"
     }
   },
   data() {

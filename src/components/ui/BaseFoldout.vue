@@ -1,13 +1,13 @@
 <template>
-  <div class="container">
-    <div class="top-bar" @click="toggleContent">
+  <div class="container" :style="containerStyle">
+    <div class="top-bar" @click="toggleContent" :style="topbarStyle">
       <span class="top-bar__item" :style="itemStyle">
         <span class="top-bar__item__caret" :style="caretStyle">&#10148;</span>
         <slot name="top"></slot>
       </span>
     </div>
     <transition name="content">
-      <div class="content" v-if="showDropdownContent">
+      <div class="content" v-if="showDropdownContent" :style="dropdownStyle">
         <slot></slot>
       </div>
     </transition>
@@ -31,15 +31,76 @@ export default {
     showContent: {
       type: Boolean,
       required: true
+    },
+    width: {
+      type: String,
+      required: false,
+      default: "",
+      validator: value =>
+        /(^$|^auto$|^initial$|^inherit$|^0$)|^\d+(rem|em|ex|ch|%|vw|vh|vmin|vmax|cm|mm|in|px|pt|pt|pc)$/.test(
+          value
+        )
+    },
+    margin: {
+      type: String,
+      required: false,
+      default: "",
+      validator: value =>
+        /(^$|^auto$|^initial$|^inherit$|^0$)|^((0\.)?\d+|\d+\.\d+)(rem|em|ex|ch|%|vw|vh|vmin|vmax|cm|mm|in|px|pt|pt|pc)$/.test(
+          value
+        )
+    },
+    background: {
+      type: String,
+      required: false,
+      default: ""
     }
   },
   computed: {
+    containerStyle() {
+      let styles = {};
+      styles = this.width
+        ? { ...styles, width: this.width }
+        : { ...styles, minWidth: "40rem" };
+      styles = this.margin
+        ? { ...styles, margin: this.margin }
+        : { ...styles, margin: "0 4rem 2rem" };
+      return styles;
+    },
+    topbarStyle() {
+      let styles = {};
+      if (this.background) {
+        styles = { ...styles, background: this.background };
+      }
+      if (this.width) {
+        styles = { ...styles, width: this.width };
+      }
+      return styles;
+    },
     itemStyle() {
       return {
         cursor: this.enableContent ? "pointer" : "not-allowed",
         color: this.enableContent ? "#000000" : "#54483A",
         opacity: this.enableContent ? 1 : 0.5
       };
+    },
+    dropdownStyle() {
+      let styles = {};
+      if (this.background) {
+        styles = { ...styles, background: this.background };
+      }
+      if (
+        this.width &&
+        window.matchMedia("only screen and (max-width: 37.5em)").matches
+      ) {
+        styles = {
+          ...styles,
+          margin: "0",
+          padding: "2rem 0.5",
+          alignItems: "flex-start"
+        };
+      }
+      return styles;
     },
     caretStyle() {
       return {
@@ -63,8 +124,6 @@ export default {
 <style lang="scss" scoped>
 .container {
   position: relative;
-  margin: 0 4rem 2rem;
-  min-width: 40rem;
 }
 .top-bar {
   display: flex;
@@ -104,6 +163,7 @@ export default {
 }
 .content {
   border: 1px solid $color-black;
+  max-width: 110%;
   @include respond(tab-land) {
     width: 50rem;
   }

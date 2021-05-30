@@ -32,7 +32,7 @@
 <script>
 import { mapState } from "vuex";
 
-import { checkBreakpointActive, shuffleArray } from "@/utils/other";
+import { checkBreakpointActive, shuffleSmallArray } from "@/utils/other";
 import { title, name, paragraphs } from "@/data/home/homeCenterFront";
 import BaseTwoColumns from "@/components/ui/BaseTwoColumns";
 import TextColumn from "@/components/columns/TextColumn";
@@ -65,7 +65,7 @@ export default {
   },
   mounted() {
     if (this.breakpointActive) {
-      shuffleArray(this.paragraphs);
+      shuffleSmallArray(this.paragraphs);
     }
   }
 };

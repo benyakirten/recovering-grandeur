@@ -1,5 +1,5 @@
 <template>
-  <div class="range-input">
+  <div class="range-input" :style="rangeInputStyles">
     <label class="range-input__label" :for="randomId">
       <slot></slot>
     </label>
@@ -45,11 +45,29 @@ export default {
     step: {
       type: Number,
       required: true
+    },
+    allowVertical: {
+      type: Boolean,
+      required: false,
+      default: false
     }
   },
   computed: {
     randomId() {
       return new Date().toISOString() + Math.floor(Math.random() * 1000);
+    },
+    rangeInputStyles() {
+      if (
+        this.allowVertical &&
+        window.matchMedia("only screen and (max-width: 56.25em)").matches
+      ) {
+        return {
+          flexDirection: "column",
+          alignItems: "flex-start",
+          padding: "1rem 0"
+        };
+      }
+      return {};
     }
   },
   methods: {

@@ -15,6 +15,16 @@ const beforeEach = {
         headerOpacity: to.meta.headerOpacityDefault || 0.4
       });
     }
+  },
+  allowOnlyVisibleRoutes(to, _, next) {
+    if (
+      !store.getters["links/getActiveLinks"].find(l => l.link === to.path) &&
+      to.path !== "/not-found"
+    ) {
+      next("/not-found");
+      return;
+    }
+    next();
   }
 };
 

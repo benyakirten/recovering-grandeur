@@ -56,7 +56,7 @@
 <script>
 import { mapState } from "vuex";
 
-import { checkBreakpointActive, shuffleArray } from "@/utils/other";
+import { checkBreakpointActive, shuffleSmallArray } from "@/utils/other";
 import { names, paragraphs, animations } from "@/data/home/homeBottom";
 import BaseThreeRows from "@/components/ui/BaseThreeRows";
 import SkewRow from "@/components/rows/SkewRow";
@@ -89,9 +89,9 @@ export default {
   },
   mounted() {
     if (this.breakpointActive) {
-      shuffleArray(this.names);
-      shuffleArray(this.paragraphs);
-      shuffleArray(this.animations);
+      shuffleSmallArray(this.names);
+      shuffleSmallArray(this.paragraphs);
+      shuffleSmallArray(this.animations);
     }
   }
 };

@@ -15,12 +15,20 @@ export default {
     marginTop: {
       type: String,
       required: false,
-      default: () => "4rem"
+      default: "4rem",
+      validator: value =>
+        /(^auto$|^initial$|^inherit$|^0$)|(^((0\.)?\d+|\d+\.\d+)(rem|em|ex|ch|%|vw|vh|vmin|vmax|cm|mm|in|px|pt|pt|pc))$/.test(
+          value
+        )
     },
     marginBottom: {
       type: String,
       required: false,
-      default: () => "4rem"
+      default: "4rem",
+      validator: value =>
+        /(^auto$|^initial$|^inherit$|^0$)|(^((0\.)?\d+|\d+\.\d+)(rem|em|ex|ch|%|vw|vh|vmin|vmax|cm|mm|in|px|pt|pt|pc))$/.test(
+          value
+        )
     }
   },
   computed: {

@@ -21,7 +21,7 @@ export default {
     linkStyle: {
       type: String,
       required: false,
-      default: () => ""
+      default: ""
     }
   },
   computed: {

@@ -25,12 +25,20 @@ export default {
     color: {
       type: String,
       required: false,
-      default: () => "#ffffff"
+      default: "#ffffff",
+      validator: value =>
+        /(^rgba\([\d]{1,3},\s?[\d]{1,3},\s?[\d]{1,3},\s?(0?\.)?[\d]{1,2}\)$)|(^#(?:[0-9A-F]{3}|[0-9A-F]{6})$)/i.test(
+          value
+        )
     },
     headingBackgroundColor: {
       type: String,
       required: false,
-      default: () => `rgba(109, 93, 75, 0.3);`
+      default: `rgba(109, 93, 75, 0.3);`,
+      validator: value =>
+        /^(rgba\([\d]{1,3},\s?[\d]{1,3},\s?[\d]{1,3},\s?(0?\.)?[\d]{1,2}\);?$)|(^#([0-9A-F]{3}|[0-9A-F]{6})$)/i.test(
+          value
+        )
     }
   },
   computed: {

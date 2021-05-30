@@ -57,12 +57,19 @@ export const getRandomKeyFromObject = obj => {
   return keys[idx];
 };
 
-export const shuffleArray = arr => {
+export const shuffleSmallArray = arr => {
   // Shuffles in place
   if (!Array.isArray(arr)) {
     throw new TypeError("Parameter must be an array");
   }
   arr.sort(() => Math.random() - 0.5);
+};
+
+export const shuffleLongArray = arr => {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
 };
 
 export const checkBreakpointActive = (

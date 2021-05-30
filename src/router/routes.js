@@ -53,6 +53,15 @@ const routes = [
     }
   },
   {
+    path: "/games",
+    name: "Games",
+    component: () => import("../views/games/Games.vue"),
+    meta: {
+      title: "Play a game with me",
+      headerDefault: true
+    }
+  },
+  {
     path: "/:pathMatch(.*)",
     name: "NotFound",
     component: () => import("../views/not-found/NotFound"),

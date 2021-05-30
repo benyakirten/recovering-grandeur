@@ -1,3 +1,5 @@
+import { namedColorsAndHexes } from "./namedColors";
+
 // To avoid too much bloat in the vue files
 // serveral functions concerning
 // hex and decimal conversions
@@ -148,4 +150,118 @@ export const getHexFromDecimal = decimal => {
     throw new TypeError("Parameter must be a number");
   }
   return decimal.toString(16);
+};
+
+export const getContrastingHex = hexString => {
+  let rgb;
+  if (Object.keys(namedColorsAndHexes).includes(hexString)) {
+    rgb = separateRGB(namedColorsAndHexes[hexString]);
+  } else {
+    rgb = separateRGB(hexString);
+  }
+  const hsv = convertRGBToHSV({ ...rgb });
+  // Black - it requires a special case
+  if (hsv.h === 0 && hsv.s === 0 && hsv.v === 0) {
+    return "#ffffff";
+  }
+  // Gray - simply contrast with white/black
+  if (hsv.s === 0) {
+    if (hsv.b > 0.62) {
+      return "#ffffff";
+    } else {
+      return "#000000";
+    }
+  }
+  hsv.h = 180 + hsv.h;
+  if (hsv.h > 360) {
+    hsv.h %= 360;
+  }
+  if (hsv.s < 0.5) {
+    hsv.s += 0.5;
+  } else {
+    hsv.s -= 0.5;
+  }
+  if (hsv.v < 0.5) {
+    hsv.v += 0.5;
+  } else {
+    hsv.v -= 0.5;
+  }
+  const finalRGB = convertHSVtoRGB({ ...hsv });
+  for (let key in finalRGB) {
+    if (finalRGB[key].length === 1) {
+      finalRGB[key] = finalRGB[key].repeat(2);
+    }
+  }
+  return `#${finalRGB.r}${finalRGB.g}${finalRGB.b}`;
+};
+
+export const normalizeRGB = (red, green, blue) => {
+  return [red / 255, green / 255, blue / 255];
+};
+
+// Thanks to https://www.cs.rit.edu/~ncs/color/t_convert.html
+export const convertRGBToHSV = ({ r, g, b }) => {
+  let hue, sat, val;
+  const [normR, normG, normB] = normalizeRGB(
+    parseInt(r, 16),
+    parseInt(g, 16),
+    parseInt(b, 16)
+  );
+  const max = Math.max(normR, normG, normB);
+  const min = Math.min(normR, normG, normB);
+  val = (max + min) / 2;
+
+  const delta = max - min;
+  if (max !== 0 && delta !== 0) {
+    sat = delta / max;
+  } else {
+    sat = 0;
+    hue = 0;
+    return { h: hue, s: sat, v: val };
+  }
+
+  if (normR === max) {
+    hue = Math.abs(normG - normB) / delta;
+  } else if (normG === max) {
+    hue = 2 + Math.abs(normB - normR) / delta;
+  } else {
+    hue = 4 + Math.abs(normR - normG) / delta;
+  }
+
+  hue *= 60;
+  if (hue < 0) hue += 360;
+  return { h: hue, s: sat, v: val };
+};
+
+export const convertHSVtoRGB = ({ h, s, v }) => {
+  if (s === 0) {
+    return { r: v, g: v, b: v };
+  }
+  const _h = h / 60;
+  const i = Math.floor(_h);
+  const f = h / 60 - i;
+  const p = v * (1 - s);
+  const q = v * (1 - s * f);
+  const t = v * (1 - s * (1 - f));
+
+  // Convert to hexes now
+  const vFinal = getHexFromDecimal(Math.floor(v * 255));
+  const pFinal = getHexFromDecimal(Math.floor(p * 255));
+  const qFinal = getHexFromDecimal(Math.floor(q * 255));
+  const tFinal = getHexFromDecimal(Math.floor(t * 255));
+
+  switch (i) {
+    case 0:
+      return { r: vFinal, g: tFinal, b: pFinal };
+    case 1:
+      return { r: qFinal, g: vFinal, b: pFinal };
+    case 2:
+      return { r: pFinal, g: vFinal, b: tFinal };
+    case 3:
+      return { r: pFinal, g: qFinal, b: vFinal };
+    case 4:
+      return { r: tFinal, g: pFinal, b: vFinal };
+    default:
+      return { r: vFinal, g: pFinal, b: qFinal };
+  }
 };
