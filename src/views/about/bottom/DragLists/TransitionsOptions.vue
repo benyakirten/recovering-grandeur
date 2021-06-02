@@ -4,6 +4,7 @@
     :secondList="getDisabledTransitions"
     @to-right-list="disableTransition"
     @to-left-list="enableTransition"
+    name="transition"
   >
     Scene transitions
     <hover-modal>

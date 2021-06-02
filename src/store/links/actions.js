@@ -41,8 +41,11 @@ export default {
   },
   addVisibleLink(context, payload) {
     const { links, hiddenLinks } = context.state;
+    if (links.find(l => l.name === payload)) {
+      return;
+    }
     const link = hiddenLinks.find(l => l.name === payload);
-    const linkIdx = links.indexOf(link);
+    const linkIdx = hiddenLinks.indexOf(link);
     hiddenLinks.splice(linkIdx, 1);
     context.commit("setVisibleLinks", [link, ...links]);
     context.commit("setHiddenLinks", hiddenLinks);
@@ -50,6 +53,9 @@ export default {
   },
   addHiddenLink(context, payload) {
     const { links, hiddenLinks } = context.state;
+    if (hiddenLinks.find(l => l.name === payload)) {
+      return;
+    }
     const link = links.find(l => l.name === payload);
     const linkIdx = links.indexOf(link);
     links.splice(linkIdx, 1);

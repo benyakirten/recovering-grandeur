@@ -4,13 +4,13 @@
     :secondList="getHiddenLinks"
     @to-right-list="addHiddenLink"
     @to-left-list="addVisibleLink"
+    name="links"
   >
     Visible and Hidden Links
     <hover-modal>
-      Not all pages are visible right from the beginning. Some will activate and
-      others will deactivate. Any links that aren't visible in the top bar
-      cannot be reached, even if the url is manually input. This page (about and
-      settings) cannot be removed.
+      Not all pages are visible. Some will activate and others will deactivate.
+      Any links that aren't visible in the top bar cannot be reached, even if
+      the url is manually input. This page (About & Settings) cannot be removed.
     </hover-modal>
     <template #left-caption> Visible Links </template>
     <template #right-caption> Hidden Links </template>

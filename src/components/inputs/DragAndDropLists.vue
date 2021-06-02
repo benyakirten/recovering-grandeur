@@ -6,10 +6,10 @@
     <div class="list-container">
       <ul
         class="list-container__list"
-        id="left-list"
-        @dragover.prevent="addClass('left-list', 'hovered')"
-        @dragleave="removeClass('left-list', 'hovered')"
-        @drop="emitDrop($event, 'left-list')"
+        :id="`left-list-${name}`"
+        @dragover.prevent="addClass(`left-list-${name}`, 'hovered')"
+        @dragleave="removeClass(`left-list-${name}`, 'hovered')"
+        @drop="emitDrop(`left-list`)"
       >
         <h3 class="list-container__list__caption">
           <slot name="left-caption"></slot>
@@ -18,7 +18,7 @@
           class="list-container__list__item"
           v-for="item in firstList"
           :key="item"
-          :id="item"
+          :id="`${item}-${name}`"
           draggable="true"
           @click="onClick(item, 'to-right-list')"
           @dragstart="onDragstart($event, item)"
@@ -29,10 +29,10 @@
       </ul>
       <ul
         class="list-container__list"
-        id="right-list"
-        @dragover.prevent="addClass('right-list', 'hovered')"
-        @dragleave="removeClass('right-list', 'hovered')"
-        @drop="emitDrop($event, 'right-list')"
+        :id="`right-list-${name}`"
+        @dragover.prevent="addClass(`right-list-${name}`, 'hovered')"
+        @dragleave="removeClass(`right-list-${name}`, 'hovered')"
+        @drop="emitDrop(`right-list`)"
       >
         <h3 class="list-container__list__caption">
           <slot name="right-caption"></slot>
@@ -41,7 +41,7 @@
           class="list-container__list__item"
           v-for="item in secondList"
           :key="item"
-          :id="item"
+          :id="`item-${name}`"
           draggable="true"
           @click="onClick(item, 'to-left-list')"
           @dragstart="onDragstart($event, item)"
@@ -65,27 +65,51 @@ export default {
     secondList: {
       type: Array,
       required: true
+    },
+    name: {
+      type: String,
+      required: true
     }
+  },
+  data() {
+    return {
+      draggedItem: null
+    };
   },
   methods: {
     onDragstart(e, item) {
-      e.dataTransfer.setData("transition", item);
+      // Data Transfer was not always setting the data, hence using data in Vue
+      this.draggedItem = item;
       this.addClass(e.target.id, "hovering");
     },
     addClass(id, cls) {
-      document.getElementById(id).classList.add(cls);
+      if (
+        this.firstList.includes(this.draggedItem) ||
+        this.secondList.includes(this.draggedItem)
+      ) {
+        document.getElementById(id).classList.add(cls);
+      }
     },
     removeClass(id, cls) {
-      document.getElementById(id).classList.remove(cls);
+      const el = document.getElementById(id);
+      if (el.classList.contains(cls)) {
+        el.classList.remove(cls);
+      }
     },
     onClick(item, target) {
       this.$emit(target, item);
     },
-    emitDrop(e, id) {
-      this.$emit(`to-${id}`, e.dataTransfer.getData("transition"));
-      this.removeClass(id, "hovered");
+    emitDrop(destination) {
+      if (
+        this.firstList.includes(this.draggedItem) ||
+        this.secondList.includes(this.draggedItem)
+      ) {
+        this.$emit(`to-${destination}`, this.draggedItem);
+        this.removeClass(`${destination}-${this.name}`, "hovered");
+      }
     },
     onDragend(e) {
+      this.draggedItem = null;
       e.target.classList.remove("hovering");
     }
   }
