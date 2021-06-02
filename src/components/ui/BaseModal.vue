@@ -5,10 +5,19 @@
       @click="onDismiss"
       :style="{ top: `${scrollY - 50}px` }"
     />
-    <div class="modal" :style="{ top: `${scrollY + 100}px` }">
+    <dialog open class="modal" :style="{ top: `${scrollY + 100}px` }">
       <slot></slot>
-      <span class="modal__close" @click="onDismiss">&times;</span>
-    </div>
+      <span
+        class="modal__close"
+        @click="onDismiss"
+        @keydown.enter="onDismiss"
+        @keydown.space="onDismiss"
+        role="button"
+        tabindex="0"
+      >
+        &times;
+      </span>
+    </dialog>
   </teleport>
 </template>
 

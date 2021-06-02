@@ -1,10 +1,16 @@
 <template>
   <thead class="head">
     <tr class="head__row">
-      <th class="head__row__lead">
+      <th class="head__row__lead" aria-rowindex="1" aria-colcount="1">
         {{ firstItem }}
       </th>
-      <th class="head__row__item" v-for="item in remainingItems" :key="item">
+      <th
+        class="head__row__item"
+        v-for="(item, idx) in remainingItems"
+        :key="item"
+        :aria-rowindex="idx + 1"
+        aria-colcount="1"
+      >
         {{ item }}
       </th>
     </tr>

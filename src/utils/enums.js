@@ -13,7 +13,7 @@ export const breakpointEnum = {
   toggleHeaderCanvasColorRandomization: 10,
   toggleClickAnimation: 11,
   shuffleAvailableLinks: 12,
-  toggleGamesLink: 13
+  changeHiddenLink: 13
 };
 
 export const animationShapeEnum = {

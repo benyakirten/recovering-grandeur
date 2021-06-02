@@ -1,37 +1,52 @@
 <template>
   <div class="range-input" :style="rangeInputStyles">
-    <label class="range-input__label" :for="randomId">
+    <label class="range-input__label" :for="name">
       <slot></slot>
     </label>
     <input
       type="number"
       class="range-input__number-input"
       @input="onNumberInput"
-      @keyup.enter="onNumberEnter"
+      @keydown.enter="onNumberEnter"
+      @keydown="ariaKeyboardInputs"
+      :id="name + '-number'"
+      :name="name + '-number'"
       :min="min.toString()"
       :max="max.toString()"
       :step="step.toString()"
       :value="variable"
+      :aria-valuenow="variable"
+      :aria-valuemax="max.toString()"
+      :aria-valuemin="min.toString()"
     />
     <input
       type="range"
       class="range-input__range"
       @input="onNumberInput"
-      :name="randomId"
+      :id="name + '-range'"
+      :name="name + '-range'"
       :min="min.toString()"
       :max="max.toString()"
       :step="step.toString()"
       :value="variable"
+      :aria-valuenow="variable"
+      :aria-valuemax="max.toString()"
+      :aria-valuemin="min.toString()"
     />
   </div>
 </template>
 
 <script>
+import { betweenMinAndMax } from "@/utils/other";
 export default {
   emits: ["emit-number"],
   props: {
     variable: {
       type: Number,
+      required: true
+    },
+    name: {
+      type: String,
       required: true
     },
     min: {
@@ -85,6 +100,47 @@ export default {
       ) {
         this.$emit("emit-number", value);
       }
+    },
+    ariaKeyboardInputs(e) {
+      switch (e.code) {
+        case "ArrowRight":
+        case "ArrowUp":
+          this.$emit(
+            "emit-number",
+            betweenMinAndMax(this.variable, this.step, this.min, this.max)
+          );
+          break;
+        case "ArrowLeft":
+        case "ArrowDown":
+          this.$emit(
+            "emit-number",
+            betweenMinAndMax(this.variable, -1 * this.step, this.min, this.max)
+          );
+          break;
+        case "Home":
+          this.$emit("emit-number", this.min);
+          break;
+        case "End":
+          this.$emit("emit-number", this.max);
+          break;
+        case "PageUp":
+          this.$emit(
+            "emit-number",
+            betweenMinAndMax(this.variable, this.step * 10, this.min, this.max)
+          );
+          break;
+        case "PageDown":
+          this.$emit(
+            "emit-number",
+            betweenMinAndMax(this.variable, this.step * -10, this.min, this.max)
+          );
+          break;
+        default:
+          break;
+      }
+    },
+    log(e) {
+      console.log(e);
     }
   }
 };

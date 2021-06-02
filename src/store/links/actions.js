@@ -31,6 +31,32 @@ export default {
   setAnchorId(context, payload) {
     context.commit("setAnchorId", payload);
   },
+  setVisibleLinks(context, payload) {
+    context.commit("setVisibleLinks", payload);
+    context.dispatch("setLocalStorageLinks");
+  },
+  setHiddenLinks(context, payload) {
+    context.commit("setHiddenLinks", payload);
+    context.dispatch("setLocalStorageLinks");
+  },
+  addVisibleLink(context, payload) {
+    const { links, hiddenLinks } = context.state;
+    const link = hiddenLinks.find(l => l.name === payload);
+    const linkIdx = links.indexOf(link);
+    hiddenLinks.splice(linkIdx, 1);
+    context.commit("setVisibleLinks", [link, ...links]);
+    context.commit("setHiddenLinks", hiddenLinks);
+    context.dispatch("setLocalStorageLinks");
+  },
+  addHiddenLink(context, payload) {
+    const { links, hiddenLinks } = context.state;
+    const link = links.find(l => l.name === payload);
+    const linkIdx = links.indexOf(link);
+    links.splice(linkIdx, 1);
+    context.commit("setHiddenLinks", [link, ...hiddenLinks]);
+    context.commit("setVisibleLinks", links);
+    context.dispatch("setLocalStorageLinks");
+  },
   disableTransition(context, payload) {
     const { transitions } = context.state;
     context.commit(
@@ -57,7 +83,7 @@ export default {
     );
     context.dispatch("setLocalStorageLinks");
   },
-  loadAll(context, { links, transitions }) {
+  loadAll(context, { links, transitions, hiddenLinks }) {
     context.commit(
       "setTransitions",
       transitions || [
@@ -69,7 +95,11 @@ export default {
       ]
     );
     context.commit(
-      "setEnabledLinks",
+      "setHiddenLinks",
+      hiddenLinks || [{ link: "/games", name: "Games", live: true }]
+    );
+    context.commit(
+      "setVisibleLinks",
       links || [
         { link: "/", name: "Home", live: true },
         { link: "/pricing", name: "Solutions and Pricing", live: true },
@@ -88,6 +118,7 @@ export default {
       { link: "/meet-us", name: "Meet Us", live: true },
       { link: "/about", name: "About & Settings", live: true }
     ];
+    const hiddenLinks = [{ link: "/games", name: "Games", live: true }];
     const transitions = [
       { name: "slide-right", enabled: true },
       { name: "slide-left", enabled: true },
@@ -96,16 +127,18 @@ export default {
       { name: "mix-slide-left-fade", enabled: true }
     ];
     context.commit("setTransitions", transitions);
-    context.commit("setEnabledLinks", links);
+    context.commit("setVisibleLinks", links);
+    context.commit("setHiddenLinks", hiddenLinks);
     context.dispatch("setLocalStorageLinks");
   },
   setLocalStorageLinks(context) {
-    const { links, transitions } = context.state;
+    const { links, transitions, hiddenLinks } = context.state;
     localStorage.setItem(
       "RG_L",
       JSON.stringify({
         links,
-        transitions
+        transitions,
+        hiddenLinks
       })
     );
   }

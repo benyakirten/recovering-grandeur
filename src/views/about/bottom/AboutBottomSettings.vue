@@ -4,6 +4,7 @@
     <ClickAnimationOptions />
     <BreakpointOptions />
     <TransitionsOptions />
+    <VisibleLinksOptions />
     <div class="button-container">
       <base-button>
         Reset All Settings
@@ -16,7 +17,8 @@
 import HeaderCanvasOptions from "./HeaverCanvasOptions/HeaderCanvasOptions";
 import ClickAnimationOptions from "./ClickAnimationsOptions/ClickAnimationsOptions";
 import BreakpointOptions from "./BreakpointOptions/BreakpointOptions";
-import TransitionsOptions from "./Transitions/TransitionsOptions";
+import TransitionsOptions from "./DragLists/TransitionsOptions";
+import VisibleLinksOptions from "./DragLists/VisibleLinksOptions";
 import BaseButton from "@/components/ui/BaseButton";
 export default {
   components: {
@@ -24,6 +26,7 @@ export default {
     ClickAnimationOptions,
     BreakpointOptions,
     TransitionsOptions,
+    VisibleLinksOptions,
     BaseButton
   }
 };

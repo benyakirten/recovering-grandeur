@@ -4,6 +4,7 @@
       <slide-checkbox
         :property="clickAnimationEnabled"
         @toggle-checked="toggleAnimation"
+        name="click-animation"
       >
         <span class="slider-desc">
           Click Animation

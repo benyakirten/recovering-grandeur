@@ -1,5 +1,11 @@
 <template>
-  <button class="button" @click="onClick">
+  <button
+    class="button"
+    @click="onInteract"
+    @keydown.space="onInteract"
+    @keydown.enter="onInteract"
+    tabindex="0"
+  >
     <slot>
       Call To Action!
     </slot>
@@ -20,7 +26,7 @@ export default {
     ...mapState("links", ["buttonAction"])
   },
   methods: {
-    onClick() {
+    onInteract() {
       this.click ? this.click() : this.buttonAction();
     }
   }

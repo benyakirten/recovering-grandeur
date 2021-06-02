@@ -4,6 +4,7 @@
       <slide-checkbox
         :property="headerCanvasEnabled"
         @toggle-checked="toggleCanvas"
+        name="toggle-canvas"
       >
         <span class="slider-desc">
           Header Canvas

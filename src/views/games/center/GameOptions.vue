@@ -8,6 +8,7 @@
     :margin="foldoutMargin"
     foldoutTextColor="#000000"
     @broadcast-click="dropdownClick"
+    :tabindex="10"
   >
     <template #top>
       Game Options
@@ -22,6 +23,7 @@
       :max="282"
       :step="2"
       @emit-number="emitNoCards"
+      name="number-of-cards"
     >
       Number of Cards
       <hover-modal tinyArea>
@@ -35,6 +37,7 @@
       :max="1000"
       :step="1"
       @emit-number="emitNoGuesses"
+      name="number-of-guesses"
     >
       Number of Guesses
       <hover-modal tinyArea>

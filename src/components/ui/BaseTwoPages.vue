@@ -5,6 +5,10 @@
       class="flip"
       :style="flipPagePosition"
       @click="flipPage"
+      @keydown.space="flipPage"
+      @keydown.enter="flipPage"
+      role="button"
+      tabindex="0"
     >
       {{ flipArrow }}
     </div>

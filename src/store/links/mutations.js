@@ -22,10 +22,10 @@ export default {
   setTransitions(state, payload) {
     state.transitions = payload;
   },
-  setEnabledLinks(state, payload) {
+  setVisibleLinks(state, payload) {
     state.links = payload;
   },
-  setHiddenLink(state, payload) {
-    state.hiddenLink = payload;
+  setHiddenLinks(state, payload) {
+    state.hiddenLinks = payload;
   }
 };

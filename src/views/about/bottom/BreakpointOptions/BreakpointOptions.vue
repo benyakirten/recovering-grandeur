@@ -4,6 +4,7 @@
       <slide-checkbox
         :property="breakpointEnabled"
         @toggle-checked="toggleBreakpoint"
+        name="breakpoint"
       >
         <span class="slider-desc">
           Breakpoint

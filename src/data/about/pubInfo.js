@@ -19,13 +19,11 @@ export default {
     title: "The Human Error",
     link: "https://benyakiredits.com"
   },
-  miscInfo: `Set in the same universe and city as The Human Automata, Delusions of Form
-    can be understood without reading any other book. It is loosely based on my own
-    experience in a coma. Upon the end of my own experience, I long contemplated
-    how I would articulate what happened to me. Delusions of Form attempts to capture the feeling,
-    rather than the truth of the situation.`,
-  miscInfoExtra: `Click on the arrow in the top right to read an exegesis of how
-    this website accompanies the book.`,
+  miscInfo: `Though it is set in the same universe as The Human Automata, Delusions of Form
+    is a stand-alone book. It is loosely based on my own
+    experience in a coma. I long contemplated how I would articulate what happened to me, and
+    Delusions of Form attempts to capture the feeling, rather than the truth of the situation.`,
+  miscInfoExtra: `Click on the arrow in the top right to read my thoughts in more detail.`,
   coverDesignerInfo: `Cover designed by Mais Ahmad. As soon as I saw what Mais produced,
     I knew it captured exactly what I aimed to write.
     If you are interested in seeing more of Mais&rsquo; work, please visit her websites:`,

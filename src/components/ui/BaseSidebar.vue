@@ -3,21 +3,28 @@
     <div class="sidebar__center" id="sidebar-center" :style="centerStyle">
       <slot></slot>
     </div>
-    <div
+    <aside
       class="sidebar__side"
       id="sidebar-side"
       :style="sideStyle"
-      @click="onSidebarClick"
+      @click="onSidebarInteract"
+      @keydown.enter="onSidebarInteract"
+      @keydown.space="onSidebarInteract"
     >
       <transition name="opacity">
-        <div class="sidebar__popout" id="summary-popout" v-if="popout">
+        <div
+          class="sidebar__popout"
+          id="summary-popout"
+          v-if="popout"
+          :tabindex="checkIfHidden"
+        >
           <slot name="popout"></slot>
         </div>
       </transition>
       <div class="sidebar__summary" id="sidebar-summary">
         <slot name="summary"></slot>
       </div>
-    </div>
+    </aside>
   </div>
 </template>
 
@@ -40,7 +47,7 @@ export default {
   },
   data() {
     return {
-      showsideBar: false,
+      showSidebar: false,
       timeout: null
     };
   },
@@ -78,22 +85,28 @@ export default {
               borderTopLeftRadius: "3rem",
               borderBottomLeftRadius: "3rem"
             };
-      let width = this.popout ? "42%" : "10%";
+      let width = this.popout ? "52%" : "10%";
+      if (window.matchMedia("only screen and (max-width: 56.25em)").matches) {
+        width = this.popout ? "55%" : "10%";
+      }
       if (window.matchMedia("only screen and (max-width: 37.5em)").matches) {
-        width = this.popout ? "50%" : "15%";
+        width = this.popout ? "60%" : "15%";
       }
       return {
         transition: "all 0.4s",
         width,
-        opacity: this.showsideBar ? "1" : "0",
+        opacity: this.showSidebar ? "1" : "0",
         ...leftOrRight,
         ...disabledSidebar,
         ...borderRadius
       };
+    },
+    checkIfHidden() {
+      return this.showSidebar ? 0 : -1;
     }
   },
   methods: {
-    onSidebarClick(e) {
+    onSidebarInteract(e) {
       this.$emit("sidebar-click", e);
     }
   },
@@ -107,10 +120,10 @@ export default {
         window.clearTimeout(this.timeout);
       }
       if (sidebarClientRect.top < 250 && sidebarClientRect.bottom > 500) {
-        this.showsideBar = true;
+        this.showSidebar = true;
         sidebarSide.style.display = "initial";
       } else {
-        this.showsideBar = false;
+        this.showSidebar = false;
         this.timeout = setTimeout(() => {
           sidebarSide.style.display = "none";
           this.timeout = null;

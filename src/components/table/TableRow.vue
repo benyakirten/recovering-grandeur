@@ -1,9 +1,15 @@
 <template>
   <tr class="table-row">
-    <td class="table-row__lead-item">
+    <td class="table-row__lead-item" aria-rowindex="0" :aria-colindex="col">
       {{ firstItem }}
     </td>
-    <td class="table-row__item" v-for="item in allOtherItems" :key="item">
+    <td
+      class="table-row__item"
+      v-for="(item, idx) in allOtherItems"
+      :key="item"
+      :aria-rowindex="idx + 1"
+      :aria-colindex="col"
+    >
       {{ item ? item : "N/A" }}
     </td>
   </tr>
@@ -17,6 +23,11 @@ export default {
     row: {
       type: Array,
       required: true
+    },
+    col: {
+      type: Number,
+      required: false,
+      default: 1
     }
   },
   data() {

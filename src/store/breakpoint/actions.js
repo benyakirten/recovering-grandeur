@@ -88,7 +88,12 @@ export default {
     const { breakpoint, minimum } = context.state;
     let interval;
     let rep = 0;
+
+    // For moving the links around
+    let firstRandomIdx;
+    let secondRandomIdx;
     let links;
+    let hiddenLinks;
     let about;
     let otherLink;
     let hiddenLink;
@@ -221,31 +226,36 @@ export default {
             });
           }, Math.floor(Math.random() * breakpoint) * 2 + 500);
           break;
-        case breakpointEnum.shuffleLinks:
+        case breakpointEnum.shuffleAvailableLinks:
           links = context.rootState.links.links;
           about = links.pop();
           // Remove the about link - it needs to always be there
           shuffleSmallArray(links);
           // Shuffle the rest
-          context.commit("links/setEnabledLinks", [...links, about], {
+          context.commit("links/setVisibleLinks", [...links, about], {
             root: true
           });
           // Add the about link again
           break;
-        case breakpointEnum.toggleGamesLink:
+        case breakpointEnum.changeHiddenLink:
           links = context.rootState.links.links;
+          hiddenLinks = context.rootState.links.hiddenLinks;
+          // Remove the about link so it can't be a candidate
           about = links.pop();
-          // Remove the about link
-          hiddenLink = context.rootState.links.hiddenLink;
-          [otherLink] = links.splice(0, 1);
-          // Get the hidden link, then remove the first link
+          // Get a random index from the links and one from the hidden links
+          firstRandomIdx = Math.floor(Math.random() * links.length);
+          secondRandomIdx = Math.floor(Math.random() * hiddenLinks.length);
+          // Grab a link and remove it from each list
+          [otherLink] = links.splice(firstRandomIdx, 1);
+          [hiddenLink] = hiddenLinks.splice(secondRandomIdx, 1);
+          // Switch which list they're in at index 0
           links.unshift(hiddenLink);
-          // Add the hidden link in the place of the first link
-          context.commit("links/setEnabledLinks", [...links, about], {
+          hiddenLinks.unshift(otherLink);
+          context.dispatch("links/setVisibleLinks", [...links, about], {
             root: true
           });
           // Set the links
-          context.commit("links/setHiddenLink", otherLink, { root: true });
+          context.dispatch("links/setHiddenLinks", hiddenLinks, { root: true });
           // Store the hidden link for later
           break;
         default:

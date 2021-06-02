@@ -1,6 +1,11 @@
 <template>
-  <div :class="containerClass" @click="onClick">
-    <p :class="linkClass" :style="{ color: headerLinkColor }">
+  <div
+    :class="containerClass"
+    @click="onInteract"
+    @onkeydown="onInteract"
+    :aria-label="'Link to ' + linkName"
+  >
+    <p :class="linkClass" :style="{ color: headerLinkColor }" tabindex="0">
       {{ linkName }}
     </p>
   </div>
@@ -39,7 +44,7 @@ export default {
   },
   methods: {
     ...mapActions("links", ["toggleLink"]),
-    onClick() {
+    onInteract() {
       if (this.$route.fullPath !== this.linkRoute) {
         this.toggleLink(this.linkName);
         this.$router.push(this.linkRoute);
@@ -67,7 +72,7 @@ export default {
 
 .link-container-alternate {
   &:not(:last-child) {
-    margin-right: 1rem;
+    margin-right: 8rem;
   }
   &__link {
     cursor: pointer;

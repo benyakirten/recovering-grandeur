@@ -5,6 +5,7 @@
     :max="2000"
     :step="10"
     @emit-number="setAnimationLength"
+    name="click-animation-lengt"
   >
     Click Animation Length
     <hover-modal leftMargin="0">
@@ -17,13 +18,18 @@
     :max="clickAnimationLength"
     :step="10"
     @emit-number="setAnimationLengthVariation"
+    name="animation-variation"
   >
     Animation Variation
     <hover-modal leftMargin="0">
       {{ clickAnimationLengthVariationToolbar }}
     </hover-modal>
   </range-slider>
-  <color-picker :color="clickAnimationColor" @emit-color="setAnimationColor">
+  <color-picker
+    :color="clickAnimationColor"
+    @emit-color="setAnimationColor"
+    name="animation-color"
+  >
     Animation Color:
   </color-picker>
   <range-slider
@@ -32,6 +38,7 @@
     :max="40"
     :step="1"
     @emit-number="setAnimationRadius"
+    name="initial-radius"
   >
     Initial Radius:
   </range-slider>

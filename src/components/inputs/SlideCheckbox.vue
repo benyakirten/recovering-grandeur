@@ -2,15 +2,16 @@
   <div class="container" :style="shadow">
     <div class="input-container">
       <input
-        :name="randomId"
         type="checkbox"
         class="input-container__checkbox"
-        :aria-labelledby="randomId"
+        :aria-labelledby="name"
         :checked="property"
       />
-      <label :for="randomId" class="input-container__label" @click="onClick" />
+      <label :for="name" class="input-container__label" @click="onClick" />
     </div>
-    <slot>{{ property }}</slot>
+    <span :name="name" :id="name" class="name">
+      <slot>{{ property }}</slot>
+    </span>
   </div>
 </template>
 
@@ -26,14 +27,10 @@ export default {
       type: String,
       required: false,
       default: ""
-    }
-  },
-  computed: {
-    randomId() {
-      return new Date().toISOString() + Math.floor(Math.random() * 1000);
     },
-    randomLabel() {
-      return this.randomId + "-label";
+    name: {
+      type: String,
+      required: true
     }
   },
   methods: {
@@ -106,5 +103,9 @@ export default {
       border-radius: 50%;
     }
   }
+}
+.name {
+  display: flex;
+  align-items: center;
 }
 </style>

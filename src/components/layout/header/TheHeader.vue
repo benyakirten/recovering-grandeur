@@ -6,15 +6,17 @@
     @mouseenter="startHeaderWave($event)"
   >
     <header-canvas></header-canvas>
-    <transition-group :name="transitionName" @afterEnter="afterEnter">
-      <header-link
-        v-for="link in liveLinks"
-        :key="link.link"
-        :linkRoute="link.link"
-        :linkName="link.name"
-        :linkStyle="breakpointActive ? 'alternate' : ''"
-      ></header-link>
-    </transition-group>
+    <nav :style="navStyles">
+      <transition-group :name="transitionName" @afterEnter="afterEnter">
+        <header-link
+          v-for="link in liveLinks"
+          :key="link.link"
+          :linkRoute="link.link"
+          :linkName="link.name"
+          :linkStyle="breakpointActive ? 'alternate' : ''"
+        ></header-link>
+      </transition-group>
+    </nav>
   </header>
 </template>
 
@@ -59,6 +61,12 @@ export default {
     },
     transitionName() {
       return this.breakpointActive ? "link-fall-alt" : "link-fall";
+    },
+    navStyles() {
+      if (this.breakpointActive) {
+        return { display: "flex" };
+      }
+      return {};
     }
   },
   methods: {
@@ -94,6 +102,11 @@ export default {
   position: absolute;
   top: 5rem;
   left: 50%;
+  padding: 2rem 3rem;
+
+  @include respond(tab-port) {
+    padding: 1rem 1.5rem;
+  }
   transform: translateX(-50%) skewX(-25deg);
 
   min-width: 80%;
@@ -101,10 +114,6 @@ export default {
   z-index: 1;
 
   display: flex;
-  padding: 2rem 3rem;
-  @include respond(tab-port) {
-    padding: 1rem 1.5rem;
-  }
   justify-content: space-between;
   align-items: center;
 }

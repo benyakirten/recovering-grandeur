@@ -28,7 +28,7 @@
     <template #summary>
       <div class="summary">
         <div class="summary__top">
-          <square-button :onClick="setGameBegin" color="#8b4513">
+          <square-button :onClick="setGameBegin" color="#8b4513" :tabindex="6">
             <span class="button-text">
               {{ gameOngoing ? "Res" : "S" }}tart game
             </span>
@@ -37,6 +37,7 @@
             color="#acacac"
             :onClick="toggleGamePause"
             :disabled="!gameCanBePausedOrEnded"
+            :tabindex="7"
           >
             <span class="button-text">
               Pause game
@@ -45,6 +46,7 @@
           <square-button
             :onClick="setGameEnd"
             :disabled="!gameCanBePausedOrEnded"
+            :tabindex="8"
           >
             <span class="button-text">
               End game
@@ -61,6 +63,7 @@
             :onClick="togglePopout"
             :disabled="gameOngoing"
             color="#ffebcd"
+            :tabindex="9"
           >
             <span class="button-text">
               {{ popout ? "Less Options" : "More Options" }}

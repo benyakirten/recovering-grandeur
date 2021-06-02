@@ -1,6 +1,11 @@
 <template>
   <tbody class="body">
-    <table-row v-for="row in rows" :key="row[0]" :row="row"></table-row>
+    <table-row
+      v-for="(row, idx) in rows"
+      :col="idx + 1"
+      :key="row[0]"
+      :row="row"
+    ></table-row>
   </tbody>
 </template>
 

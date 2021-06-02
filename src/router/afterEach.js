@@ -8,6 +8,16 @@ const afterEach = {
     document.title = `${to.meta.title || DEFAULT_TITLE}
       - Recovering Grandeur`;
   },
+  setMetaContent(to) {
+    if (to.meta.description) {
+      const meta = document.head.getElementsByTagName("meta");
+      for (let i = 0; i < meta.length; i++) {
+        if (meta[i].getAttribute("name") === "description") {
+          meta[i].setAttribute("content", to.meta.description);
+        }
+      }
+    }
+  },
   bringLinksBack() {
     setTimeout(() => store.dispatch("links/enlivenLinks"), 1000);
   },

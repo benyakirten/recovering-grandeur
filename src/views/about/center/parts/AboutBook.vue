@@ -78,7 +78,7 @@
     <template #heading-3> Miscellaneous Info </template>
     <template #para-3>
       {{ pubInfo.miscInfo }}
-      <span v-if="normalScreen">
+      <span v-if="normalScreen" class="misc-extra-info">
         {{ pubInfo.miscInfoExtra }}
       </span>
     </template>
@@ -211,5 +211,11 @@ export default {
       }
     }
   }
+}
+.misc-extra-info {
+  display: block;
+
+  margin-top: 1rem;
+  font-size: $font-size-small;
 }
 </style>

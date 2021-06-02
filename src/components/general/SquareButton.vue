@@ -2,6 +2,8 @@
   <button
     class="button"
     @click="activateEvent"
+    @keydown.space="activateEvent"
+    @keydown.enter="activateEvent"
     :style="buttonStyles"
     :disabled="disabled"
   >

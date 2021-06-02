@@ -2,6 +2,7 @@
   <slide-checkbox
     :property="headerCanvasRandomizeColorsEnabled"
     @toggle-checked="toggleHeaderCanvasColorRandomization"
+    name="header-color-randomization"
   >
     <span class="slider-desc slider-desc--small">
       Header Canvas Color Randomization
@@ -11,10 +12,18 @@
       {{ randomizeColorsToolbar }}
     </hover-modal>
   </slide-checkbox>
-  <color-picker :color="startColor" @emit-color="changeHeaderStartColor">
+  <color-picker
+    :color="startColor"
+    @emit-color="changeHeaderStartColor"
+    name="start-color"
+  >
     Start Color:
   </color-picker>
-  <color-picker :color="endColor" @emit-color="changeHeaderEndColor">
+  <color-picker
+    :color="endColor"
+    @emit-color="changeHeaderEndColor"
+    name="end-color"
+  >
     End Color:
   </color-picker>
   <range-slider
@@ -22,6 +31,7 @@
     :min="1.01"
     :max="1.2"
     :step="0.01"
+    name="radius-delta"
     @emit-number="setRadiusDelta"
   >
     Radius Delta
@@ -34,6 +44,7 @@
     :min="1"
     :max="300"
     :step="1"
+    name="number-of-concentric-circles"
     @emit-number="setNumberOfCircles"
   >
     No. Concentric Circles

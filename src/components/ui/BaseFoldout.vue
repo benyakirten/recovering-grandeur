@@ -1,6 +1,12 @@
 <template>
   <div class="container" :style="containerStyle">
-    <div class="top-bar" @click="toggleContent" :style="topbarStyle">
+    <div
+      class="top-bar"
+      @click="toggleContent"
+      @keydown="keydownToggleContent"
+      :style="topbarStyle"
+      tabindex="0"
+    >
       <span class="top-bar__item" :style="itemStyle">
         <span class="top-bar__item__caret" :style="caretStyle">&#10148;</span>
         <slot name="top"></slot>
@@ -75,6 +81,12 @@ export default {
       if (this.width) {
         styles = { ...styles, width: this.width };
       }
+      if (this.showDropdownContent) {
+        styles = {
+          ...styles,
+          background: this.background ? this.background : "#7ed56f"
+        };
+      }
       return styles;
     },
     itemStyle() {
@@ -116,6 +128,17 @@ export default {
       if (this.enableContent) {
         this.$emit("broadcast-click", this.name);
       }
+    },
+    keydownToggleContent(e) {
+      if (e.code === "Enter" || e.code === "Space") {
+        this.toggleContent();
+      }
+      if (e.code === "ArrowRight" && this.enableContent && !this.showContent) {
+        this.toggleContent();
+      }
+      if (e.code === "ArrowLeft" && this.showDropdownContent) {
+        this.toggleContent();
+      }
     }
   }
 };
@@ -147,6 +170,12 @@ export default {
 
   text-align: left;
   padding: 0 2rem;
+
+  transition: $transition-normal;
+
+  &:hover {
+    background-color: lighten($color-primary, 30%);
+  }
 
   &__item {
     display: flex;

@@ -1,6 +1,6 @@
 <template>
   <div class="picker">
-    <label class="picker__label" :for="randomId">
+    <label class="picker__label" :for="name">
       <slot></slot>
     </label>
     <input
@@ -9,13 +9,16 @@
       :value="color"
       @keyup.enter="onEnter"
       @input="onInput"
+      :name="name + '-text-input'"
+      :id="name + '-text-input'"
     />
     <input
       type="color"
       class="picker__color-input"
       :value="color"
       @input="onInput"
-      :name="randomId"
+      :name="name + '-color-input'"
+      :id="name + '-color-input'"
     />
   </div>
 </template>
@@ -24,6 +27,10 @@
 export default {
   emits: ["emit-color"],
   props: {
+    name: {
+      type: String,
+      required: true
+    },
     color: {
       type: String,
       required: true,

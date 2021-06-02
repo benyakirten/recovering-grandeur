@@ -5,6 +5,7 @@
     :max="breakpointMaximum"
     :step="1"
     @emit-number="setBreakpoint"
+    name="set-breakpoint"
   >
     Breakpoint
     <hover-modal leftMargin="0">
@@ -17,6 +18,7 @@
     :max="500"
     :step="5"
     @emit-number="setBreakpointMaximum"
+    name="breakpoint-max"
   >
     Breakpoint Maximum
     <hover-modal leftMargin="0">
@@ -29,6 +31,7 @@
     :max="10"
     :step="1"
     @emit-number="setMaxAdd"
+    name="max-increment"
   >
     Max Increment
     <hover-modal leftMargin="0">
@@ -41,6 +44,7 @@
     :max="100"
     :step="1"
     @emit-number="setMinimum"
+    name="min-to-act"
   >
     Minimum To Act
     <hover-modal leftMargin="0">

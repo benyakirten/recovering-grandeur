@@ -1,5 +1,11 @@
 <template>
-  <table class="table" id="centerTable" :style="tableChangesAtBreakpoint">
+  <table
+    class="table"
+    id="centerTable"
+    :style="tableChangesAtBreakpoint"
+    :aria-rowcount="items.length"
+    :aria-colcount="tableHead.length"
+  >
     <table-head :items="tableHead"></table-head>
     <table-body :rows="tableBody"></table-body>
   </table>

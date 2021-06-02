@@ -1,6 +1,6 @@
 <template>
   <figure class="figure">
-    <img class="figure__img" :style="imgStyle" />
+    <img class="figure__img" :alt="'Image of ' + image" :style="imgStyle" />
     <figcaption class="figure__caption">
       <slot></slot>
     </figcaption>
