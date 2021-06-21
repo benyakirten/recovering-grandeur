@@ -7,7 +7,7 @@ describe("ColorPicker.vue", () => {
     let colorInput;
 
     beforeEach(() => {
-        wrapper = shallowMount(ColorPicker, { props: { color: "#abcdef" } });
+        wrapper = shallowMount(ColorPicker, { props: { color: "#abcdef", name: "test" } });
         textInput = wrapper.find(".picker__text-input");
         colorInput = wrapper.find(".picker__color-input");
     })

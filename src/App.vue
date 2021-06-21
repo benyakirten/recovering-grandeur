@@ -2,6 +2,13 @@
   <TheModal />
   <TheHeader />
   <div id="modal-teleport" />
+  <TheClickAnimation
+    v-if="showClickAnimation"
+    :pageX="pageX"
+    :pageY="pageY"
+    :breakpointActive="breakpointActive"
+    :animationLength="animationLength"
+  />
   <main class="main">
     <router-view v-slot="slotProps">
       <transition :name="getRandomTransition()" :mode="transitionMode">
@@ -15,24 +22,27 @@
 <script>
 import { mapActions, mapState, mapGetters, mapMutations } from "vuex";
 
-import { animationShapeEnum } from "@/utils/enums";
 import { checkBreakpointActive } from "@/utils/other";
 
 import TheModal from "@/components/layout/modal/TheModal";
 import TheHeader from "@/components/layout/header/TheHeader";
 import TheFooter from "@/components/layout/footer/TheFooter";
+import TheClickAnimation from "@/components/special/TheClickAnimation";
 export default {
   components: {
     TheModal,
     TheHeader,
-    TheFooter
+    TheFooter,
+    TheClickAnimation
   },
   data() {
     return {
       chosenTransition: null,
-      x: 0,
-      y: 0,
+      pageX: 0,
+      pageY: 0,
       interval: null,
+      showClickAnimation: false,
+      animationLength: 0,
       EVENT_NOT_CHANCE: 50
     };
   },
@@ -45,9 +55,7 @@ export default {
     ]),
     ...mapState("clickAnimation", [
       "clickAnimationLength",
-      "clickAnimationLengthVariation",
-      "clickAnimationColor",
-      "clickAnimationRadius"
+      "clickAnimationLengthVariation"
     ]),
     ...mapState("settings", [
       "clickAnimationEnabled",
@@ -75,76 +83,26 @@ export default {
     }
   },
   methods: {
-    ...mapActions("breakpoint", [
-      "incrementBreakpoint",
-      "stopClickWave",
-      "ghostActs"
-    ]),
+    ...mapActions("breakpoint", ["incrementBreakpoint", "stopClickWave"]),
     ...mapActions("links", ["enlivenLinks"]),
     ...mapActions("settings", ["loadAllSettings"]),
     ...mapMutations("settings", ["setScrollY"]),
-    flashFromClick({ pageX, pageY }) {
+    flashFromClick() {
       if (!this.clickAnimationEnabled) {
         return;
       }
-      const animationLength =
+      this.animationLength =
         this.clickAnimationLength + this.getAnimationLengthVariation();
-
-      const clickAnimation = document.createElement("span");
-      const shape = this.getAnimationShape();
-      clickAnimation.classList.add("click-animation");
-      clickAnimation.style.left = `${pageX}px`;
-      clickAnimation.style.top = `${pageY}px`;
-
-      this.breakpointActive
-        ? (clickAnimation.style.clipPath = this.getAnimationClipPath(shape))
-        : (clickAnimation.style.borderRadius = "50%");
-
-      // You can't change the animation scaling,
-      // but you can change the initial size
-      clickAnimation.style.width = `${this.clickAnimationRadius}rem`;
-      clickAnimation.style.height = `${this.clickAnimationRadius}rem`;
-      clickAnimation.style.backgroundColor = this.clickAnimationColor;
-      clickAnimation.style.animation = `click-flash-out-anim ${animationLength}ms forwards`;
-
-      if (this.breakpointActive) {
-        this.ghostActs();
-      }
-
-      this.body.appendChild(clickAnimation);
+      this.showClickAnimation = true;
       setTimeout(() => {
-        this.body.removeChild(clickAnimation);
-      }, animationLength);
+        this.showClickAnimation = false;
+      }, this.animationLength);
     },
     getAnimationLengthVariation() {
       const sign = Math.random() > 0.5 ? -1 : 1;
       return (
         Math.floor(Math.random() * this.clickAnimationLengthVariation) * sign
       );
-    },
-    getAnimationShape() {
-      return Math.floor(Math.random() * Object.keys(animationShapeEnum).length);
-    },
-    getAnimationClipPath(shape) {
-      switch (shape) {
-        case animationShapeEnum.square:
-          return "polygon(25% 25%, 75% 25%, 75% 75%, 25% 75%)";
-        case animationShapeEnum.star:
-          return "polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%)";
-        case animationShapeEnum.x:
-          return "polygon(20% 0%, 0% 20%, 30% 50%, 0% 80%, 20% 100%, 50% 70%, 80% 100%, 100% 80%, 70% 50%, 100% 20%, 80% 0%, 50% 30%)";
-        case animationShapeEnum.rhombus:
-          return "polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)";
-        case animationShapeEnum.frame:
-          return "polygon(0% 0%, 0% 100%, 25% 100%, 25% 25%, 75% 25%, 75% 75%, 25% 75%, 25% 100%, 100% 100%, 100% 0%)";
-        case animationShapeEnum.arrow:
-          return "polygon(0% 20%, 60% 20%, 60% 0%, 100% 50%, 60% 100%, 60% 80%, 0% 80%)";
-        case animationShapeEnum.trapezoid:
-          return "polygon(20% 0%, 80% 0%, 100% 100%, 0% 100%)";
-        case animationShapeEnum.circle:
-        default:
-          return "circle(50% at 50% 50%)";
-      }
     },
     getRandomTransition() {
       const transitionIndex = Math.floor(
@@ -154,8 +112,8 @@ export default {
       return `scene-${this.chosenTransition}`;
     },
     setMouseCoordinates({ pageX, pageY }) {
-      this.x = pageX;
-      this.y = pageY;
+      this.pageX = pageX;
+      this.pageY = pageY;
     },
     setScrollHeight() {
       this.setScrollY(window.scrollY);

@@ -7,7 +7,12 @@ describe("SlideCheckbox.vue", () => {
     let label;
 
     beforeEach(() => {
-        wrapper = shallowMount(SlideCheckbox, { props: { property: true } });
+        wrapper = shallowMount(SlideCheckbox, {
+            props: {
+                property: true,
+                name: "test"
+            }
+        });
         input = wrapper.find(".input-container__checkbox");
         label = wrapper.find(".input-container__label");
     });
@@ -23,7 +28,7 @@ describe("SlideCheckbox.vue", () => {
         expect(input.element.checked).toEqual(wrapper.componentVM.property);
 
         const wrapperTwo = shallowMount(SlideCheckbox, {
-            props: { property: true },
+            props: { property: true, name: "test_2" },
         });
         expect(
             wrapperTwo.find(".input-container__checkbox").element.checked

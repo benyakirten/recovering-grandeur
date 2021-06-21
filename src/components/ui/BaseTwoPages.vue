@@ -170,8 +170,6 @@ export default {
   }
 }
 
-// OTHER STYLING
-
 // FLIP BUTTON STYLING
 .flip {
   position: absolute;
@@ -183,7 +181,7 @@ export default {
   font-size: $font-size-xl;
   color: $color-white;
   background-image: linear-gradient(
-    to right,
+    to bottom right,
     $color-alt-primary,
     $color-alt-primary-dark
   );

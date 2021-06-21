@@ -9,7 +9,7 @@
 
 <script>
 import BaseCaption from "@/components/ui/BaseCaption";
-import TheGame from "./TheGame";
+import TheGame from "@/components/special/TheGame/TheGame";
 export default {
   components: {
     BaseCaption,

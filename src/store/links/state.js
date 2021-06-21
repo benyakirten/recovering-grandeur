@@ -1,4 +1,4 @@
-export default {
+export default () => ({
   links: [
     { link: "/", name: "Home", live: true },
     { link: "/pricing", name: "Solutions and Pricing", live: true },
@@ -16,4 +16,4 @@ export default {
     { name: "scale", enabled: true },
     { name: "mix-slide-left-fade", enabled: true }
   ]
-};
+});

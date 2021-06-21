@@ -1,7 +1,7 @@
 export default {
-  headerCanvasToolbar: `The header canvas displays the circles when hovering over a link.
-  Though its inefficiency is the point, disabling it will improve
-  performance.`,
+  headerCanvasToolbar: `The header canvas displays the circles when hovering over a in the nav. Though
+  it's not particularly difficult for your computer to do, other, overlapping animaitons can cause
+  a significant amount of lag.`,
   randomizeColorsToolbar: `The header canvas radiates concentric circles in gradations from the start
   color to the end color. At the end of each flash, the beginning and end
   colors are randomized if this option is enabled.`,

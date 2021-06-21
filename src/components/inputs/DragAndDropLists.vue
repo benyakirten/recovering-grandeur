@@ -83,11 +83,13 @@ export default {
       this.addClass(e.target.id, "hovering");
     },
     addClass(id, cls) {
+      const el = document.getElementById(id);
       if (
-        this.firstList.includes(this.draggedItem) ||
-        this.secondList.includes(this.draggedItem)
+        (this.firstList.includes(this.draggedItem) ||
+          this.secondList.includes(this.draggedItem)) &&
+        !el.classList.contains(cls)
       ) {
-        document.getElementById(id).classList.add(cls);
+        el.classList.add(cls);
       }
     },
     removeClass(id, cls) {

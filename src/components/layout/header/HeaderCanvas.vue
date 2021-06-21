@@ -1,5 +1,5 @@
 <template>
-  <canvas class="header-canvas"></canvas>
+  <canvas ref="header-canvas" class="header-canvas"></canvas>
 </template>
 
 <script>
@@ -44,7 +44,7 @@ export default {
       "headerCanvasRandomizeColorsEnabled"
     ]),
     canvas() {
-      return document.querySelector(".header-canvas");
+      return this.$refs['header-canvas'];
     },
     startColorRGB() {
       return separateRGB(this.startColor);

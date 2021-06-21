@@ -7,7 +7,6 @@
       type="number"
       class="range-input__number-input"
       @input="onNumberInput"
-      @keydown.enter="onNumberEnter"
       @keydown="ariaKeyboardInputs"
       :id="name + '-number'"
       :name="name + '-number'"
@@ -102,7 +101,10 @@ export default {
       }
     },
     ariaKeyboardInputs(e) {
-      switch (e.code) {
+      switch (e.key) {
+        case "Enter":
+          this.onNumberEnter(e);
+          break;
         case "ArrowRight":
         case "ArrowUp":
           this.$emit(

@@ -14,7 +14,8 @@ describe("placeholder", () => {
         wrapper = shallowMount(DragAndDropLists, {
             props: {
                 firstList: leftListItems,
-                secondList: rightListItems
+                secondList: rightListItems,
+                name: "test"
             }
         });
         leftList = wrapper.find("#left-list");
@@ -39,9 +40,10 @@ describe("placeholder", () => {
         }
         const leftListTriggers = wrapper.emitted()['to-right-list'];
         const rightListTriggers = wrapper.emitted()['to-left-list'];
-        const triggeredLeft = triggered.filter(t => t.list === 'left-list');
-        const triggeredRight = triggered.filter(t => t.list === 'right-list')
 
+        const triggeredLeft = triggered.filter(t => t.list === 'left-list-test');
+        const triggeredRight = triggered.filter(t => t.list === 'right-list-test');
+        
         expect(leftListTriggers.length + rightListTriggers.length).toEqual(triggered.length);
         expect(leftListTriggers.length).toEqual(triggeredLeft.length);
         expect(rightListTriggers.length).toEqual(triggeredRight.length);

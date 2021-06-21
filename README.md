@@ -12,6 +12,7 @@
 > NOTE: Test coverage was severely limited because my version of @vue/test-utils was not able to use the createLocalVue function. Therefore, any components that used the router/store could not be tested. Tests include only a few Vue components and but all the util functions and classes written in JavaScript.
 > These were the only components that made sense to write test coverage for:
 > * General: HoverModal
+> * Special: TheGame (because of a bug with mounting components, little could be tested)
 > * Inputs: ColorPicker, DragAndDropLists, RangeSlider, SlideCheckbox (NOTE: Testing drag and drop functionality isn't easy, so DropAndDropLists isn't tested extensively)
 > * UI: BaseFoldout
 

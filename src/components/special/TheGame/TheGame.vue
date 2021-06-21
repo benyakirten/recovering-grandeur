@@ -124,7 +124,7 @@ export default {
       gameOutcome: gameOutcomeEnum.unfinished,
       gameState: gameStateEnum.ended,
       // Non-mutating constants
-      allColors: Object.values(namedColorsAndHexes),
+      ALL_COLORS: Object.values(namedColorsAndHexes),
       // Game variables
       maxGuesses: 20,
       guessCount: 0,
@@ -135,15 +135,12 @@ export default {
   },
   computed: {
     usedColors() {
-      if (this.cards.length > 0) {
-        const usedColorsArray = this.cards.map(c => c.color);
-        return new Set(usedColorsArray);
-      } else {
-        return new Set();
-      }
+      return this.cards.length > 0
+        ? new Set(this.cards.map(c => c.color))
+        : new Set();
     },
     availableColors() {
-      return this.allColors.filter(c => !this.usedColors.has(c));
+      return this.ALL_COLORS.filter(c => !this.usedColors.has(c));
     },
     guessesLeft() {
       return this.maxGuesses - this.guessCount;
@@ -180,6 +177,7 @@ export default {
   },
   methods: {
     rotateCard(idx) {
+      // You cannot play if the game is ended or there has been no click
       if (this.gameState !== gameStateEnum.started || this.noClick) {
         return;
       }
@@ -336,13 +334,11 @@ export default {
         this.interval = null;
       }
       this.gameState = gameStateEnum.ended;
-      for (let i = 0; i < this.cards.length; i++) {
-        this.cards[i].state = memoryEnum.matched;
-      }
+      this.cards = this.cards.map(c => ({ ...c, state: memoryEnum.matched }));
       this.interval = setInterval(() => {
         for (let i = 0; i < this.cardTotal / 2; i++) {
           const randInd = Math.floor(Math.random() * this.cards.length);
-          this.cards[randInd].color = getRandomItemFromArray(this.allColors);
+          this.cards[randInd].color = getRandomItemFromArray(this.ALL_COLORS);
         }
       }, 500);
     }

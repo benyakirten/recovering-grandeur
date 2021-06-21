@@ -4,6 +4,7 @@
       class="top-bar"
       @click="toggleContent"
       @keydown="keydownToggleContent"
+      role="button"
       :style="topbarStyle"
       tabindex="0"
     >

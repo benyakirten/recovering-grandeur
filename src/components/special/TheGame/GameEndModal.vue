@@ -1,6 +1,6 @@
 <template>
   <base-modal @dismiss="dismiss">
-    <div class="center-vertical-items">
+    <section class="center-vertical-items">
       <h1 class="modal-header">{{ victory ? victoryHeader : defeatHeader }}</h1>
       <p class="modal-paragraph">
         {{ victory ? victorySentence : defeatSentence }}
@@ -10,7 +10,7 @@
         faster than you. It really makes you think, doesn't it?
       </p>
       <base-button :click="onButtonPress">Play again? Please?</base-button>
-    </div>
+    </section>
   </base-modal>
 </template>
 
