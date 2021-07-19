@@ -17,7 +17,7 @@ export default {
   publishDate: "September 25th, 2021",
   shortStory: {
     title: "The Human Error",
-    link: "https://benyakiredits.com"
+    link: "https://benyakiredits.com/shortstory/the-human-error/"
   },
   miscInfo: `Though it is set in the same universe as The Human Automata, Delusions of Form
     is a stand-alone book. It is loosely based on my own
