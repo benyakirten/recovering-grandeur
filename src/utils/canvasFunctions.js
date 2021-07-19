@@ -35,7 +35,7 @@ export const getNearestCornerPosition = (canvas, x, y) => {
   const dist = getAbsoluteCorners(canvas)
     .map(p => Math.sqrt((p.x - x) ** 2 + (p.y - y) ** 2))
     .reduce((acc, next, idx) => (next < acc.dist ? { dist: next, idx } : acc), {
-      dist: 10000,
+      dist: Infinity,
       idx: 0
     });
   const relative = getRelativeCorners(canvas);

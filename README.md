@@ -17,7 +17,7 @@
 > * UI: BaseFoldout
 
 ## What is this website?
-It is written to accompany my (at this point) upcoming book, A Brief Recovery. The website provides a cursory introduction to the story of the book, but its main emphasis is on its functionality: a 'ghost' that, based on certian criteria and random chance, changes the website.
+It is written to accompany my (at this point) upcoming book, Delusions of Form. The website provides a cursory introduction to the story of the book, but its main emphasis is on its functionality: a 'ghost' that, based on certian criteria and random chance, changes the website.
 
 Since I learned programming, I've wanted to create somethign that could (at least loosely) be called art on the computer. I'm not talking about pretty pictures or whatever but something with meaning. It's something that I find lacking in, especially, webpages besides many other sectors of programming. I want to convey, along with the book, the theme of mental impermanence, as in the world, what we conceive of it and even our personality is hardly as permanent as we would like it to be.
 

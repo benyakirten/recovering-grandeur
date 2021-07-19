@@ -32,7 +32,7 @@
     </div>
   </base-modal>
   <hover-image-and-text-column
-    image="temp-cover"
+    image="Cover"
     height="20rem"
     width="20rem"
     cursor="pointer"
@@ -108,7 +108,7 @@ export default {
       return !window.matchMedia("only screen and (max-width: 37.5em)").matches;
     },
     coverImage() {
-      return require("@/assets/temp-cover.svg");
+      return require("@/assets/Cover.svg");
     }
   },
   methods: {

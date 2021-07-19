@@ -1,7 +1,7 @@
 export default {
   links: [
     {
-      link: "https://www.amazon.com",
+      link: "https://www.amazon.com/dp/B099RNC65L",
       name: "Amazon"
     }
   ],
@@ -14,7 +14,7 @@ export default {
     He only cares about one thing: that he exists. Well, he can’t say that with certainty.
     The cosmos has abandoned him, and likewise, any way to know the truth is long gone, much less if such a concept exists.
     Inspired by the author’s experiences in a coma, follow John Albuquerque on the many paths of a mind in decline.`,
-  publishDate: "May 1st, 2021",
+  publishDate: "September 25th, 2021",
   shortStory: {
     title: "The Human Error",
     link: "https://benyakiredits.com"
